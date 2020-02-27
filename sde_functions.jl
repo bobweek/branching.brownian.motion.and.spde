@@ -330,3 +330,86 @@ function equilibrium(Δ,p)
 	return val
 
 end
+
+
+function alpha(sol,pars)
+
+	@unpack S, w, U, η, c, a, μ, V, R, θ, Ω = pars
+
+	x̄ = sol[(0*S+1):(1*S)]
+	G = sol[(1*S+1):(2*S)]
+	N = sol[(2*S+1):(3*S)]
+
+	α = zeros(S,S)
+
+	for i in 1:S
+		for j in 1:S
+			b = 1 / ( w[i] + w[j] + G[i] + G[j] + η[i] + η[j] )
+			r = R[i] - a[i] * ( (x̄[i] - θ[i])^2 + G[i] + η[i] ) / 2
+			α[i,j] = c[i] * √(b/(2*π)) * exp(-b*(x̄[i]-x̄[j])^2/2) / r
+		end
+	end
+
+	return α
+
+end
+
+function beta(sol,pars)
+
+	@unpack S, w, U, η, c, a, μ, V, R, θ, Ω = pars
+
+	x̄ = sol[(0*S+1):(1*S)]
+	G = sol[(1*S+1):(2*S)]
+	N = sol[(2*S+1):(3*S)]
+
+	β = zeros(S,S)
+
+	for i in 1:S
+		for j in 1:S
+			b = 1 / ( w[i] + w[j] + G[i] + G[j] + η[i] + η[j] )
+			r = R[i] - a[i] * ( (x̄[i] - θ[i])^2 + G[i] + η[i] ) / 2
+			β[i,j] = c[i] * N[j] * b * (x̄[i]-x̄[j]) * √(b/(2*π)) * exp(-b*(x̄[i]-x̄[j])^2/2) / r
+		end
+	end
+
+	return β
+
+end
+
+function gamma(sol,pars)
+
+	@unpack S, w, U, η, c, a, μ, V, R, θ, Ω = pars
+
+	x̄ = sol[(0*S+1):(1*S)]
+	G = sol[(1*S+1):(2*S)]
+	N = sol[(2*S+1):(3*S)]
+
+	γ = zeros(S,S)
+
+	for i in 1:S
+		for j in 1:S
+			b = 1 / ( w[i] + w[j] + G[i] + G[j] + η[i] + η[j] )
+			r = R[i] - a[i] * ( (x̄[i] - θ[i])^2 + G[i] + η[i] ) / 2
+			γ[i,j] = c[i] * N[j] * b * ( 1 - b*(x̄[i]-x̄[j])^2 ) * √(b/(2*π)) * exp(-b*(x̄[i]-x̄[j])^2/2) / r
+		end
+	end
+
+	return γ
+
+end
+
+function coevolution(sol,pars)
+
+	β = beta(sol,pars)
+	γ = gamma(sol,pars)
+
+	ℭ = zeros(pars.S,pars.S)
+
+	for i in 1:S
+		for j in 1:S
+			ℭ[i,j] = ( abs(β[i,j]) + abs(γ[i,j]) )*( abs(β[j,i]) + abs(γ[j,i]) )
+		end
+	end
+
+	return ℭ
+end

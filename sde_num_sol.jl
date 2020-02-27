@@ -46,6 +46,15 @@ solhat = solve(probhat,maxiters=1e8)
 
 plot(solhat)
 
+
+solhat = try solve(probhat,maxiters=1e8)
+catch y
+	if isa(y,DomainError)
+		print("poopi")
+	end
+end
+
+
 # state at time T
 endT = maximum(solhat.t)
 x̃ = sol(endT)
