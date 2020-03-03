@@ -28,14 +28,14 @@ U = fill(1.0, S)  # total niche use
 η = fill(1.0, S)  # segregation variances
 μ = fill(1e-5, S) # mutation rates
 V = fill(1.0, S)  # magnitudes of drift
-R = fill(2.0, S) # innate rate of growth
+R = fill(1.0, S) # innate rate of growth
 θ = fill(0.0, S)  # phenotypic optima
 
 # set the timespan
 # T₁ corresponds to the 'burn-in'
 # T₂ corresponds the region we estimate the covariances over
-T₁ = 5e3
-T₂ = 5e3
+T₁ = 5e2
+T₂ = 5e2
 tspan = (0.0, T₁ + T₂)
 
 # containers for covariances and correlations
@@ -53,24 +53,26 @@ Cor_αℭ_mean = zeros(0)
 Vₓ_mean = zeros(0)
 σ²_mean = zeros(0)
 
-# counts number of times Vₓ/σ² < 1.0
+# counts number of points accepted
 num = 0
 
-while num < 50
+# accumulate 1000 points
+while num < 1000
 
     # random draws for a and c
-    adraw = exp.(rand(Normal(-15,4),1))[1]
+    adraw = exp.(rand(Normal(-10,6),1))[1]
     cdraw = exp.(rand(Normal(-20,4),1))[1]
 
-    # continue to draw c until it is less than 1e-5
-    # this prevents astronomical Vₓ and mitigates small N
-    while maximum(crset)>1e-5
-        cdraw = exp.(rand(Normal(-20,4),1))[1]
+    # continue to draw a until it is less than 1e-2
+    # this prevents small N
+    while maximum(adraw)>1e-2
+        adraw = exp.(rand(Normal(-10,6),1))[1]
     end
 
-    # 1/100 chance of setting c=0
-    if Bool(rand(Bernoulli(0.01),1)[1])
-        cdraw = 0
+    # continue to draw c until it is less than 1e-3
+    # this prevents astronomical Vₓ and small N
+    while maximum(cdraw)>1e-4
+        cdraw = exp.(rand(Normal(-20,4),1))[1]
     end
 
     a = fill(adraw,S) # strength of abiotic selection
@@ -95,84 +97,91 @@ while num < 50
 
     # numerically solve SDE
     prob = SDEProblem(f, g, u₀, tspan, pars)
-    dumm = true
-    while dumm
-        dumm = false
-        global sol = try solve(prob,maxiters=1e8)
-            catch y
-                if isa(y,DomainError)
-                    dumm = true
-                end
-            end
+    dumm = false
+    sol = try solve(prob,maxiters=1e8)
+    catch y
+        if isa(y,DomainError)
+            dumm = true
+        end
     end
 
-    index_T₁ = findmin(abs.(sol.t .- T₁))[2]
-    index_T₂ = length(sol.t)
+    if !dumm
 
-    Cov_αβ = zeros(index_T₂ - index_T₁ + 1)
-    Cov_αabsβ = zeros(index_T₂ - index_T₁ + 1)
-    Cov_αγ = zeros(index_T₂ - index_T₁ + 1)
-    Cov_αℭ = zeros(index_T₂ - index_T₁ + 1)
+        index_T₁ = findmin(abs.(sol.t .- T₁))[2]
+        index_T₂ = length(sol.t)
 
-    Cor_αβ = zeros(index_T₂ - index_T₁ + 1)
-    Cor_αabsβ = zeros(index_T₂ - index_T₁ + 1)
-    Cor_αγ = zeros(index_T₂ - index_T₁ + 1)
-    Cor_αℭ = zeros(index_T₂ - index_T₁ + 1)
+        Cov_αβ = zeros(index_T₂ - index_T₁ + 1)
+        Cov_αabsβ = zeros(index_T₂ - index_T₁ + 1)
+        Cov_αγ = zeros(index_T₂ - index_T₁ + 1)
+        Cov_αℭ = zeros(index_T₂ - index_T₁ + 1)
 
-    Vₓ = zeros(index_T₂ - index_T₁ + 1)
-    σ² = zeros(index_T₂ - index_T₁ + 1)
+        Cor_αβ = zeros(index_T₂ - index_T₁ + 1)
+        Cor_αabsβ = zeros(index_T₂ - index_T₁ + 1)
+        Cor_αγ = zeros(index_T₂ - index_T₁ + 1)
+        Cor_αℭ = zeros(index_T₂ - index_T₁ + 1)
 
-    for j = index_T₁:index_T₂
-        t = sol.t[j]
+        Vₓ = zeros(index_T₂ - index_T₁ + 1)
+        σ² = zeros(index_T₂ - index_T₁ + 1)
 
-        k = j - index_T₁ + 1
+        for j = index_T₁:index_T₂
+            t = sol.t[j]
 
-        α = alpha(sol(t), pars)
-        β = beta(sol(t), pars)
-        γ = gamma(sol(t), pars)
-        ℭ = coevolution(sol(t), pars)
+            k = j - index_T₁ + 1
 
-        ᾱ = mean(α)
-        β̄ = mean(β)
-        γ̄ = mean(γ)
-        ℭ̄ = mean(ℭ)
+            α = alpha(sol(t), pars)
+            β = beta(sol(t), pars)
+            γ = gamma(sol(t), pars)
+            ℭ = coevolution(sol(t), pars)
 
-        Cov_αβ[k] = cov(vec(α), vec(β))
-        Cov_αabsβ[k] = cov(vec(α), vec(abs.(β)))
-        Cov_αγ[k] = cov(vec(α), vec(γ))
-        Cov_αℭ[k] = cov(vec(α), vec(ℭ))
+            ᾱ = mean(α)
+            β̄ = mean(β)
+            γ̄ = mean(γ)
+            ℭ̄ = mean(ℭ)
 
-        Cor_αβ[k] = cor(vec(α), vec(β))
-        Cor_αabsβ[k] = cor(vec(α), vec(abs.(β)))
-        Cor_αγ[k] = cor(vec(α), vec(γ))
-        Cor_αℭ[k] = cor(vec(α), vec(ℭ))
+            Cov_αβ[k] = cov(vec(α), vec(β))
+            Cov_αabsβ[k] = cov(vec(α), vec(abs.(β)))
+            Cov_αγ[k] = cov(vec(α), vec(γ))
+            Cov_αℭ[k] = cov(vec(α), vec(ℭ))
 
-        Vₓ[k] = var(sol(t)[1:S])
-        σ²[k] = mean(sol(t)[(S+1):(2*S)] .+ pars.η)
+            Cor_αβ[k] = cor(vec(α), vec(β))
+            Cor_αabsβ[k] = cor(vec(α), vec(abs.(β)))
+            Cor_αγ[k] = cor(vec(α), vec(γ))
+            Cor_αℭ[k] = cor(vec(α), vec(ℭ))
 
-    end
+            Vₓ[k] = var(sol(t)[1:S])
+            σ²[k] = mean(sol(t)[(S+1):(2*S)] .+ pars.η)
 
-    # append results to containers
-    append!(Cov_αβ_mean,   mean(Cov_αβ))
-    append!(Cov_αabsβ_mean,mean(Cov_αabsβ))
-    append!(Cov_αγ_mean,   mean(Cov_αγ))
-    append!(Cov_αℭ_mean,   mean(Cov_αℭ))
+        end
 
-    append!(Cor_αβ_mean,   mean(Cor_αβ))
-    append!(Cor_αabsβ_mean,mean(Cor_αabsβ))
-    append!(Cor_αγ_mean,   mean(Cor_αγ))
-    append!(Cor_αℭ_mean,   mean(Cor_αℭ))
+        # append results to containers
+        append!(Cov_αβ_mean,   mean(Cov_αβ))
+        append!(Cov_αabsβ_mean,mean(Cov_αabsβ))
+        append!(Cov_αγ_mean,   mean(Cov_αγ))
+        append!(Cov_αℭ_mean,   mean(Cov_αℭ))
 
-    append!(Vₓ_mean,mean(Vₓ))
-    append!(σ²_mean,mean(σ²))
+        append!(Cor_αβ_mean,   mean(Cor_αβ))
+        append!(Cor_αabsβ_mean,mean(Cor_αabsβ))
+        append!(Cor_αγ_mean,   mean(Cor_αγ))
+        append!(Cor_αℭ_mean,   mean(Cor_αℭ))
 
-    if (mean(Vₓ)/mean(σ²)) < 1.0
+        append!(Vₓ_mean,mean(Vₓ))
+        append!(σ²_mean,mean(σ²))
+
         global num += 1
+
     end
 
 end
 
+# check it out
 scatter(Vₓ_mean./σ²_mean,Cor_αβ_mean)
 scatter(Vₓ_mean./σ²_mean,Cor_αabsβ_mean)
 scatter(Vₓ_mean./σ²_mean,Cor_αγ_mean)
 scatter(Vₓ_mean./σ²_mean,Cor_αℭ_mean)
+
+# build dataframe
+df = DataFrame( Cαβ = Cor_αβ_mean, Cαabsβ = Cor_αabsβ_mean,
+	Cαγ = Cor_αγ_mean, Cαℭ = Cor_αℭ_mean, V = Vₓ_mean, σ = σ²_mean)
+
+# export to csv for ggplot
+CSV.write("/home/bob/Research/Branching Brownian Motion/corrs.csv", df)

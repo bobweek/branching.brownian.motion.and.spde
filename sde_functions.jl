@@ -89,26 +89,32 @@ function f(u,p,t)
 
   for i = 1:S
 
-    B = 0
+    B = 0.0
     for j = 1:S
-      B += N[j] * b[i,j] * (x[j]-x[i]) * sqrt( b[i,j] / (2.0*π) ) * exp( -b[i,j] * ( x[j]-x[i] )^2 / 2.0 )
+      B += N[j] * b[i,j] * (x[j]-x[i]) * √( b[i,j] / (2.0*π) ) *
+	  	exp( -b[i,j] * ( x[j]-x[i] )^2 / 2.0 )
     end
 
     dx[i] =  a[i] * G[i] * ( θ[i]-x[i] ) - c[i] * G[i] * B
 
-    B = 0
+    B = 0.0
     for j = 1:S
-      B += N[j] * b[i,j] * (1.0 - b[i,j] * ( x[i]-x[j] )^2) * sqrt( b[i,j] / (2.0*π) ) * exp( -b[i,j] * ( x[i]-x[j] )^2 / 2.0 )
+      B += N[j] * b[i,j] * (1.0 - b[i,j] * ( x[i]-x[j] )^2) *
+	  	√( b[i,j] / (2.0*π) ) * exp( -b[i,j] * ( x[i]-x[j] )^2 / 2.0 )
     end
+
+	B += N[i]*b[i,i]*√(b[i,i]/(2.0*π))
 
     dG[i] = μ[i] + ( c[i]*B - a[i] ) * G[i]^2 - V[i] * G[i] / N[i]
 
-    B = 0
+    B = 0.0
     for j = 1:S
-      B += N[j] * sqrt( b[i,j] / (2.0*π) ) * exp( -b[i,j] * ( x[j]-x[i] )^2 / 2.0 )
+      B += N[j] * √( b[i,j] / (2.0*π) ) *
+	  	exp( -b[i,j] * ( x[j]-x[i] )^2 / 2.0 )
     end
 
-    dN[i] = ( R[i] - a[i] * (  ( θ[i] - x[i] )^2 + G[i] + η[i] ) / 2.0 + c[i] * ( sqrt( b[i,i] / (2.0*π) ) - B ) ) * N[i]
+    dN[i] = (R[i] - a[i]*(  ( θ[i] - x[i] )^2 + G[i] + η[i]  )/2.0 -
+		c[i] * B)*N[i]
 
   end
 
@@ -147,11 +153,11 @@ function g(u,p,t)
 
   for i = 1:S
 
-  	dN[i] = sqrt( V[i] * N[i] )
+  	dN[i] = √( V[i] * N[i] )
 
-    dx[i] = sqrt( V[i] * G[i] / N[i] )
+    dx[i] = √( V[i] * G[i] / N[i] )
 
-    dG[i] = G[i] * sqrt( 2.0 * V[i] / N[i] )
+    dG[i] = G[i] * √( 2.0 * V[i] / N[i] )
 
   end
 

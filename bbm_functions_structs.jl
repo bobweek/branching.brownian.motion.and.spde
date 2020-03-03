@@ -14,25 +14,34 @@
 end
 
 @with_kw mutable struct community
-    S::Int64            # number of species
-    x::Matrix{Float64}  # trait values
-    N::Vector{Int64}    # poulation sizes
-    x̄::Vector{Float64}  # mean traits
-    σ²::Vector{Float64} # phenotypic variances
-    R::Vector{Float64}  # innate rates of growth
-    a::Vector{Float64}  # strengths of abiotic selection
-    θ::Vector{Float64}  # abiotic optima
-    c::Vector{Float64}  # strengths of competition
-    w::Vector{Float64}  # individual niche widths
-    U::Vector{Float64}  # total niche uses
-    μ::Vector{Float64}  # rates of diffusion (mutation)
-    V::Vector{Float64}  # variances in reproductive output
+    S::Int64                   # number of species
+    x::Vector{Vector{Float64}} # trait values
+    g::Vector{Vector{Float64}} # breeding values
+    N::Vector{Int64}           # population sizes
+    n::Vector{Int64}           # index of rescaled sequence
+    x̄::Vector{Float64}         # mean traits
+    σ²::Vector{Float64}        # phenotypic variances
+    G::Vector{Float64}         # additive genetic variances
+    R::Vector{Float64}         # innate rates of growth
+    a::Vector{Float64}         # strengths of abiotic selection
+    θ::Vector{Float64}         # abiotic optima
+    c::Vector{Float64}         # strengths of competition
+    w::Vector{Float64}         # individual niche widths
+    U::Vector{Float64}         # total niche uses
+    η::Vector{Float64}         # segregation variance
+    μ::Vector{Float64}         # rates of diffusion (mutation)
+    V::Vector{Float64}         # variances in reproductive output
 end
 
-# update for community with complex competition term
+# update for community
 function comm_update(X)
 
     @unpack S, x, N, x̄, σ², R, a, θ, c, w, U, μ, V = X
+
+    # creates array of offspring trait values
+    # first index is species
+    # second index is individual
+    xₚ = fill(zeros(0),S)
 
     for i in 1:S
 
@@ -50,19 +59,100 @@ function comm_update(X)
 
             # collect effects of competition with other individuals
             # within the same population
-            except_j = 1:N[i] # somehow remove j
-            for k in except_j
-                B += U[i]^2*exp( (x[i,j] - x[i,k])^2 / (4*w[i]) )
-                    / √(4*π*w[i])
+            for k in filter(x -> x≠j, 1:N[i])
+                B += U[i]^2*exp( (x[i][j] - x[i][k])^2 / (4*w[i]) ) / √(4*π*w[i])
             end
 
             # collect effects of competition with other individuals
             # in other populations
-            except_i = 1:S # somehow remove i
-            for k in except_i
+            for k in filter(x -> x≠i, 1:S)
                 for l in 1:N[k]
-                    B += U[i]*U[k]*exp( (x[i,j] - x[k,l])^2 / (2*(w[i]+w[k])) )
-                        / √(2*π*(w[i]+w[k]))
+                    B += U[i]*U[k]*exp( (x[i][j] - x[k][l])^2 / (2*(w[i]+w[k])) ) / √(2*π*(w[i]+w[k]))
+                end
+            end
+
+            w = exp( R[i] - a[i]*(θ[i]-x[i][j])^2/2.0 - c[i]*B )
+
+            # parameterizing the NegativeBinomial
+            q = w/V
+            s = w^2/(V-w)
+
+            # draw random number of offspring
+            W[j] = rand( NegativeBinomial( s, q ), 1)[1]
+
+        end
+
+        # total number of offspring
+        Nₚ = sum(W)
+
+        # container for locations of offspring
+        xₚ = fill(0.0,Nₚ)
+
+        # keeps track of which individual is being born
+        ct = 0
+
+        # loop throug parents
+        for j in 1:N[i]
+
+            # birth each offspring
+            for k in 1:W[j]
+
+                # consider next individual
+                ct += 1
+
+                # draw random trait for this individual
+                xₚ[ct] = rand( Normal( x[i,j], √μ[i] ), 1)[1]
+
+            end
+
+        end
+
+        x̄ₚ[i] = mean(xₚ)
+        σₚ²[i]= var(xₚ)
+
+    end
+
+    Xₚ = community(x=xₚ,N=Nₚ,x̄=x̄ₚ,σ²=σₚ²,R=R,a=a,θ=θ,c=c,μ=μ,V=V)
+
+    return Xₚ
+
+end
+
+# rescaled update for community
+function rescaled_update(X)
+
+    @unpack S, x, N, x̄, σ², R, a, θ, c, w, U, μ, V = X
+
+    # creates array of offspring trait values
+    # first index is species
+    # second index is individual
+    xₚ = fill(zeros(0),S)
+
+    for i in 1:S
+
+        W = fill(0,N[i])
+
+        for j in 1:N[i]
+
+            #
+            # mean fitness of individual j in species i
+            # this follows exactly from SM §5.6
+            #
+
+            # container for aggregating effects of competition
+            B = 0.0
+
+            # collect effects of competition with other individuals
+            # within the same population
+            for k in filter(x -> x≠j, 1:N[i])
+                B += U[i]^2*exp( (x[i,j] - x[i,k])^2 / (4*w[i]) ) / √(4*π*w[i])
+            end
+
+            # collect effects of competition with other individuals
+            # in other populations
+            for k in filter(x -> x≠i, 1:S)
+                for l in 1:N[k]
+                    B += U[i]*U[k]*exp( (x[i,j] - x[k,l])^2 / (2*(w[i]+w[k])) ) / √(2*π*(w[i]+w[k]))
                 end
             end
 
@@ -96,7 +186,7 @@ function comm_update(X)
                 ct += 1
 
                 # draw random trait for this individual
-                xₚ[ct] = rand( Normal( x[i,j], √μ ), 1)[1]
+                xₚ[ct] = rand( Normal( x[i,j], √μ[i] ), 1)[1]
 
             end
 
@@ -107,62 +197,180 @@ function comm_update(X)
 
     end
 
-    Xₚ = population(x=xₚ,N=Nₚ,x̄=x̄ₚ,σ²=σₚ²,R=R,a=a,θ=θ,c=c,μ=μ,V=V)
+    Xₚ = community(x=xₚ,N=Nₚ,x̄=x̄ₚ,σ²=σₚ²,R=R,a=a,θ=θ,c=c,μ=μ,V=V)
 
     return Xₚ
 
 end
 
-# update for community with simple competition term
-function update_simple(X)
+# update for community using lower bound on fitness
+function update_lower(X)
 
-    @unpack x, N, x̄, σ², R, a, θ, c, μ, V = X
+    @unpack S, x, N, x̄, σ², R, a, θ, c, w, U, μ, V = X
 
-    W = fill(0,N)
+    # creates array of offspring trait values
+    # first index is species
+    # second index is individual
+    xₚ = fill(zeros(0),S)
 
-    for j in 1:N
+    for i in 1:S
 
-        # mean fitness of individual j
-        w = exp( R - a*(θ-x[j])^2/2.0 - c*N )
+        W = fill(0,N[i])
 
-        # parameterizing the NegativeBinomial
-        q = w/V
-        s = w^2/(V-w)
+        for j in 1:N[i]
 
-        # draw random number of offspring
-        W[j] = rand( NegativeBinomial( s, q ), 1)[1]
+            #
+            # mean fitness of individual j in species i
+            # this follows exactly from SM §5.6
+            #
 
-    end
+            # container for aggregating effects of competition
+            B = 0.0
 
-    # total number of offspring
-    Nₚ = sum(W)
+            # collect effects of competition with other individuals
+            # within the same population
+            for k in filter(x -> x≠j, 1:N[i])
+                B += U[i]^2*exp( (x[i,j] - x[i,k])^2 / (4*w[i]) ) / √(4*π*w[i])
+            end
 
-    # container for locations of offspring
-    xₚ = fill(0.0,Nₚ)
+            # collect effects of competition with other individuals
+            # in other populations
+            for k in filter(x -> x≠i, 1:S)
+                for l in 1:N[k]
+                    B += U[i]*U[k]*exp( (x[i,j] - x[k,l])^2 / (2*(w[i]+w[k])) ) / √(2*π*(w[i]+w[k]))
+                end
+            end
 
-    # keeps track of which individual is being born
-    ct = 0
+            w = exp( R[i] - a[i]*(θ[i]-x[i,j])^2/2.0 - c[i]*B )
 
-    # loop throug parents
-    for j in 1:N
+            # parameterizing the NegativeBinomial
+            q = w/V
+            s = w^2/(V-w)
 
-        # birth each offspring
-        for k in 1:W[j]
-
-            # consider next individual
-            ct += 1
-
-            # draw random trait for this individual
-            xₚ[ct] = rand( Normal( x[j], √μ ), 1)[1]
+            # draw random number of offspring
+            W[j] = rand( NegativeBinomial( s, q ), 1)[1]
 
         end
 
+        # total number of offspring
+        Nₚ = sum(W)
+
+        # container for locations of offspring
+        xₚ = fill(0.0,Nₚ)
+
+        # keeps track of which individual is being born
+        ct = 0
+
+        # loop throug parents
+        for j in 1:N[i]
+
+            # birth each offspring
+            for k in 1:W[j]
+
+                # consider next individual
+                ct += 1
+
+                # draw random trait for this individual
+                xₚ[ct] = rand( Normal( x[i,j], √μ[i] ), 1)[1]
+
+            end
+
+        end
+
+        x̄ₚ[i] = mean(xₚ)
+        σₚ²[i]= var(xₚ)
+
     end
 
-    x̄ₚ = mean(xₚ)
-    σₚ²= var(xₚ)
+    Xₚ = community(x=xₚ,N=Nₚ,x̄=x̄ₚ,σ²=σₚ²,R=R,a=a,θ=θ,c=c,μ=μ,V=V)
 
-    Xₚ = population(x=xₚ,N=Nₚ,x̄=x̄ₚ,σ²=σₚ²,R=R,a=a,θ=θ,c=c,μ=μ,V=V)
+    return Xₚ
+
+end
+
+# rescaled update for community using lower bound on fitness
+function rescaled_lower(X)
+
+    @unpack S, x, g, N, n, x̄, σ², G, R, a, θ, c, w, U, η, μ, V = X
+
+    #
+    x̄ₚ = fill(0.0,S)
+    σₚ²= fill(0.0,S)
+    Gₚ = fill(0.0,S)
+    Nₚ = fill(0.0,S)
+
+    # creates array of offspring
+    # breeding and trait values
+    # first index is species
+    # second index is individual
+    gₚ = fill(zeros(0),S)
+    xₚ = fill(zeros(0),S)
+
+    for i in 1:S
+
+        W = fill(0,N[i])
+
+        for j in 1:N[i]
+
+            #
+            # mean fitness of individual j in species i
+            # this follows exactly from SM §5.6
+            #
+
+            # container for aggregating effects of competition
+            B = 0.0
+
+            # collect effects of competition with other individuals
+            # within the same population
+            for k in filter(x -> x≠j, 1:N[i])
+                B += U[i]^2 / √(4*π*w[i])
+            end
+
+            # collect effects of competition with other individuals
+            # in other populations
+            for k in filter(x -> x≠i, 1:S)
+                for l in 1:N[k]
+                    B += U[i]*U[k] / √(2*π*(w[i]+w[k]))
+                end
+            end
+
+            𝒲 = exp( (R[i] - a[i]*(θ[i]-x[i][j])^2/2.0 - c[i]*B/n[i]) / n[i] )
+
+            # parameterizing the NegativeBinomial
+            q = 𝒲/V[i]
+            s = 𝒲^2/(V[i]-𝒲)
+
+            # draw random number of offspring
+            W[j] = rand( NegativeBinomial( s, q ), 1)[1]
+
+        end
+
+        # loop through parents
+        for j in 1:N[i]
+
+            # birth each offspring
+            for k in 1:W[j]
+
+                # draw random breeding value for this individual
+                append!(gₚ[i], rand( Normal( g[i][j], √μ[i] ), 1)[1])
+
+                # draw random trait for this individual
+                append!(xₚ[i], rand( Normal( gₚ[i][k], √η[i] ), 1)[1])
+
+            end
+
+        end
+
+        x̄ₚ[i] = mean(xₚ[i])
+        σₚ²[i]= var(xₚ[i])
+        Gₚ[i] = var(gₚ[i])
+        Nₚ[i] = length(gₚ[i])
+
+    end
+
+
+    Xₚ = community(S=S,x=xₚ,g=gₚ,N=Nₚ,n=n,x̄=x̄ₚ,σ²=σₚ²,G=Gₚ,R=R,
+        a=a,θ=θ,c=c,w=w,U=U,η=η,μ=μ,V=V)
 
     return Xₚ
 
