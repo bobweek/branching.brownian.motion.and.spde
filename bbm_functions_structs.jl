@@ -354,7 +354,7 @@ function rescaled_lower(X)
                 # draw random breeding value for this individual
                 append!(gₚ[i], rand( Normal( g[i][j], √μ[i] ), 1)[1])
 
-                # draw random trait for this individual
+                # draw random trait value for this individual
                 append!(xₚ[i], rand( Normal( gₚ[i][k], √η[i] ), 1)[1])
 
             end
