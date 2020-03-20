@@ -4,62 +4,63 @@ using Parameters, Statistics, Random, LinearAlgebra, Distributions,
 
 include("/home/bob/Research/Branching Brownian Motion/bbm_functions_structs.jl")
 
-#
-# demonstrating approximate Gaussian distribution for small V/N
-#
-# corresponds
-#
-
-# number of generations to halt at
-T = 200
-
-# initial trait values
-x₀ = rand(Normal(0.0,1.0),n)
+#######################################################
+#                                                     #
+# a branching Brownian motion for a single population #
+#                                                     #
+#######################################################
 
 # parameter values
-r = 2.0
-a = 0.01
-θ = 0.0
-c = 0.0001
-μ = 1.0
-V = 20.0
-
-# equilibrium abundance
-# we use this as the initial abundance
-N̂ = floor((r-.5*√(μ*a))/c)
+w = 0.1  # niche breadths
+U = 1.0  # total niche use
+c = 2e-3 # strengths of competition
+η = 1e-5 # segregation variances
+μ = 1e-2 # mutation rates
+V = 2.0  # magnitudes of drift
+r = 1.0  # innate rate of growth
+a = 1e-2 # strengths of abiotic selection
+θ = 0.0  # phenotypic optima
+n = 20.0 # scaling parameter
 
 ##
 ## VERY IMPORTANT REQUIREMENT   -->  V >= exp(r)
 ##
 ## this inequality must be satisfied to use negative binomial sampling
 ##
-##
-## TWO MORE IMPORTANT REQUIREMENTS --> 2*r > √(μ*a) && c > r - √(μ*a)/2
-##
-## these inequalities must be satisfied for positive equilibrium abundance
-##
+
+# equilibrium abundance an the absence of interspecific interactions
+# we use this as the initial abundance
+
+N₀ = Int64(floor( n*( r -0.5*( η*a + √(μ*a) ) )/c ) )
+
+# initial breeding values
+g₀ = rand(Normal(θ,√(μ/a)),N₀)
+
+# initial trait values
+ηₘ = √η*Matrix(I, N₀, N₀)
+x₀ = vec(rand(MvNormal(g₀,ηₘ),1))
 
 # set up initial population
-X = population(x=x₀, x̄=mean(x₀), σ²=var(x₀), N=N̂,
-	r=r, a=a, θ=θ, c=c, μ=μ, V=V)
+X = community(S=1, x=fill(x₀,1), g=fill(g₀,1), N=fill(N₀,1), n=fill(n,1),
+	x̄=mean.(fill(x₀,1)), σ²=var.(fill(x₀,1)), G=var.(fill(g₀,1)),
+	R=fill(r,1), a=fill(a,1), θ=fill(θ,1), c=fill(c,1), w=fill(w,1),
+	U=fill(U,1), η=fill(η,1), μ=fill(μ,1), V=fill(V,1) )
 
 # always a good idea to inspect a single iteration
-update(X)
+rescaled_lower(X)
+
+# number of generations to halt at
+T = Int64(50*n)
 
 # set up history of population
 Xₕ = fill(X,T)
 
-# set up containers for paths of N, x\bar and σ²
-Nₕ = fill(X.N,T)
-x̄ₕ = fill(X.x̄,T)
-σ²ₕ = fill(X.σ²,T)
-
 # simulate
 for i in 2:T
 
-	if Xₕ[i-1].N > 0
+	if prod( log.( 1 .+ Xₕ[i-1].N ) ) > 0
 
-		Xₕ[i] = update(Xₕ[i-1])
+		Xₕ[i] = rescaled_lower(Xₕ[i-1])
 
 	else
 
@@ -67,26 +68,62 @@ for i in 2:T
 
 	end
 
-	Nₕ[i] = Xₕ[i].N
-	x̄ₕ[i] = Xₕ[i].x̄
-	σ²ₕ[i] = Xₕ[i].σ²
-
 end
 
-# rescale time
-Tₛ = fill(1/N₀,T)
-for i in 2:T
-	Tₛ[i] = Tₛ[i-1]+1/n
+# set up containers for paths of N, x̄ and σ²
+Nₕ = zeros(1,T)
+x̄ₕ = zeros(1,T)
+σ²ₕ= zeros(1,T)
+Gₕ = zeros(1,T)
+
+# container for individuals
+#individualₕ = zeros(2)
+
+# fill them in
+for i in 1:1
+	for j in 1:T
+		Nₕ[i,j] =Xₕ[j].N[i]
+		x̄ₕ[i,j] =Xₕ[j].x̄[i]
+		σ²ₕ[i,j]=Xₕ[j].σ²[i]
+		Gₕ[i,j] =Xₕ[j].G[i]
+	end
 end
 
-# plotting the rescaled process
+# rescaled time
+resc_time = (1:T)./n
 
-plot(Tₛ,Nₕ)
-plot(Tₛ,x̄ₕ)
-plot(Tₛ,σ²ₕ)
+# total number of individuals across entire simulation
+total_inds = Int64(sum(Nₕ[1,:]))
+
+# traits of each individual across entire simulation
+inds = zeros(2,total_inds)
+
+ind = 0
+for i in 1:T
+	for j in 1:Int64(Nₕ[1,i])
+
+		global ind += 1
+		inds[1,ind] = resc_time[i]
+		inds[2,ind] = Xₕ[i].x[1][j]
+
+	end
+end
+
+scatter(inds[1,:], inds[2,:], legend=false, ms=.5, c=:black)
+
+# build dataframe
+df = DataFrame(x = inds[2,:], time = inds[1,:])
+
+CSV.write("/home/bob/Research/Branching Brownian Motion/n_3.csv", df)
+
+plot(resc_time,Nₕ[1,:]./n)
+plot(resc_time,x̄ₕ[1,:]./√n)
+plot(resc_time,σ²ₕ[1,:]./n)
+
+histogram(Xₕ[T].x[1])
 
 # our approximate
-phen_dist = kde(Xₕ[T].x)
+phen_dist = kde(Xₕ[T].x[1])
 
 # expected
 x̄_exp = θ

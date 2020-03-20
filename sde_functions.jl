@@ -118,7 +118,11 @@ function f(u,p,t)
 
   end
 
-  return( cat(dx,dG,dN,dims=1) )
+  du = dx
+  append!(du,dG)
+  append!(du,dN)
+
+  return(du)
 
 end
 
@@ -161,7 +165,11 @@ function g(u,p,t)
 
   end
 
-  return( cat(dx,dG,dN,dims=1) )
+  du = dx
+  append!(du,dG)
+  append!(du,dN)
+
+  return(du)
 
 end
 

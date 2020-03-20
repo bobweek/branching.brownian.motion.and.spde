@@ -317,24 +317,7 @@ function rescaled_lower(X)
             # this follows exactly from SM §5.6
             #
 
-            # container for aggregating effects of competition
-            B = 0.0
-
-            # collect effects of competition with other individuals
-            # within the same population
-            for k in filter(x -> x≠j, 1:N[i])
-                B += U[i]^2 / √(4*π*w[i])
-            end
-
-            # collect effects of competition with other individuals
-            # in other populations
-            for k in filter(x -> x≠i, 1:S)
-                for l in 1:N[k]
-                    B += U[i]*U[k] / √(2*π*(w[i]+w[k]))
-                end
-            end
-
-            𝒲 = exp( (R[i] - a[i]*(θ[i]-x[i][j])^2/2.0 - c[i]*B/n[i]) / n[i] )
+            𝒲 = exp( ( R[i] - (a[i]*(θ[i]-x[i][j])^2/2.0) - c[i]*N[i]/n[i] ) / n[i] )
 
             # parameterizing the NegativeBinomial
             q = 𝒲/V[i]
@@ -345,6 +328,9 @@ function rescaled_lower(X)
 
         end
 
+        # tracks the current offspring
+        count = Int64(1)
+
         # loop through parents
         for j in 1:N[i]
 
@@ -352,10 +338,12 @@ function rescaled_lower(X)
             for k in 1:W[j]
 
                 # draw random breeding value for this individual
-                append!(gₚ[i], rand( Normal( g[i][j], √μ[i] ), 1)[1])
+                append!( gₚ[i], rand( Normal( g[i][j], √(μ[i]/n[i]) ), 1)[1] )
 
                 # draw random trait value for this individual
-                append!(xₚ[i], rand( Normal( gₚ[i][k], √η[i] ), 1)[1])
+                append!( xₚ[i], rand( Normal( gₚ[i][count], √η[i] ), 1)[1] )
+
+                count += 1
 
             end
 
@@ -364,7 +352,7 @@ function rescaled_lower(X)
         x̄ₚ[i] = mean(xₚ[i])
         σₚ²[i]= var(xₚ[i])
         Gₚ[i] = var(gₚ[i])
-        Nₚ[i] = length(gₚ[i])
+        Nₚ[i] = sum(W)
 
     end
 

@@ -1,62 +1,56 @@
 using Parameters, Statistics, Random, LinearAlgebra, Distributions,
-	StatsBase, StatsPlots, Plots, DataFrames, CSV, Optim
+	StatsBase, StatsPlots, Plots, DataFrames, CSV, Optim, KernelDensity,
+	QuadGK, HypothesisTests
 
 include("/home/bob/Research/Branching Brownian Motion/bbm_functions_structs.jl")
 
-#
-# a branching Brownian motion
-#
+#######################################################
+#                                                     #
+# a branching Brownian motion for a single population #
+#                                                     #
+#######################################################
 
 # parameter values
-S = 1
-w = fill(0.1, S)  # niche breadths
-U = fill(1.0, S)  # total niche use
-c = fill(0.0003,S)      # strengths of competition
-Ω = sum(U) # niche use scaling
-η = fill(1.0, S)  # segregation variances
-μ = fill(1e-7, S) # mutation rates
-V = fill(5.0, S)  # magnitudes of drift
-R = fill(1.0, S) # innate rate of growth
-a = fill(1e-2,S)       # strengths of abiotic selection
-θ = fill(0.0, S)  # phenotypic optima
-
-# equilibrium abundance an the absence of interspecific interactions
-# we use this as the initial abundance
-
-C = c.*.√( U.^2 ./ .√(4*π.*w) )
-
-N₀ = Int64.(floor.( (R.-0.5*.√(μ.*a))./C ) )
-
-# initial breeding values
-g₀ = rand.(Normal(0.0,1.0),N₀)
-
-# initial trait values
-x₀ = fill(zeros(0),S)
-for i in 1:S
-	ηₘ = √η[i]*Matrix(I, N₀[i], N₀[i])
-	x₀[i] = vec(rand(MvNormal(g₀[i],ηₘ),1))
-end
+w = 0.1  # niche breadths
+U = 1.0  # total niche use
+c = 2e-3 # strengths of competition
+η = 1e-5 # segregation variances
+μ = 1e-3 # mutation rates
+V = 2.0  # magnitudes of drift
+r = 1.0  # innate rate of growth
+a = 1e-2 # strengths of abiotic selection
+θ = 0.0  # phenotypic optima
+n = 1.0 # scaling parameter
 
 ##
 ## VERY IMPORTANT REQUIREMENT   -->  V >= exp(r)
 ##
 ## this inequality must be satisfied to use negative binomial sampling
 ##
-##
-## TWO MORE IMPORTANT REQUIREMENTS --> 2*r > √(μ*a) && c > r - √(μ*a)/2
-##
-## these inequalities must be satisfied for positive equilibrium abundance
-##
-var.(x₀)
+
+# equilibrium abundance an the absence of interspecific interactions
+# we use this as the initial abundance
+
+N₀ = Int64(floor( n*( r -0.5*( η*a + √(μ*a) ) )/c ) )
+
+# initial breeding values
+g₀ = rand(Normal(0.0,1.0),N₀)
+
+# initial trait values
+ηₘ = √η*Matrix(I, N₀, N₀)
+x₀ = vec(rand(MvNormal(g₀,ηₘ),1))
+
 # set up initial population
-X = community(S=S, x=x₀, g=g₀, N=N₀, n=N₀, x̄=mean.(x₀), σ²=var.(x₀),
-	G=var.(g₀), R=R, a=a, θ=θ, c=c, w=w, U=U, η=η, μ=μ, V=V)
+X = community(S=1, x=fill(x₀,1), g=fill(g₀,1), N=fill(N₀,1), n=fill(n,1),
+	x̄=mean.(fill(x₀,1)), σ²=var.(fill(x₀,1)), G=var.(fill(g₀,1)),
+	R=fill(r,1), a=fill(a,1), θ=fill(θ,1), c=fill(c,1), w=fill(w,1),
+	U=fill(U,1), η=fill(η,1), μ=fill(μ,1), V=fill(V,1) )
 
 # always a good idea to inspect a single iteration
 rescaled_lower(X)
 
 # number of generations to halt at
-T = 1000
+T = 50
 
 # set up history of population
 Xₕ = fill(X,T)
@@ -77,46 +71,95 @@ for i in 2:T
 end
 
 # set up containers for paths of N, x̄ and σ²
-Nₕ = zeros(S,T)
-x̄ₕ = zeros(S,T)
-σ²ₕ= zeros(S,T)
-Gₕ = zeros(S,T)
+Nₕ = zeros(1,T)
+x̄ₕ = zeros(1,T)
+σ²ₕ= zeros(1,T)
+Gₕ = zeros(1,T)
 
 # container for individuals
-individualₕ = zeros(2)
+#individualₕ = zeros(2)
 
 # fill them in
-for i in 1:S
+for i in 1:1
 	for j in 1:T
 		Nₕ[i,j] =Xₕ[j].N[i]
 		x̄ₕ[i,j] =Xₕ[j].x̄[i]
 		σ²ₕ[i,j]=Xₕ[j].σ²[i]
 		Gₕ[i,j] =Xₕ[j].G[i]
-		for k in 1:Nₕ[i,j]
-			individualₕ = [individualₕ, ]
-		end
 	end
 end
 
-individualₕ = [individualₕ, [1 3]]
+# rescaled time
+resc_time = (1:T)./n
 
-plot((1:T)./N₀[1],Nₕ[1,:])
-plot((1:T)./N₀[1],x̄ₕ[1,:])
-plot((1:T)./N₀[1],σ²ₕ[1,:])
+# total number of individuals across entire simulation
+total_inds = Int64(sum(Nₕ[1,:]))
 
-plot(1:T,x̄ₕ,title="Mean Trait: N ~ 195000",ylabel="Value",xlabel="Iteration",ylim=(-1,1))
-png("mean2.png")
-plot(1:T,σ²ₕ,title="Trait Variance: N ~ 195000",ylabel="Value",xlabel="Iteration",ylim=(0,15))
-png("var2.png")
+# traits of each individual across entire simulation
+inds = zeros(2,total_inds)
 
-# rescale time
-Tₛ = fill(1/N₀,T)
-for i in 2:T
-	Tₛ[i] = Tₛ[i-1]+1/n
+ind = 0
+for i in 1:T
+	for j in 1:Int64(Nₕ[1,i])
+
+		global ind += 1
+		inds[1,ind] = resc_time[i]
+		inds[2,ind] = Xₕ[i].x[1][j]
+
+	end
 end
 
-# plotting the rescaled process
+scatter(inds[1,:], inds[2,:], legend=false, ms=.5, c=:black)
 
-plot(Tₛ,Nₕ)
-plot(Tₛ,x̄ₕ)
-plot(Tₛ,σ²ₕ)
+# build dataframe
+df = DataFrame(x = inds[2,:], time = inds[1,:])
+
+CSV.write("/home/bob/Research/Branching Brownian Motion/n_3.csv", df)
+
+plot(resc_time,Nₕ[1,:]./n)
+plot(resc_time,x̄ₕ[1,:]./√n)
+plot(resc_time,σ²ₕ[1,:]./n)
+
+histogram(Xₕ[T].x[1])
+
+# our approximate
+phen_dist = kde(Xₕ[T].x[1])
+
+# expected
+x̄_exp = θ
+σ²_exp = √(μ/a)
+
+# integral of kernel density estimate
+one = quadgk(x->pdf(phen_dist,x), -Inf, Inf, rtol=1e-3)[1]
+
+# plotting the approximate versus expected
+plot(range(-15,15),x->pdf(phen_dist,x)/one)
+plot!(x->pdf(Normal(x̄_exp,√σ²_exp),x))
+
+# define culmulative density functions (cdf's)
+function phen_cdf(x,X)
+	n = length(X)
+	num = length(findall(X.<=x))
+	return Float64(num) / Float64(n)
+end
+
+# plot the cdf's
+plot(range(-15,15),x->phen_cdf(x,Xₕ[T].x))
+plot!(x->cdf(Normal(x̄_exp,√σ²_exp),x))
+
+# calculate kolmogorov statistic
+function Kst_fct(x)
+	abs( cdf(Normal(x̄_exp,√σ²_exp),x) - phen_cdf(x,Xₕ[T].x) )
+end
+findKst = maximize(Kst_fct,-20,20)
+KS_stat = -findKst.res.minimum
+
+cdf(KSOneSided(length(Xₕ[T].x)),KS_stat)
+
+plot(range(0,1),x->cdf(KSOneSided(length(Xₕ[T].x)),x))
+
+function KSONEcdf(x)
+	return cdf(KSOneSided(length(Xₕ[T].x)),x)
+end
+
+plot(range(0,.,length=1000),y->KSONEcdf(y))
