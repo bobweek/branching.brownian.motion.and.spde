@@ -1,7 +1,7 @@
 using Parameters, Statistics, Random, LinearAlgebra, Distributions,
 	DifferentialEquations, StatsBase, StatsPlots, Plots, DataFrames, CSV, Optim
 
-include("/home/bob/Research/Branching Brownian Motion/sde_functions.jl")
+include("/home/bb/Gits/branching.brownian.motion.and.spde/sde_functions.jl")
 
 j=1
 k=2
