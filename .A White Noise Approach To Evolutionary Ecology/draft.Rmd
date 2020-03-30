@@ -34,7 +34,7 @@ Current theoretical approaches to synthesize evolution and ecology have capitali
 
 Reviewing these accomplishments reveals a beautiful synthesis of evolution and population ecology. However, it also reveals a gap in theoretical approaches to incorporate the intrinsically random nature of populations. Specifically, in theoretical quantitative genetics the derivation of a population's response to random genetic drift is derived in discrete time under the assumption of constant effective population size using arguments based on properties of random samples [@Lande1976]. Though this approach conveniently mimics the formalism provided by the Wright-Fisher model of population genetics, real population sizes fluctuate over time. Furthermore, since these fluctuations are themselves stochastic, it seems natural to derive expressions for the evolutionary response to demographic stochasticity and consider how the results relate to characterizations of random genetic drift. This has been done in continuous time for population genetic models without too much technical overhead, assuming a finite number of alleles. However, for populations with a continuum of types, such as a quantitative trait, this becomes a vexing mathematical challenge. Here we close this gap by combining the calculus of white noise with results on rescaled limits of branching Brownian motion processes (BBM) and stochastic partial differential equations (SPDE). Our goal has two components: 1) Establish a novel synthetic approach to theoretical evolutionary ecology that provides a formal connection between demographic stochasticity and random genetic drift in the context of quantitative traits. To show that our approach can be used to develop useful biological insights we derive a model of coevolution in an ecological network and use it to investigate the relationship between competition coefficients and selection gradients. 2) Communicate some useful properties of space-time white noise, BBM and SPDE to as wide of audience as possible. With this goal in mind we will not provide a rigorous treatment of any of these deep subjects. Instead, we introduce a set of heuristics that only require the basic concepts of Reimann integration, partial differentiation and some exposure to Brownian motion and stochastic ordinary differential equations (SDE). For a concise introduction to SDE and Brownian motion, we recommend the primer by Evans [-@9781470410544]. Rigorous treatments of SPDE and rescaled limits of BBM can be found in Walsh [-@Walsh] and Dawson [-@dawson1993measure] respectively.
 
-To provide motivation for the stochastic equations developed later and background for our model of coevolution, we begin with \S\ref{deterministic} by briefly summarizing derivations of deterministic dynamics of biological populations. Starting with a partial differential equation (PDE), we arrive at a general set of ordinary differential equations modelling the dynamics of abundance, trait mean and trait variance. From this we observe that replacing the PDE with a SPDE provides a path to derive SDE describing the evolutionary response to demographic stochasticity. We accomplish this in \S\ref{wnc} by introducing a set of mathematical tools based on the calculus of white noise and discuss how a diffusion limit of a spatially structured branching process leads to the natural SPDE appropriate for our study. The diffusion limit in turn provides a rigorous method for constructing fitness functions used in models of evolutionary ecology. We employ these tools to derive a system of SDE generalizing our deterministic results to account for demographic stochasticity. However, although biologically insightful, these equations remain difficult to analyze and implement numerically. In \S\ref{equations} we use an assumption of normally distributed trait values to simplify these expressions into formulae that are much easier to work with. We then account for the constraint of adaptive evolution on the amount of heritable variation in a population by extending these results via a model of imperfect inheritance. The resulting equations coincide with classical results in quantitative genetics as a special case. In \S\ref{coev} we combine the derived equations of population dynamics with classical niche theory to formulate a model of coevolution across a guild of $S$ species participating in exploitative competition along a common resource continuum. In SM \S\ref{diffuse} we apply a classical theorem on rescaled limits of BBM that allow for ecological interactions to provide a rigorous derivation. To gain biological insight, in \S\ref{dynamics} we numerically integrate our model of coevolution for $S=100$ species, tracking the dynamics of traits and abundances, under scenarios of weak and strong competition. We include an account of the natural history of the simulated system and discuss the significance of demographic stochasticity for structuring ecological communities. In \S\ref{ecoevo} we provide formula for selection gradients and competition coefficients implied by our model and use these to investigate the relationship between the strengths of competition and coevolution. Finally, \S\ref{conclusion} concludes with a summary of accomplishments, a few remarks on the limits of this approach and future directions to incorporate more explicitly the genetic architecture of populations, feedbacks with ecosystem processes and the macroevolutionary history of interacting lineages.
+To provide motivation for the stochastic equations developed later and background for our model of coevolution, we begin with \S\ref{deterministic} by briefly summarizing derivations of deterministic dynamics of biological populations. Starting with a partial differential equation (PDE), we arrive at a general set of ordinary differential equations modelling the dynamics of abundance, trait mean and trait variance. From this we observe that replacing the PDE with a SPDE provides a path to derive SDE describing the evolutionary response to demographic stochasticity. We accomplish this in \S\ref{wnc} by introducing a set of mathematical tools based on the calculus of white noise and discuss how a diffusion limit of a spatially structured branching process leads to the natural SPDE appropriate for our study. The diffusion limit in turn provides a rigorous method for constructing fitness functions used in models of evolutionary ecology. We employ these tools to derive a system of SDE generalizing our deterministic results to account for demographic stochasticity. However, although biologically insightful, these equations remain difficult to analyze and implement numerically. In \S\ref{equations} we use an assumption of normally distributed trait values to simplify these expressions into formulae that are much easier to work with. We then account for the constraint of adaptive evolution on the amount of heritable variation in a population by extending these results via a model of imperfect inheritance. The resulting equations coincide with classical results in quantitative genetics as a special case. In \S\ref{coev} we combine the derived equations of population dynamics with classical niche theory to formulate a model of coevolution across a guild of $S$ species participating in exploitative competition along a common resource continuum. In SM \S\ref{diffuse} we apply a classical theorem on rescaled limits of BBM that allow for ecological interactions to provide a rigorous derivation. To gain biological insight, in \S\ref{dynamics} we numerically integrate our model of coevolution for $S=100$ species, tracking the dynamics of traits and abundances, under scenarios of weak and strong competition. We include an account of the natural history of the simulated system and discuss the significance of demographic stochasticity for structuring ecological communities. In \S\ref{ecoevo} we provide expressions for selection gradients and competition coefficients implied by our model and use these expressions to investigate the relationship between the strengths of competition and coevolution. Finally, \S\ref{conclusion} concludes with a summary of accomplishments, a few remarks on the limits of this approach and future directions to incorporate more explicitly the genetic architecture of populations, feedbacks with ecosystem processes and the macroevolutionary history of interacting lineages.
 
 # The framework
 
@@ -70,7 +70,7 @@ N(0)=\int_{-\infty}^{+\infty}\nu(x,0)dx<+\infty,
 \begin{equation}
 \sigma^2(0)=\int_{-\infty}^{+\infty}(x-\bar x(0))^2p(x,0)dx<+\infty,
 \end{equation}
-where $\bar x(t)$ and $\sigma^2(t)$ are respectively the mean trait and phenotypic variance at time $t\geq0$. We denote by $C_{1,c}^+(\mathbb{R}\times[0,\infty))$ the set of all non-negative integrable functions that are continuous in $x$ and $t$. Second, we assume selection is determined by the growth rate $m(\nu,x)$ that is differentiable with respect to $x\in\mathbb{R}$, continuous with respect to $\nu\in C^+_{1,c}(\mathbb{R}\times[0,\infty))$ and satisfies $m(\nu,x)\leq r$ for some $r\in\mathbb{R}$ and all $x\in\mathbb{R}$ and $\nu\in C_{1,c}^+(\mathbb{R}\times[0,\infty))$. Our continuity assumption implies; if a sequence of abundance densities $\{\nu_n\}_{n=1}^\infty\subset C^+_{1,c}(\mathbb{R}\times[0,\infty))$ satisfies $\lim_{n\to\infty}\nu_n=\nu\in C^+_{1,c}(\mathbb{R}\times[0,\infty))$, then $\lim_{n\to\infty}m(\nu_n,x)=m(\nu,x)$ for all $x\in\mathbb{R}$. Third, we assume mutation is captured by diffusion with coefficient $\frac{\mu}{2}$. With these technicalities aside, the demographic dynamics can be modelled by the PDE
+where $\bar x(t)$ and $\sigma^2(t)$ are respectively the mean trait and phenotypic variance at time $t\geq0$. Second, we assume selection is determined by the growth rate $m(\nu(x,t),x)$ that is differentiable with respect to both arguments and satisfies $m(y,x)\leq r$ for some $r\in\mathbb{R}$ and for all $x\in\mathbb{R}$, $y\geq0$. From here on we abbreviate $m(\nu(x,t),x)$ to $m(\nu,x)$. Third, we assume mutation is captured by diffusion with coefficient $\frac{\mu}{2}$. With these technicalities aside, the demographic dynamics can be modelled by the PDE
 \begin{equation}\label{eq1}
 \frac{\partial}{\partial t}\nu(x,t)=m(\nu,x)\nu(x,t)+\frac{\mu}{2}\frac{\partial^2}{\partial x^2}\nu(x,t)
 \end{equation}
@@ -83,7 +83,7 @@ To derive a replicator-mutator equation from equation (\ref{eq1}), we employ the
 =\int_{-\infty}^{+\infty} m(\nu,x)\nu(x,t)dx+\int_{-\infty}^{+\infty}\frac{\mu}{2}\frac{\partial^2}{\partial x^2}\nu(x,t)dx \\
 =N(t)\int_{-\infty}^{+\infty} m(\nu,x)p(x,t)dx=\bar m(t) N(t).
 \end{multline}
-By our assumptions on mutation and rate of growth, $\nu(x,t)$ is twice differentiable with respect to $x$ and $\int_{-\infty}^{+\infty}\nu(x,t)dx<\infty$ for all $t\geq0$ (SM \S\ref{}). This implies that we are justified in swapping the order of differentiation and integration and the result $\int_{-\infty}^{+\infty}\frac{\partial^2}{\partial x^2}\nu(x,t)dx=0$ can be derived from the fundamental theorem of calculus. Biological reasoning agrees with this latter result since mutation neither creates nor destroys individuals, but merely changes their type from their parental type. Taking the same approach, we derive the dynamics of the phenotypic distribution $p(x,t)$ in response to selection and muation as
+Using our assumptions on mutation and rate of growth, we show in SM \S\ref{} $\nu(x,t)$ is twice differentiable with respect to $x$ and $\int_{-\infty}^{+\infty}\nu(x,t)dx<\infty$ for all $t\geq0$. This implies that we are justified in swapping the order of differentiation and integration and the result $\int_{-\infty}^{+\infty}\frac{\partial^2}{\partial x^2}\nu(x,t)dx=0$ can be derived from the fundamental theorem of calculus. Biological reasoning agrees with this latter result since mutation neither creates nor destroys individuals, but merely changes their type from their parental type. Taking the same approach, we derive the dynamics of the phenotypic distribution $p(x,t)$ in response to selection and muation as
 
 \begin{multline}\label{p_PDE}
 \frac{\partial}{\partial t}p(x,t)=\frac{\partial}{\partial t}\frac{\nu(x,t)}{N(t)}=\frac{1}{N^2(t)}\left(N(t)\frac{\partial}{\partial t}\nu(x,t)-\nu(x,t)\frac{d}{dt}N(t)\right) \\
@@ -101,15 +101,15 @@ Hence, the dynamics of the mean trait $\bar x(t)$ can be derived as
 
 \begin{multline}\label{detmean}
 \frac{d}{dt}\bar x(t)=\frac{d}{dt}\int_{-\infty}^{+\infty} x p(x,t)dx=\int_{-\infty}^{+\infty} x\frac{\partial}{\partial t} p(x,t)dx \\
-=\int_{-\infty}^{+\infty} x\big(m(\nu,x)-\bar m(t)\big) p(x,t)+x\frac{\mu}{2}\frac{\partial^2}{\partial x^2} p(x,t)dx \\
-=\mathrm{Cov}_t\Big(m(\nu,x),x\Big)+\frac{\mu}{2}\int_{-\infty}^{+\infty} x\frac{\partial^2}{\partial x^2} p(x,t)dx.
+=\int_{-\infty}^{+\infty} x\big(m(\nu,x)-\bar m(t)\big) p(x,t)+x\frac{\mu}{2}\frac{\partial^2}{\partial x^2} p(x,t)dx
+=\mathrm{Cov}_t\Big(m(\nu,x),x\Big).
 \end{multline}
 
-Equation (\ref{detmean}) is a continuous time analog of the well known Robertson-Price equation [@Robertson1966; @PRICE1970; @FRANK2012; @Queller2017; @Lion2018]. The covariance of fitness and phenotype creates change in $\bar x$ to maximize mean fitness $\bar m$. Since this change is driven by a covariance with respect to phenotypic diversity, the response in mean trait to selection is mediated by the phenotypic variance. In particular, when $\sigma^2=0$, $\bar x$ will not respond to selection. The second term, due to mutation, represents the so-called _transmission bias_ [@FRANK2012]. When $p(x,t)$ is symmetric around $\bar x$, this term disappears due to equal bias in opposite directions cancelling the effect of mutation on $\bar x$. Following the approach taken to calculate the evolution of $\bar x$, we find the response of phenotypic variation to this model of selection and mutation is
+Equation (\ref{detmean}) is a continuous time analog of the well known Robertson-Price equation without transmission bias [@Robertson1966; @PRICE1970; @FRANK2012; @Queller2017; @Lion2018]. The covariance of fitness and phenotype creates change in $\bar x$ to maximize mean fitness $\bar m$. Since this change is driven by a covariance with respect to phenotypic diversity, the response in mean trait to selection is mediated by the phenotypic variance. In particular, when $\sigma^2=0$, $\bar x$ will not respond to selection. The result $\int_{-\infty}^{+\infty} x\frac{\partial^2}{\partial x^2} p(x,t)dx=0$ can be found by applying integration by parts. Following the approach taken to calculate the evolution of $\bar x$, we find the response of phenotypic variation to this model of selection and mutation is
 \begin{equation}\label{vardyn_det}
-\frac{d}{dt}\sigma^2(t)=\mathrm{Cov}_t\Big(m(\nu,x),(x-\bar x)^2\Big)+\frac{\mu}{2}\int_{-\infty}^{+\infty}(x-\bar x)^2\frac{\partial^2}{\partial x^2}p(x,t)dx.
+\frac{d}{dt}\sigma^2(t)=\mathrm{Cov}_t\Big(m(\nu,x),(x-\bar x)^2\Big)+\mu.
 \end{equation}
-For the sake of space we relegate the derivation of $d\sigma^2/dt$ to SM \S\ref{var_deriv}. In the absence of mutation equation (\ref{vardyn_det}) agrees with the result derived by Lion [-@Lion2018] for discrete phenotypes. From a statistical perspective, if we think of $(x-\bar x)^2$ as a square error, then in analogy to the dynamics of the mean trait, we see that the response in $\sigma^2$ to selection can be expressed as a covariance of fitness and square error, which is defined in analogy to $\mathrm{Cov}_t(m(\nu,x),x)$. This covariance also creates change in $\sigma^2$ that maximizes mean fitness $\bar m$, which can be positive or negative depending on whether selection is stabilizing or disruptive. In SM \S\ref{var_deriv} we show when $p(x,t)$ is a Gaussian bell curve, the increase in variance due to mutation simplifies to $\mu$. 
+For the sake of space we relegate the derivation of $d\sigma^2/dt$ to SM \S\ref{var_deriv}. In the absence of mutation equation (\ref{vardyn_det}) agrees with the result derived by Lion [-@Lion2018] for discrete phenotypes. From a statistical perspective, if we think of $(x-\bar x)^2$ as a square error, then in analogy to the dynamics of the mean trait, we see that the response in $\sigma^2$ to selection can be expressed as a covariance of fitness and square error, which is defined in analogy to $\mathrm{Cov}_t(m(\nu,x),x)$. This covariance also creates change in $\sigma^2$ that maximizes mean fitness $\bar m$, which can be positive or negative depending on whether selection is stabilizing or disruptive.
 
 In SM \S\ref{SDE_DERIV}, we extend these results to include the effects of demographic stochasticity. Similar to the approach taken by Champagnat, Ferriére and Méléard [-@Champagnat2006], we begin with a BBM that models populations as discrete sets of reproducing individuals whose vital rates depend on their trait value as well as the state of the entire population. Taking a large population size limit and keeping our assumption of single dimensional traits, we employ a pair of classical results that show, under the appropriate rescaling in time, phenotypic space and population density, a sequence of rescaled BBM converges to a limiting process that can be characterized by a SPDE [@Mlard1993; @zeng1998absolute]. The limiting processes of rescaled BBM have been referred to as measure-valued Markov processes [@dawson1993measure] or superprocesses [@alisonetheridge2000]. Under the simplifying assumptions inherited from our treatment of deterministic dynamics and an additional assumption on demographic stochasticity, we obtain as a special case a relatively simple expression for an SPDE that generalizes equation (\ref{eq1}). The simplicity of our special case allows us to use properties of space-time white noise processes to derive a set of SDE that generalize equations (\ref{N_det}), (\ref{detmean}) and (\ref{vardyn_det}) to include the effects of demographic stochasticity. Classical expressions for the effects of random genetic drift on the evolution of mean traits are obtained as a special case.
 
@@ -153,15 +153,17 @@ ggsave("~/Gits/branching.brownian.motion.and.spde/.A White Noise Approach To Evo
 knitr::include_graphics('wn.png')
 ```
 
-However, it turns out that realizations of white noise do not exist as functions in the classical sense. Indeed, since Brownian motion is nowhere differentiable with respect to time, white noise cannot be formally understood as its time derivative. Thus our notation $\dot W$ is only meant to aid intuition and not be taken as formal. A formal understanding is possible by considering white noise as a _measure_-valued process [@Dawson1975; @Walsh] or as a _generalized_ process that acts on classically defined functions or stochastic processes to return random variables or stochastic processes [@Krylov1981; @DaPrato2014]. Since a measure-valued process can be defined from a generalized process and a generalized process can be defined from a measure-valued process, the distinction between the two is more or less a matter of perspective. However, we find the perspective of white-noise as a generalized process to be a more efficient route for developing heuristics to help with some routine calculations. Hence, this latter approach provides the general idea implemented here. Although the treatments provided by Krylov and Rozovskii [-@Krylov1981] and Da Prato and Zabczyk [-@DaPrato2014] extend the theory of SDE to formally treat SPDE in a general and elegant fashion, they require the navigation of an enourmous amount of technical definitions and detailed proofs. To extract some particularly useful results from this theory relevant to our goal of synthesizing the stochastic dynamics of biological populations, we provide a streamlined approach by capitolizing on the solid ground these authors have established. For instance, instead of rigorously proving properties of white-noise, we simply define them to be so, taking solice in the fact that the technical details have been worked out elsewhere.
+However, it turns out that realizations of white noise do not exist as functions in the classical sense. Indeed, since Brownian motion is nowhere differentiable with respect to time, white noise cannot be formally understood as its time derivative. Thus our notation $\dot W$ is only meant to aid intuition and not be taken as formal. A formal understanding is possible by considering white noise as a _measure_-valued process [@Dawson1975; @Walsh] or as a _generalized_ process that acts on classically defined functions or stochastic processes to return either random variables or stochastic processes [@Krylov1981; @DaPrato2014]. Since a measure-valued process can be defined from a generalized process and a generalized process can be defined from a measure-valued process, the distinction between the two is more or less a matter of perspective. However, we find the perspective of white-noise as a generalized process to be a more efficient route for developing heuristics to help with some routine calculations involved with deriving SDE from SPDE. Hence, the notion of a generalized process provides the general idea implemented here. Although the treatments of SPDE provided by Krylov and Rozovskii [-@Krylov1981] and Da Prato and Zabczyk [-@DaPrato2014] extend the theory of SDE to formally treat SPDE in a general and elegant fashion, they require the navigation of an enourmous amount of technical definitions and detailed proofs. To extract some particularly useful results from this theory relevant to our goal of synthesizing the stochastic dynamics of biological populations, we provide a streamlined approach by capitolizing on the solid ground these authors have established. For instance, instead of rigorously proving properties of white-noise, we simply define them to be so, taking solice in the fact that the technical details have been worked out elsewhere.
 
-To shed a bit of light on the idea of a generalized process, we note that they are the stochastic analog of a generalized function, such as the Dirac delta function $\delta$. Just as a generalized function operates on classical functions to return a value (e.g., $\delta(f)=f(0)$), a generalized process acts on a set of functions to return a classically defined stochastic process. For a breif overview of the theory of generalized functions, see the addendum to chapter 3 of Kolmogorov and Fomin [-@kolmogorov1999elements].
+Before diving in, we shed a bit of light on the idea of a generalized process. A generalized process is the stochastic analog of a generalized function, such as the Dirac delta function $\delta$. Just as a generalized function operates on classical functions to return a value (e.g., $\delta(f)=f(0)$), a generalized process acts on a set of functions to return a classically defined stochastic process. For a breif primer on the theory of generalized functions, see the addendum to chapter 3 of Kolmogorov and Fomin [-@kolmogorov1999elements].
 
-Throughout this section, we minimize notation by writing $\int_{\mathbb{R}}f(x)dx=\int_{-\infty}^{+\infty}f(x)dx$ and similarly $\int_Df(x)dx$ for the integral of $f$ over $D\subset\mathbb{R}$. We define $\mathscr{N}_2$ as the set of stochastic processes $f(x,t)$ that are continuous in both $x$ and $t$ and satisfy $\mathbb{E}\left(\int_0^t\int_\mathbb{R}f^2(x,s)dxds\right)<+\infty$ for each $t\geq0$. The operator $\mathbb{E}$ denotes expectation with respect to the underlying probability space. For each $t\geq0$ we set
+Throughout this section, we minimize notation by writing $\int_{\mathbb{R}}f(x)dx=\int_{-\infty}^{+\infty}f(x)dx$ and similarly $\int_Df(x)dx$ for the integral of $f$ over $D\subset\mathbb{R}$. We define $\mathscr{N}_2$ as the set of stochastic processes $f(x,t)$ that are continuous in $t$ and satisfy $\mathbb{E}\left(\int_0^t\int_\mathbb{R}f^2(x,s)dxds\right)<+\infty$ for each $t\geq0$. The operator $\mathbb{E}$ denotes expectation with respect to the underlying probability space. For each $t\geq0$ we set
 
 \begin{equation}
-\|f\|_t=\sqrt{\mathbb{E}\left(\int_0^t\int_\mathbb{R}f^2(x,s)dxds\right)}.
+\|f\|_t=\sqrt{\mathbb{E}\left(\int_0^t\int_\mathbb{R}f^2(x,s)dxds\right)},
 \end{equation}
+
+and make use of the convention $f=g$ if $\|f-g\|_t=0$ for all $t\geq0$.
 
 We define a generalized stochastic process $\mathbf W$ that maps processes $f\in\mathscr{N}_2$ to real-valued stochastic processes indexed by time $t\geq0$, but not by space. To evaluate $\mathbf W$ for a process $f\in\mathscr{N}_2$ and some time $t\geq0$ we write $\mathbf W_t(f)$. Specifically, for any $f,g\in\mathscr{N}_2$, we define $\mathbf W(f)$ and $\mathbf W(g)$ to be Gaussian processes satisfying, for any $t,t_1,t_2\geq0$,
 \begin{equation}\label{exp_WN}
@@ -170,27 +172,31 @@ We define a generalized stochastic process $\mathbf W$ that maps processes $f\in
 \begin{equation}\label{cov_WN}
 \mathbb{C}\big(\mathbf W_{t_1}(f),\mathbf W_{t_2}(g)\big)=\mathbb{E}\left(\int_0^{t_1\wedge t_2}\int_\mathbb{R} f(x,s)g(x,s)dxds\right),
 \end{equation}
-where $t_1\wedge t_2=\min(t_1,t_2)$ and $\mathbb{C}$ denotes covariance with respect to the underlying probability space. The operators $\mathbb{E}$ and $\mathbb{C}$ are to be distinguished from $\bar f(t)$ and $\mathrm{Cov}_t(f,g)$ which denote expectation and covariance with respect to phenotypic diversity at time $t\geq0$.
+where $t_1\wedge t_2=\min(t_1,t_2)$ and $\mathbb{C}$ denotes covariance with respect to the underlying probability space. In particular, denoting $\mathbb{V}$ the variance operator with respect to the underlying probability space, we have $\mathbb{V}\big(\mathbf W_t(f)\big)=\|f\|_t^2$ for all $t\geq0$ and $f\in\mathscr{N}_2$. The operators $\mathbb{E}$ and $\mathbb{C}$ are to be distinguished from $\bar f(t)$ and $\mathrm{Cov}_t(f,g)$ which denote expectation and covariance with respect to phenotypic diversity at time $t\geq0$.
 
-Since Gaussian processes are characterized by their expectations and covariances and since we assume the $\mathscr{N}_2$ processes are continuous in both time and space, the processes $\mathbf W(f)$ and $\mathbf W(g)$ are well defined. In particular, if $f\in\mathscr{N}_2$ is independent of time, then $\mathbf W(f)$ is a Brownian motion with variance at time $t\geq0$ equal to $t \ \mathbb{E}(\int_\mathbb{R}f^2(x,0)dx)$. With the generalized process $\mathbf W$ defined, we define the space-time white noise $\dot W(x,t)$ implicitly via the stochastic integral
-\begin{equation}
+Since Gaussian processes are characterized by their expectations and covariances and since we assume the $\mathscr{N}_2$ processes are continuous in time, the processes $\mathbf W(f)$ and $\mathbf W(g)$ are well defined. As an example, if $f\in\mathscr{N}_2$ is independent of time, then $\mathbf W(f)$ is a Brownian motion with variance at time $t\geq0$ equal to $\|f\|_t^2=t \ \mathbb{E}(\int_\mathbb{R}f^2(x,0)dx)$. With the generalized process $\mathbf W$ defined, we define the space-time white noise $\dot W(x,t)$ implicitly via the stochastic integral
+\begin{equation}\label{informal}
 ``\int_0^t\int_\mathbb{R}f(x,s)\dot W(x,s)dxds"=``\int_\mathbb{R}\int_0^tf(x,s)\dot W(x,s)dxds"=\mathbf W_t(f), \ \forall \ f\in\mathscr{N}_2, \ t\geq0.
 \end{equation}
-We place quotations in the above expression to emphasize its informal nature and that it should not be confused with classical Riemann integration. Following this definition of white noise, we compute its value by sampling it using $\mathscr{N}_2$ processes. For example, integrating white noise over a region $D\times[0,t]$, with $t>0$ and $D$ a bounded subset of $\mathbb{R}$, is equivalent to evaluating $\mathbf W_t(I_{D\times [0,\infty)})$ where
+We place quotations in the above expression to emphasize its informal nature and that it should not be confused with classical Riemann integration. Following this definition of white noise, we compute its value by sampling it using $\mathscr{N}_2$ processes. For example, integrating white noise over a region $D\times[0,t]$, with $t>0$ and $D$ a bounded subset of $\mathbb{R}$, is equivalent to evaluating $\mathbf W_t(I_{D\times [0,+\infty)})$ for the deterministic process
 \begin{equation}
-I_{D\times [0,\infty)}(x,t)=\left\{\begin{matrix}
+I_{D\times [0,+\infty)}(x,t)=\left\{\begin{matrix}
 0, & x\notin D \\
 1, & x\in D
 \end{matrix}\right..
 \end{equation}
-Since $\int_\mathbb{R}I_{D\times [0,\infty)}^2(x,t)dx=\int_Ddx=|D|$, where $|D|$ denotes the length of $D$, $I_{D\times [0,\infty)}\in L^2_c(\mathbb{R}\times[0,\infty))$. Thus, by equations (\ref{exp_WN}) and (\ref{cov_WN}), we have 
+Since 
+\begin{equation}
+\|I_{D\times[0,+\infty))}\|_t^2=\mathbb{E}\left(\int_0^t\int_\mathbb{R}I_{D\times [0,+\infty)}^2(x,s)dxds\right)=t\int_Ddx=t|D|<+\infty, 
+\end{equation}
+where $|D|$ denotes the length of $D$, we have $I_{D\times [0,+\infty)}\in\mathscr{N}_2$. Thus, using equations (\ref{exp_WN}) and (\ref{cov_WN}) and adopting the informal notation introduced in equation (\ref{informal}), we can write the following
 \begin{equation}
 \mathbb{E}\left(\int_0^t\int_D\dot W(x,s)dxds\right)=0,
 \end{equation}
 \begin{equation}
-\mathbb{V}\left(\int_0^t\int_D\dot W(x,s)dxds\right)=t|D|,
+\mathbb{V}\left(\int_0^t\int_D\dot W(x,s)dxds\right)=t|D|.
 \end{equation}
-where $\mathbb{V}$ denotes the variance operator with respect to the underlying probability space. Using this notation equations (\ref{exp_WN}) and (\ref{cov_WN}) can be rewritten as
+Using this informal notation, equations (\ref{exp_WN}) and (\ref{cov_WN}) can be rewritten as
 \begin{equation}\label{exp_WN_xi}
 \mathbb{E}\left(\int_0^t\int_\mathbb{R}f(x,s)\dot W(x,s)dxds\right)=0,
 \end{equation}
@@ -202,7 +208,7 @@ To relate these formulae to the common notation used for SDE, we write $d\hat{\m
 \begin{equation}
 \int_0^td\hat{\mathbf W}_s(f)=\int_0^t\int_\mathbb{R}\frac{f(x,s)}{\sqrt{\int_\mathbb{R}f^2(s,y)dy}}\dot W(x,s)dxds.
 \end{equation}
-This implies $\mathbb{E}\big(\int_0^td\hat{\mathbf W}_s(f)\big)=0$, $\mathbb{C}\big(\int_0^{t_1}d\hat{\mathbf W}_s(f),\int_0^{t_2}d\hat{\mathbf W}_s(f)\big)=t_1\wedge t_2$ and, as a function of $t$, $\int_0^td\hat{\mathbf W}_s(f)$ is a standard Brownian motion for any $f\in L^2_c(\mathbb{R}\times[0,\infty))$. Hence, $d\hat{\mathbf W}_t(f)$ is analogous to the traditional shorthand used to denote stochastic differentials. Thus, equation (\ref{cov_WN_xi}) effectively extends It&ocirc;'s multiplication table to:
+This implies $\mathbb{E}\big(\int_0^td\hat{\mathbf W}_s(f)\big)=0$, $\mathbb{C}\big(\int_0^{t_1}d\hat{\mathbf W}_s(f),\int_0^{t_2}d\hat{\mathbf W}_s(f)\big)=t_1\wedge t_2$ and, as a function of $t$, $\int_0^td\hat{\mathbf W}_s(f)$ is a standard Brownian motion for any $f\in\mathscr{N}_2$. Hence, $d\hat{\mathbf W}_t(f)$ is analogous to the traditional shorthand used to denote stochastic differentials. Thus, equation (\ref{cov_WN_xi}) effectively extends It&ocirc;'s multiplication table to:
 \begin{table}[H]
 \centering\caption{An extension of It\^o's multiplication table.}\vspace{0.2cm}
 \begin{tabular}{l|lll}
@@ -241,7 +247,7 @@ Since $\nu(x,t)$ is not generally differentiable in $x$ or $t$, the derivatives 
 \int_\mathbb{R}\nu(x,t)f(x)dx-\int_\mathbb{R}\nu(x,0)f(x)dx=\int_0^t\int_\mathbb{R}\nu(x,s)\left(mf(x)+\frac{\mu}{2}\frac{\partial^2}{\partial x^2}f(x)\right)dsdx \\
 +\int_0^t\int_\mathbb{R}f(x)\sqrt{V\nu(x,s)}\dot W(x,s)dxds, \ \forall \ f\in C_b^2(\mathbb{R}).
 \end{multline}
-Evans [-@lawrenceevans2010] provides a nice introduction to weak derivatives. For more on the general theory of SPDE see Walsh [-@Walsh]. Note that since $\nu(x,t)$ is the density of a finite measure, it is integrable for each $t\geq0$. Thus, since for some $M>0$, $|f(x)|\leq M$ for every $x\in\mathbb{R}$, setting $\varphi(x,t)=f(x)\sqrt{V\nu(x,t)}$ implies $\varphi\in L^2_c(\mathbb{R}\times[0,\infty))$. Hence, the white noise integral on the right-hand side of equation (\ref{neutral_int}) can be understood using the heuristics introduced above. Evaluating equation (\ref{neutral_int}) in the particular case of $f(x)\equiv1$ returns the total mass process, which we refer to as the total abundance $N(t)$.
+Evans [-@lawrenceevans2010] provides a nice introduction to weak derivatives. For more on the general theory of SPDE see Walsh [-@Walsh]. Note that since $\nu(x,t)$ is the density of a finite measure, it is integrable for each $t\geq0$. Thus, since for some $M>0$, $|f(x)|\leq M$ for every $x\in\mathbb{R}$, setting $\varphi(x,t)=f(x)\sqrt{V\nu(x,t)}$ implies $\varphi\in\mathscr{N}_2$. Hence, the white noise integral on the right-hand side of equation (\ref{neutral_int}) can be understood using the heuristics introduced above. Evaluating equation (\ref{neutral_int}) in the particular case of $f(x)\equiv1$ returns the total mass process, which we refer to as the total abundance $N(t)$.
 
 A convergence theorem for the diffusion limit of a generalization of BBM was established by Watanabe [-@Watanabe1968]. Dawson [-@Dawson1975] suggested that, for spatial dimension $d=1$, this diffusion limit should admit a density process that satisfies a SPDE. Konna and Shiga [-@Konno1988] and Reimers [-@Reimers1989] independently proved Dawson's suggestion was indeed correct. The diffusion limit of this more general branching process (in arbitrary spatial dimension) is referred to as the Dawson-Watanabe superprocess [@alisonetheridge2000]. Conditioning the Dawson-Watanabe superprocess to have constant mass returns the Fleming-Viot process [@Etheridge1991; @Perkins1991] which has been popular in studies of spatial population genetics. In particular, an extension of the Fleming-Viot process, known as the $\Lambda$-Fleming-Viot process, was introduced by Bertoin and Le Gall [-@Bertoin2003] and coined by Etheridge [-@Etheridge2008] where it was used to resolve some technical challenges in modelling isolation by distance [@Felsenstein1975; see also @Barton2013; and @Barton2019]. Although this provides an impressive list of accomplishments, the Dawson-Watanabe superprocess falls short of our needs. In particular this process assumes individuals do not interact and thus precludes its ability to model ecological interactions. However, this concern has been addressed, leading to constuctions of superprocesses that account for interactions among individuals. In the next subsection we summarize the main results in this area and introduce the SPDE that provides the basis for our approach to theoretical evolutionary ecology.
 
@@ -278,7 +284,7 @@ Recall, we use $\nu(x,t)$ to denote the density of a superprocess, given it exis
 \begin{equation}\label{SPDE}
 \frac{\partial}{\partial t}\nu(x,t)=m(\nu,x)\nu(x,t)+\frac{\mu}{2}\frac{\partial^2}{\partial x^2}\nu(x,t)+\sqrt{V\nu(x,t)}\dot W(x,t).
 \end{equation}
-Note that, comparing equation (\ref{SPDE}) to equation (3.5) of Li [-@zeng1998absolute], our $m$ and $V$ correspond to Li's $b$ and $c$ respectively. Denoting $C_1^+(\mathbb{R})$ the set of non-negative, continuous, integrable functions on $\mathbb{R}$, it is important to note that, under the assumptions made in Méléard and Roelly [-@meleard1992interacting; -@Mlard1993] and Li [-@zeng1998absolute], equation (\ref{SPDE}) is only formal when $m(\nu,x)$ is bounded across all combinations of $\nu\in C_1^+(\mathbb{R})$ and $x\in\mathbb{R}$. However, recalling our condition $m(\nu,x)\leq r\in\mathbb{R}$, the growth rates we consider are only bounded above. Replacing $m(\nu,x)$ with its upper-bound demonstrates that the associated superprocess should still admit an integrable density. That is, we should still be able to compute the total mass process $N(t)$. In fact, in the proof of the construction of the interacting superprocess as the limit of rescaled branching diffusions, Méléard and Roelly [-@meleard1992interacting; -@Mlard1993] assumed $m(\nu,x)$ to be bounded to guarantee the total mass process will have finite mean and variance. This allowed them to employ a tightness criterion for sequences of measures and show the rescaled processes converge to a superprocess with finite total mass. Li's [-@zeng1998absolute] result builds directly off of Méléard and Roelly's construction, inheriting the assumption of boundedness for $m(\nu,x)$. However, in Li [-@zeng1998absolute], the sufficiency of $m(\nu,x)$ being bounded above is even more clear since Li works explicitly with a common upperbound for both $m(\nu,x)$ and $V$. Hence, one can repeat the necessary proofs replacing the assumption that $m(\nu,x)$ is bounded with the assumption that $m(\nu,x)$ is merely bounded above to derive the same results.
+Note that, comparing equation (\ref{SPDE}) to equation (3.5) of Li [-@zeng1998absolute], our $m$ and $V$ correspond to Li's $b$ and $c$ respectively. Denoting $C_1^+(\mathbb{R})$ the set of non-negative, continuous, integrable functions on $\mathbb{R}$, it is important to note that, under the assumptions made in Méléard and Roelly [-@meleard1992interacting; -@Mlard1993] and Li [-@zeng1998absolute], equation (\ref{SPDE}) is only formal when $m(y,x)$ is bounded across all combinations of $y\geq0$ and $x\in\mathbb{R}$. However, recalling our condition $m(y,x)\leq r\in\mathbb{R}$, the growth rates we consider are only bounded above. Replacing $m(y,x)$ with its upper-bound demonstrates that the associated superprocess should still admit an integrable density. That is, we should still be able to compute the total mass process $N(t)$. In fact, in the proof of the construction of the interacting superprocess as the limit of rescaled branching diffusions, Méléard and Roelly [-@meleard1992interacting; -@Mlard1993] assumed $m(\nu,x)$ to be bounded to guarantee the total mass process will have finite mean and variance. This allowed them to employ a tightness criterion for sequences of measures and show the rescaled processes converge to a superprocess with finite total mass. Li's [-@zeng1998absolute] result builds directly off of Méléard and Roelly's construction, inheriting the assumption of boundedness for $m(\nu,x)$. However, in Li [-@zeng1998absolute], the sufficiency of $m(\nu,x)$ being bounded above is even more clear since Li works explicitly with a common upperbound for both $m(\nu,x)$ and $V$. Hence, one can repeat the necessary proofs replacing the assumption that $m(\nu,x)$ is bounded with the assumption that $m(\nu,x)$ is merely bounded above to derive the same results.
 
 What remains is to show the spatial mean and variance are finite, assuming finite initial conditions. That is, setting $M_n(t)=\int_\mathbb{R}|x|^n\nu(x,t)dx$, we want $M_1(0),M_2(0),M_4(0)<\infty$ to imply $M_1(t),M_2(t),M_4(t)<\infty$ for each $t>0$ (it turns out we need $M_4(t)<\infty$ for the SDE describing the evolution of phenotypic variance). By condition (\ref{m_cond}), we see that $m(\nu,x)$ drops quadratically as $x$ leaves $\theta$. In SM \S\ref{finite} we show that, when $V=0$, this form of fitness generates a restoring force that ensures a finite mean and variance. Since mutation causes finite perturbations we do not expect it to overcome this restoring force in the stochastic case. If anything, we suspect a large mutation variance to merely increase the genetic load of the population and drive it to extinction. Indeed, this suggestion is supported by equilibrium of the corresponding deterministic system found in SM \S\ref{numerical}. However, to establish further support, in SM \S\ref{numerical} we investigate these claims by comparing simulations of the BBM with selection to analytical solutions of the PDE obtained from equation (\ref{SPDE}) by setting $V=0$. The results suggest our assertions are sound, but they have yet to be rigorously justified. For now, we leave this as an open problem and assume spatial means and variances are finite for every $t\in[0,\infty)$. In the next subsection we derive an SDE for the abundance of a population and report the SDE for the trait mean $\bar x$ and trait variance $\sigma^2$. For the sake of space, derivations of $d\bar x$ and $d\sigma^2$ can be found in SM \S\ref{SDE_DERIV}.
 
@@ -314,11 +320,11 @@ In SM \S\ref{SDE_DERIV} we use our assumptions that trait mean and variance are 
 dN(t)=\bar m(t)N(t)dt+\sqrt{V N(t)}dW_1(t),
 \end{equation}
 \begin{equation}\label{xbar_gen}
-d\bar x(t)=\mathrm{Cov}_t\Big(x,m(\nu,x)\Big)dt+\frac{\mu}{2}\int_{-\infty}^{+\infty}x\frac{\partial^2}{\partial x^2} p(x,t)dx+\sqrt{V\frac{\sigma^2(t)}{N(t)}}dW_2(t),
+d\bar x(t)=\mathrm{Cov}_t\Big(x,m(\nu,x)\Big)dt+\sqrt{V\frac{\sigma^2(t)}{N(t)}}dW_2(t),
 \end{equation}
-\begin{multline}\label{sig2_gen}
-d\sigma^2(t)=\left(\mathrm{Cov}_t\Big((x-\bar x(t))^2,m(\nu,x)\Big)+\frac{\mu}{2}\int_{-\infty}^{+\infty}(x-\bar x(t))^2\frac{\partial^2}{\partial x^2} p(x,t)dx-V\frac{\sigma^2(t)}{N(t)}\right)dt \\ +\sqrt{V\frac{\overline{(x-\bar x(t))^4}-\sigma^4(t)}{N(t)}}dW_3(t).
-\end{multline}
+\begin{equation}\label{sig2_gen}
+d\sigma^2(t)=\left(\mathrm{Cov}_t\Big((x-\bar x(t))^2,m(\nu,x)\Big)+\mu-V\frac{\sigma^2(t)}{N(t)}\right)dt+\sqrt{V\frac{\overline{(x-\bar x(t))^4}-\sigma^4(t)}{N(t)}}dW_3(t),
+\end{equation}
 \end{subequations}
 where $W_1$, $W_2$ and $W_3$ are standard Brownian motions. Dividing by $dt$ one can interpret equations (\ref{gen_eqns}) as if they are ordinary differential equations, but this not technically rigorous since Brownian motion is nowhere differentiable with respect to time. In SM \S\ref{SDE_DERIV} we show that in general $W_1$ is independent of both $W_2$ and $W_3$, but $W_2$ and $W_3$ covary.
 
@@ -330,15 +336,14 @@ By assuming $\nu(x,t)$ can be approximated by a Gaussian curve for each $t\geq0$
 \begin{equation}
 \nu(x,t)=\frac{N(t)}{\sqrt{2\pi\sigma^2(t)}}\exp\left(-\frac{\big(x-\bar x(t)\big)^2}{2\sigma^2(t)}\right).
 \end{equation}
-Under this assumption, Lande [-@Lande1976] found (suppressing the dependency on $t$)
-\begin{equation}
-\mathrm{Cov}(x,m)=\sigma^2\left(\frac{\partial\bar m}{\partial\bar x}-\overline{\frac{\partial m}{\partial\bar x}}\right).
+Under this assumption we find in SM \S\ref{cov2deriv} the results (suppressing the dependency on $t$)
+\begin{equation}\label{covxm}
+\mathrm{Cov}(x,m)=\sigma^2\left(\frac{\partial\bar m}{\partial\bar x}-\overline{\frac{\partial m}{\partial\bar x}}\right),
 \end{equation}
-Under the same assumption, in SM \S\ref{var_deriv} we show
 \begin{equation}
 \mathrm{Cov}\Big((x-\bar x)^2,m\Big)=2\sigma^4\left(\frac{\partial\bar m}{\partial\sigma^2}-\overline{\frac{\partial m}{\partial\sigma^2}}\right)
 \end{equation}
-and $\overline{(x-\bar x)^4}=3\sigma^4$. In particular, this implies
+and $\overline{(x-\bar x)^4}=3\sigma^4$. Equation (\ref{covxm}) is the continuous time equivalent to equation (9) in Lande [-@Lande1976]. In particular, these results imply
 \begin{subequations}\label{no_inher}
 \begin{equation}\label{xbar}
 d\bar x=\sigma^2\left(\frac{\partial\bar m}{\partial\bar x}-\overline{\frac{\partial m}{\partial\bar x}}\right)dt+\sqrt{V\frac{\sigma^2}{N}}dW_2,
@@ -993,7 +998,9 @@ Throughout this supplement, we set use dot notation for time derivatives so that
 
 ## Sufficient conditions for finite mean, variance and total abundance in the deterministic case \label{finite}
 
-Recall $C_{1,c}^+(\mathbb{R}\times[0,\infty))$ denotes the set of non-negative functions $\nu(x,t)$ continuous in both $x$ and $t$ such that $\int_{\mathbb{R}}\nu(x,t)dx<+\infty$. We assume, for $m:C_{1,c}^+(\mathbb{R}\times[0,\infty))\times\mathbb{R}\to\mathbb{R}$, there exists $r\in\mathbb{R}$ such that $m(\nu,x)\leq r$ for each $\nu\in C_{1,c}^+(\mathbb{R}\times[0,\infty))$ and $x\in\mathbb{R}$. As in the main text, we also assume the initial condition $\nu(x,0)$ satisfies
+Recall that $m(\nu,x)$ is shorthand for $m(\nu(x,t),x)$. That is, $m:[0,+\infty)\times\mathbb{R}\to\mathbb{R}$. Following our assumptions of the main text, we have that $m(y,x)$ is differentiable with respect to both $x$ and $y$ and there exists $r\in\mathbb{R}$ such that $m(y,x)\leq r$ for each $y\geq0$ and $x\in\mathbb{R}$. Hence, we can apply Proposition 1.21 of Cantrell and Cosner [-@Cantrell2004] to show that $\nu(x,t)$ remains differentiable with respect to $t$ and twice differentiable with respect to $x$ for all $t\geq0$.
+
+As in the main text, we also assume the initial condition $\nu(x,0)$ satisfies
 \begin{equation}
 N(0)=\int_{\mathbb{R}}\nu(x,0)dx<+\infty,
 \end{equation}
@@ -1007,6 +1014,7 @@ where $p(x,0)=\nu(x,0)/N(0)$, and we consider the PDE
 \begin{equation}\label{PDE_SM}
 \dot\nu(x,t)=m(\nu,x)\nu(x,t)+\frac{\mu}{2}\Delta\nu(x,t).
 \end{equation}
+
 Replacing $m$ with it's upper bound $r\in\mathbb{R}$, equation (\ref{PDE_SM}) reduces to a simple parabolic equation that can be solved using standard techniques [@stanleyfarlow1993]. In particular, when $m(\nu,x)\equiv0$ denote the solution to (\ref{PDE_SM}) by $\nu_0(x,t)$. Then, denoting
 \begin{equation}
 \Phi(x,t)=\frac{\exp\left(-x^2/2\mu t\right)}{\sqrt{2\pi\mu t}},
@@ -1027,13 +1035,13 @@ Hence, $|\bar x_r(t)|,\sigma_r^2(t)<+\infty$ for all $t\geq0$. For the sake of c
 \begin{equation}
 \nu(x,t)-\nu(x,0)=\int_0^tm(\nu,x)\nu(x,s)+\frac{\mu}{2}\Delta\nu(x,s)ds>\int_0^tr\nu_r(x,s)+\frac{\mu}{2}\Delta\nu_r(x,s)ds=\nu_r(x,t)-\nu(x,0)
 \end{equation}
-which implies there exists $\nu\in C^+_{1,c}(\mathbb{R}\times[0,\infty))$ and $x\in\mathbb{R}$ such that $m(\nu,x)>r$. But this contradicts our assumption $m(\nu,x)\leq r$ for all $\nu\in C^+_{1,c}(\mathbb{R}\times[0,\infty))$ and $x\in\mathbb{R}$. So we have $\nu(x,t)\leq\nu_r(x,t)$ for each $x\in\mathbb{R}$ and $t\geq0$. This implies that $N(t)=\int_\mathbb{R}\nu(x,t)dx<+\infty$,
+which implies there exists $y\geq0$ and $x\in\mathbb{R}$ such that $m(y,x)>r$. But this contradicts our assumption $m(y,x)\leq r$ for all $y\geq0$ and $x\in\mathbb{R}$. So we have $\nu(x,t)\leq\nu_r(x,t)$ for each $x\in\mathbb{R}$ and $t\geq0$. This implies that $N(t)=\int_\mathbb{R}\nu(x,t)dx<+\infty$,
 \begin{equation}
-0<\int_\mathbb{R}x^2\nu(x,t)dx\leq\int_\mathbb{R}x^2\nu_r(x,t)dx<+\infty
+0\leq\int_\mathbb{R}x^2\nu(x,t)dx\leq\int_\mathbb{R}x^2\nu_r(x,t)dx<+\infty
 \end{equation}
 and in particular
 \begin{equation}
-0<\sigma^2(t)+\bar x^2(t)=\frac{1}{N(t)}\int_\mathbb{R}x^2\nu(x,t)dx<+\infty
+0\leq\sigma^2(t)+\bar x^2(t)=\frac{1}{N(t)}\int_\mathbb{R}x^2\nu(x,t)dx<+\infty
 \end{equation}
 for each $t\geq0$.
 
@@ -1078,43 +1086,37 @@ f(x,t)+\int_t^{t+1}\Delta f(x,s)ds=\int_{\mathbb{R}^d}\Phi(1,x-y)f(y,t)dy. \tag{
 
 ## Deterministic dynamics of $\sigma^2(t)$ \label{var_deriv}
 
-Picking up from the main text \S2.1,
+Picking up from the main text \S\ref{deterministic},
+
+\begin{multline}
+\dot{\sigma}^2(t)=\frac{d}{dt}\int_\mathbb{R}(x-\bar x(t))^2p(x,t)dx=\int_\mathbb{R}2(x-\bar x(t))\dot{\bar x}(t)+(x-\bar x(t))^2\dot p(x,t)dx\\=\int_\mathbb{R}(x-\bar x(t))^2\left((m(\nu,x)-\bar m(t))p(x,t)+\frac{\mu}{2}\frac{\partial^2}{\partial x^2}p(x,t)\right)dx\\=\int_\mathbb{R}\left((x-\bar x(t))^2-\sigma^2(t)+\sigma^2(t)\right)(m(\nu,x)-\bar m(t))p(x,t)+(x-\bar x(t))^2\frac{\mu}{2}\frac{\partial^2}{\partial x^2}p(x,t)dx\\=\mathrm{Cov}_t\Big((x-\bar x(t))^2,m(\nu,x)\Big)+\frac{\mu}{2}\int_\mathbb{R}(x-\bar x(t))^2\frac{\partial^2}{\partial x^2}p(x,t)dx.
+\end{multline}
+
+Applying integration by parts twice yields
 
 \begin{equation}
-\dot{\sigma}^2(t)=\frac{d}{dt}\int_\mathbb{R}(x-\bar x(t))^2p(x,t)dx
+\int_{-\infty}^{+\infty}(x-\bar x(t))^2\frac{\partial^2}{\partial x^2}p(x,t)dx=2.
 \end{equation}
 
-$$=\int_\mathbb{R}2(x-\bar x(t))\dot{\bar x}(t)+(x-\bar x(t))^2\dot p(x,t)dx$$
+## Simplifying covariances with fitness under the assumption of a Gaussian density \label{cov2deriv}
 
-$$=\int_\mathbb{R}(x-\bar x(t))^2\left((m(\nu,x)-\bar m(t))p(x,t)+\frac{\mu}{2}\frac{\partial^2}{\partial x^2}p(x,t)\right)dx$$
-
-$$=\int_\mathbb{R}\left((x-\bar x(t))^2-\sigma^2(t)+\sigma^2(t)\right)(m(\nu,x)-\bar m(t))p(x,t)+(x-\bar x(t))^2\frac{\mu}{2}\frac{\partial^2}{\partial x^2}p(x,t)dx$$
-
-$$=\mathrm{Cov}_t\Big((x-\bar x(t))^2,m(\nu,x)\Big)+\frac{\mu}{2}\int_\mathbb{R}(x-\bar x(t))^2\frac{\partial^2}{\partial x^2}p(x,t)dx.$$
-
-In particular, when $p(x,t)$ is Gaussian,
+By assuming
 
 \begin{equation}
-\frac{\partial^2}{\partial x^2}p(x,t)=\frac{(x-\bar x(t))^2-\sigma^2(t)}{\sigma^4(t)}p(x,t)
+p(x,t)=\frac{\exp\left(-\frac{(x-\bar x(t))^2}{2\sigma^2(t)}\right)}{\sqrt{2\pi\sigma^2(t)}}
 \end{equation}
 
-and hence, referring to the well-known moments of the Gaussian distribution, we find
+we have
 
-\begin{equation}
-\int_\mathbb{R}(x-\bar x(t))^2\frac{\partial^2}{\partial x^2}p(x,t)dx
-\end{equation}
+\begin{multline}
+\sigma^2\left(\frac{\partial\bar m}{\partial\bar x}-\overline{\frac{\partial m}{\partial\bar x}}\right)=\sigma^2\left(\frac{\partial}{\partial\bar x}\int_\mathbb{R}m(\nu,x)p(x,t)dx-\int_\mathbb{R}p(x,t)\frac{\partial}{\bar x}m(\nu,x)dx\right)\\=\sigma^2\int_\mathbb{R}m(\nu,x)\frac{\partial}{\partial\bar x}p(x,t)dx=\sigma^2\int_\mathbb{R}\frac{x-\bar x(t)}{\sigma^2}m(\nu,x)p(x,t)dx\\=\int_\mathbb{R}(x-\bar x)(m(\nu,x)-\bar m)p(x,t)dx=\mathrm{Cov}_t(m,x),
+\end{multline}
 
-$$=\int_\mathbb{R}\frac{(x-\bar x(t))^4-(x-\bar x(t))^2\sigma^2(t)}{\sigma^4(t)}p(x,t)dx=2.$$
+and
 
-In the Gaussian case, we also have
-
-\begin{equation}
-2\sigma^4\left(\frac{\partial\bar m}{\partial\sigma^2}-\overline{\frac{\partial m}{\partial\sigma^2}}\right)=2\sigma^4\left(\frac{\partial}{\partial\sigma^2}\int_\mathbb{R}m(\nu,x)p(x,t)dx-\int_\mathbb{R}p(x,t)\frac{\partial}{\partial\sigma^2}m(\nu,x)dx\right)
-\end{equation}
-
-$$=2\sigma^4\int_\mathbb{R}\frac{(x-\bar x)^2-\sigma^2}{2\sigma^4}m(\nu,x)p(x,t)dx=\int_\mathbb{R}\left((x-\bar x)^2-\sigma^2\right)\big(m(\nu,x)-\bar m\big)p(x,t)dx$$
-
-$$=\mathrm{Cov}_t\Big((x-\bar x)^2,m\Big).$$
+\begin{multline}
+2\sigma^4\left(\frac{\partial\bar m}{\partial\sigma^2}-\overline{\frac{\partial m}{\partial\sigma^2}}\right)=2\sigma^4\left(\frac{\partial}{\partial\sigma^2}\int_\mathbb{R}m(\nu,x)p(x,t)dx-\int_\mathbb{R}p(x,t)\frac{\partial}{\partial\sigma^2}m(\nu,x)dx\right)\\=2\sigma^4\int_\mathbb{R}\frac{(x-\bar x)^2-\sigma^2}{2\sigma^4}m(\nu,x)p(x,t)dx=\int_\mathbb{R}\left((x-\bar x)^2-\sigma^2\right)\big(m(\nu,x)-\bar m\big)p(x,t)dx\\=\mathrm{Cov}_t\Big((x-\bar x)^2,m\Big).
+\end{multline}
 
 ## Numerical evidence of finite moments and approximate normality in the stochastic case \label{numerical}
 
