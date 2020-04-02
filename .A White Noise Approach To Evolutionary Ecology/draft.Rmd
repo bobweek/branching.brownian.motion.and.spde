@@ -176,7 +176,7 @@ where $t_1\wedge t_2=\min(t_1,t_2)$ and $\mathbb{C}$ denotes covariance with res
 
 Since Gaussian processes are characterized by their expectations and covariances and since we assume the $\mathscr{N}_2$ processes are continuous in time, the processes $\mathbf W(f)$ and $\mathbf W(g)$ are well defined. As an example, if $f\in\mathscr{N}_2$ is independent of time, then $\mathbf W(f)$ is a Brownian motion with variance at time $t\geq0$ equal to $\|f\|_t^2=t \ \mathbb{E}(\int_\mathbb{R}f^2(x,0)dx)$. With the generalized process $\mathbf W$ defined, we define the space-time white noise $\dot W(x,t)$ implicitly via the stochastic integral
 \begin{equation}\label{informal}
-``\int_0^t\int_\mathbb{R}f(x,s)\dot W(x,s)dxds"=``\int_\mathbb{R}\int_0^tf(x,s)\dot W(x,s)dxds"=\mathbf W_t(f), \ \forall \ f\in\mathscr{N}_2, \ t\geq0.
+``\int_0^t\int_\mathbb{R}f(x,s)\dot W(x,s)dxds"=\mathbf W_t(f), \ \forall \ f\in\mathscr{N}_2, \ t\geq0.
 \end{equation}
 We place quotations in the above expression to emphasize its informal nature and that it should not be confused with classical Riemann integration. Following this definition of white noise, we compute its value by sampling it using $\mathscr{N}_2$ processes. For example, integrating white noise over a region $D\times[0,t]$, with $t>0$ and $D$ a bounded subset of $\mathbb{R}$, is equivalent to evaluating $\mathbf W_t(I_{D\times [0,+\infty)})$ for the deterministic process
 \begin{equation}
@@ -241,17 +241,19 @@ A BBM tracks individuals navigating $d$-dimensional Euclidean space that reprodu
 
   3) __Spatial movement:__ Each offspring is born at the current location of their parent. Immediately after birth they move around space according to $d$-dimensional Brownian motion with diffusion parameter $\sqrt\mu$. In our context we interpret spatial movement as mutation so that the location of an individual at death represents the value of its phenotype. Then an individual born at location $x\in\mathbb{R}^d$ that lives for $\tau>0$ units of time will have a normally distributed trait centered on $x$ with covariance matrix equal to $\tau\mu$ times the $d\times d$ identity matrix. Hence, offspring inherit normally distributed traits centered on their parental trait. This fact creates a vital link to the deterministic dynamics reviewed above. Indeed, in the absence of selection, the deterministic PDE (\ref{eq1}) reduces to the $d=1$-dimensional Kolmogorov forward equation for a Brownian motion with diffusion parameter $\sqrt\mu$.
   
-To obtain a SPDE from a BBM we take a diffusion limit. There are several ways to do this, but a simple approach is to rescale the mass of individuals and time by $1/n$, diffusion by $\mu\to\mu/n$, branching rate by $\lambda\to n\lambda$, fitness by $\mathscr{W}\to\mathscr{W}^{1/n}$ and consider the limit as $n\to\infty$. Denoting the rescaled process by $X_t^{(n)}(D)$, the limiting process $\mathscr{X}_t=\lim_{n\to\infty}X_t^{(n)}$ is called a super-Brownian motion and is also a non-negative finite measure-valued process [@Watanabe1968]. However, instead of returning the number of individuals alive in a region of space, super-Brownian motion returns the _mass_ of the population concentrated in a region of space. Since we have rescaled individual mass by $1/n$ and took the limit $n\to\infty$, individuals are no longer discrete units. The particle view of the population gets replaced by a continuous blob spread across $d$-dimensional space. In particular, the value of $\mathscr{X}_t(D)$ is a continuously varying non-negative random variable for any $t\geq0$ and $D\subset\mathbb{R}^d$. It turns out that for spatial dimension $d=1$, $\mathscr{X}_t$ is absolutely continuous with respect to the Lebesgue measure for each $t\geq0$ [@Konno1988; @Reimers1989]. This means that we can write $\mathscr{X}_t(D)=\int_D \nu(x,t)dx$ for some density process $\nu(x,t)$. Setting $\lambda=1$ and $m=\ln\mathscr{W}$ this density process satisfies the SPDE
+To obtain a SPDE from a BBM we take a diffusion limit. There are several ways to do this, but a simple approach is to rescale the mass of individuals and time by $1/n$, diffusion by $\mu\to\mu/n$, branching rate by $\lambda\to n\lambda$, fitness by $\mathscr{W}\to\mathscr{W}^{1/n}$ and consider the limit as $n\to\infty$. Denoting the rescaled process by $X_t^{(n)}(D)$, the limiting process $\mathscr{X}_t=\lim_{n\to\infty}X_t^{(n)}$ is called a super-Brownian motion and is also a non-negative finite measure-valued process [@Watanabe1968]. However, instead of returning the number of individuals alive in a region of space, super-Brownian motion returns the _mass_ of the population concentrated in a region of space. Since we have rescaled individual mass by $1/n$ and took the limit $n\to\infty$, individuals are no longer discrete units. Instead, the particle view of the population gets replaced by a blob spread across $d$-dimensional space. In particular, the value of $\mathscr{X}_t(D)$ is a continuously varying non-negative random variable for any $t\geq0$ and $D\subset\mathbb{R}^d$. 
+
+Unfortunately, just as with cream cheese spread across too much toast, the blob perspective of the population may exhibit some complicated spatial discontinuities. However, for spatial dimension $d=1$, it turns out that $\mathscr{X}_t$ is absolutely continuous with respect to the Lebesgue measure for each $t\geq0$ [@Konno1988; @Reimers1989]. This means that we can write $\mathscr{X}_t(D)=\int_D \nu(x,t)dx$ for some density process $\nu(x,t)$. Setting $\lambda=1$ and $m=\ln\mathscr{W}$ this density process satisfies the SPDE
 \begin{equation}\label{neutral_SPDE}
 \frac{\partial}{\partial t}\nu(x,t)=m\nu(x,t)+\frac{\mu}{2}\frac{\partial^2}{\partial x^2}\nu(x,t)+\sqrt{V\nu(x,t)}\dot W(x,t).
 \end{equation}
-Since $\nu(x,t)$ is not generally differentiable in $x$ or $t$, the derivatives in expression (\ref{neutral_SPDE}) are taken in the _weak_ sense. That is, to rigorously interpret SPDE (\ref{neutral_SPDE}), we integrate the solution $\nu(x,t)$ against functions $f\in C_b^2(\mathbb{R})$, where $C_b^2(\mathbb{R})$ is the set of bounded and twice continuously differentiable functions on $\mathbb{R}$. Hence, equation (\ref{neutral_SPDE}) is just an abbreviation for
+Since $\nu(x,t)$ is not generally differentiable in $x$ or $t$, the derivatives in expression (\ref{neutral_SPDE}) are taken in the _weak_ sense [sensu @lawrenceevans2010]. That is, to rigorously interpret SPDE (\ref{neutral_SPDE}), we integrate the solution $\nu(x,t)$ against functions $f\in C_b^2(\mathbb{R})$, where $C_b^2(\mathbb{R})$ is the set of bounded and twice continuously differentiable functions on $\mathbb{R}$. Hence, equation (\ref{neutral_SPDE}) is just an abbreviation for
 
 \begin{multline}\label{neutral_int}
 \int_\mathbb{R}\nu(x,t)f(x)dx-\int_\mathbb{R}\nu(x,0)f(x)dx=\int_0^t\int_\mathbb{R}\nu(x,s)\left(mf(x)+\frac{\mu}{2}\frac{\partial^2}{\partial x^2}f(x)\right)dsdx \\
 +\int_0^t\int_\mathbb{R}f(x)\sqrt{V\nu(x,s)}\dot W(x,s)dxds, \ \forall \ f\in C_b^2(\mathbb{R}).
 \end{multline}
-This expression is referred to as the _mild_ solution of (\ref{neutral_SPDE}). Evans [-@lawrenceevans2010] provides a nice introduction to weak derivatives. For more on the general theory of SPDE see Walsh [-@Walsh] and Da Prato and Zabczyk [-@DaPrato2014]. Note that since $\nu(x,t)$ is the density of a finite measure, it is integrable for each $t\geq0$. Thus, since for some $M>0$, $|f(x)|\leq M$ for every $x\in\mathbb{R}$, setting $\varphi(x,t)=f(x)\sqrt{V\nu(x,t)}$ implies $\varphi\in\mathscr{N}_2$. Hence, the white noise integral on the right-hand side of equation (\ref{neutral_int}) can be understood using the heuristics introduced above. Evaluating equation (\ref{neutral_int}) in the particular case of $f(x)\equiv1$ returns the total mass process, which we refer to as the total abundance $N(t)$.
+This expression is referred to as the _mild_ solution of (\ref{neutral_SPDE}). For more on the general theory of SPDE see Walsh [-@Walsh] and Da Prato and Zabczyk [-@DaPrato2014]. Note that since $\nu(x,t)$ is the density of a finite measure, it is integrable for each $t\geq0$. Thus, since for some $M>0$, $|f(x)|\leq M$ for every $x\in\mathbb{R}$, setting $\varphi(x,t)=f(x)\sqrt{V\nu(x,t)}$ implies $\varphi\in\mathscr{N}_2$. Hence, the white noise integral on the right-hand side of equation (\ref{neutral_int}) can be understood using the heuristics introduced above. Evaluating equation (\ref{neutral_int}) in the particular case of $f(x)\equiv1$ returns the total mass process, which we refer to as the total abundance $N(t)$.
 
 A convergence theorem for the diffusion limit of a generalization of BBM was established by Watanabe [-@Watanabe1968]. Dawson [-@Dawson1975] suggested that, for spatial dimension $d=1$, this diffusion limit should admit a density process that satisfies a SPDE. Konna and Shiga [-@Konno1988] and Reimers [-@Reimers1989] independently proved Dawson's suggestion was indeed correct. The diffusion limit of this more general branching process (in arbitrary spatial dimension) is referred to as a Dawson-Watanabe superprocess [@alisonetheridge2000]. Conditioning a Dawson-Watanabe superprocess to have constant mass returns a Fleming-Viot process [@Etheridge1991; @Perkins1991] which has been popular in studies of spatial population genetics. In particular, an extension of Fleming-Viot processes, known as $\Lambda$-Fleming-Viot processes, were introduced by Bertoin and Le Gall [-@Bertoin2003] and coined by Etheridge [-@Etheridge2008] where it was used to resolve some technical challenges in modelling isolation by distance [@Felsenstein1975; see also @Barton2013; and @Barton2019]. Although this provides an impressive list of accomplishments, the Dawson-Watanabe superprocess falls short of our needs. In particular this process assumes individuals do not interact and thus precludes its ability to model ecological interactions. However, this concern has been addressed, leading to constuctions of superprocesses that account for interactions among individuals. In the next subsection we summarize the main results in this area and introduce the SPDE that provides the basis for our approach to theoretical evolutionary ecology.
 
@@ -308,7 +310,7 @@ Setting $W_1(t)=\hat{\mathbf{W}}_t(\sqrt{\nu(x,t)})$, we can use traditional sto
 \begin{equation}
 dN=\bar mNdt+\sqrt{VN}dW_1.
 \end{equation}
-To find the associated SDE for $\bar x(t)$ and $\sigma^2(t)$, we want to repeat the same approach for $f(x)=x,x^2$ and apply It&ocirc;'s lemma. However, for these cases $f\notin C^2_b(\mathbb{R})$ since $f$ will not be bounded. Hence, the goal is to show that $\int_\mathbb{R}(|x|+x^2)\nu(x,t)dx<+\infty$ for all $t>0$ given this condition is satisfied by $\nu(x,0)$. Let us begin by supposing we can apply the mild solution to $f(x)=x,x^2$. Setting $\tilde x(t)=\int_\mathbb{R}x\nu(x,t)dx$, we have
+To find the associated SDE for $\bar x(t)$ and $\sigma^2(t)$, we want to repeat the same approach for $f(x)=x,x^2$ and apply It&ocirc;'s lemma. However, for these cases $f\notin C^2_b(\mathbb{R})$ since $f$ will not be bounded. However, if we can show that $\int_\mathbb{R}(|x|+x^2+x^4)\nu(x,t)dx<+\infty$ for all $t>0$ given this condition is satisfied by $\nu(x,0)$, then we can apply the mild solution of (\ref{SPDE}) to derive SDE for $\bar x(t)$ and $\sigma^2(t)$. To illustrate, let us suppose this is the case. Setting $\tilde x(t)=\int_\mathbb{R}x\nu(x,t)dx$, we have
 \begin{equation}
 \tilde x(t)=\tilde x(0)+\int_0^t\int_\mathbb{R}\nu(x,s)m(\nu,x)x+x\sqrt{V\nu(x,s)}\dot W(x,s)dxds.
 \end{equation}
@@ -348,7 +350,9 @@ d\sigma^2(t)=\left(\mathrm{Cov}_t\Big((x-\bar x(t))^2,m(\nu,x)\Big)+\mu-V\frac{\
 \end{subequations}
 where $W_1$, $W_2$ and $W_3$ are standard Brownian motions. We note that conditions on the growth rate $m$ to guarantee existence and uniqueness of solutions to (\ref{xbar_gen}) and (\ref{sig2_gen}) have yet to be investigated. However, our results on the deterministic PDE suggest that $m(y,x)$ bounded above and differentiable in both arguments is sufficient. Dividing by $dt$ one can interpret equations (\ref{gen_eqns}) as if they are ordinary differential equations, but this not technically rigorous since Brownian motion is nowhere differentiable with respect to time. In SM \S\ref{SDE_DERIV} we show that in general $W_1$ is independent of both $W_2$ and $W_3$, but $W_2$ and $W_3$ covary.
 
-There is quite a bit we can learn from expressions (\ref{gen_eqns}). Firstly, setting $V=0$ recovers the deterministic dynamics derived in \S\ref{deterministic}. Alternatively, one can take $N(t)\to\infty$ to recover the deterministic dynamics for $\bar x(t)$ and $\sigma^2(t)$. Characteristically, we note the effect of demographic stochasticity on abundance grows with $\sqrt{N(t)}$. Hence, dividing by $N$, we find the effects of demographic stochasticity on the per-capita growth rate diminish with increased abundance. Relating the response to demographic stochasticity derived here to the effect of random genetic drift derived in classic quantitative genetic theory, if we set $\sigma^2(t)=\sigma^2$ and $N(t)=N$ constant with respect to time, then integrating the stochastic term in equation (\ref{xbar_gen}) over a single unit of time returns a normally distributed random variable with mean zero and variance equal to $V\sigma^2/N$. In particular, assuming perfect inheritance, when reproductive variance is unity ($V=1$) this random variable coincides with the effect of random genetic drift on the change in mean trait over a single generation derived using sampling arguments [@Lande1976]. There is also an interesting connection with classical population genetics. A fundamental result from early population genetic theory is the expected reduction in diversity due to the chance loss of alleles in finite populations [@Fisher1923; @Wright97]. This expected reduction in diversity due to random genetic drift is captured by the third term in the deterministic component of expression (\ref{sig2_gen}), particularly $-V\sigma^2(t)/N(t)$. The component of SDE (\ref{sig2_gen}) describing random fluctuations in $\sigma^2(t)$ is more complicated and is proportional to the root of the difference between the centralized fourth moment of $p(x,t)$ and $\sigma^4(t)$. These expressions can be used to investigate the dynamics of the mean and variance for general $\nu(x,t)$. However, in the next subsection we simplify these expressions by approximating $\nu(x,t)$ with a Gaussian curve. In SM \S\ref{SDE_DERIV} we show that under the Gaussian case $W_1,W_2$ and $W_3$ are independent.
+There is quite a bit we can learn from expressions (\ref{gen_eqns}). Firstly, setting $V=0$ recovers the deterministic dynamics derived in \S\ref{deterministic}. Alternatively, one can take $N(t)\to\infty$ to recover the deterministic dynamics for $\bar x(t)$ and $\sigma^2(t)$. Characteristically, we note the effect of demographic stochasticity on abundance grows with $\sqrt{N(t)}$. Hence, dividing by $N$, we find the effects of demographic stochasticity on the per-capita growth rate diminish with increased abundance. Relating the response to demographic stochasticity derived here to the effect of random genetic drift derived in classic quantitative genetic theory, if we set $\sigma^2(t)=\sigma^2$ and $N(t)=N$ constant with respect to time, then integrating the stochastic term in equation (\ref{xbar_gen}) over a single unit of time returns a normally distributed random variable with mean zero and variance equal to $V\sigma^2/N$. In particular, assuming perfect inheritance, when reproductive variance is unity ($V=1$) this random variable coincides with the effect of random genetic drift on the change in mean trait over a single generation derived using sampling arguments [@Lande1976]. There is also an interesting connection with classical population genetics. A fundamental result from early population genetic theory is the expected reduction in diversity due to the chance loss of alleles in finite populations [@Fisher1923; @Wright97]. This expected reduction in diversity due to random genetic drift is captured by the third term in the deterministic component of expression (\ref{sig2_gen}), particularly $-V\sigma^2(t)/N(t)$. The component of SDE (\ref{sig2_gen}) describing random fluctuations in $\sigma^2(t)$ is more complicated and is proportional to the root of the difference between the centralized fourth moment of $p(x,t)$ and $\sigma^4(t)$.
+
+These expressions can be used to investigate the dynamics of the mean and variance for general $\nu(x,t)$. However, in the next subsection we simplify these expressions by approximating $\nu(x,t)$ with a Gaussian curve. By assuming $\nu(x,t)$ is Gaussian for $t\geq0$, we guarantee the existence of $\bar x(t)$ and $\sigma^2(t)$ for all $t\geq0$. Furthermore, in SM \S\ref{SDE_DERIV} we show that under the Gaussian case $W_1,W_2$ and $W_3$ are independent.
 
 ### Particular results assuming a Gaussian phenotypic distribution \label{particular}
 
@@ -838,7 +842,7 @@ ggsave("~/Gits/branching.brownian.motion.and.spde/.A White Noise Approach To Evo
 
 
 ```{r, message=FALSE, echo=F, fig.align='center', fig.cap='\\label{temporal}Temporal dynamics of mean trait (top), additive genetic variance (middle) and abundance (bottom) for the scenario of weak competition (left) and strong competition (right). Red lines indicate average trend across species.'}
-knitr::include_graphics('community_dynamics.png')
+knitr::include_graphics('community_dynamics.jpg')
 ```
 
 ## The relation between the strength of ecological interactions and coevolution \label{ecoevo}
@@ -1138,7 +1142,7 @@ and
 2\sigma^4\left(\frac{\partial\bar m}{\partial\sigma^2}-\overline{\frac{\partial m}{\partial\sigma^2}}\right)=2\sigma^4\left(\frac{\partial}{\partial\sigma^2}\int_\mathbb{R}m(\nu,x)p(x,t)dx-\int_\mathbb{R}p(x,t)\frac{\partial}{\partial\sigma^2}m(\nu,x)dx\right)\\=2\sigma^4\int_\mathbb{R}\frac{(x-\bar x)^2-\sigma^2}{2\sigma^4}m(\nu,x)p(x,t)dx=\int_\mathbb{R}\left((x-\bar x)^2-\sigma^2\right)\big(m(\nu,x)-\bar m\big)p(x,t)dx\\=\mathrm{Cov}_t\Big((x-\bar x)^2,m\Big).
 \end{multline}
 
-## Numerical evidence of finite moments and approximate normality in the stochastic case \label{numerical}
+## Simulating the rescaled process and numerical evidence of approximate normality \label{numerical}
 
 Here we use a numerical argument to suggest, for
 
@@ -1247,6 +1251,21 @@ For the sake of illustration, we simulated the unscaled process ($n=1$) and the 
 To demonstrate approximate normality of the phenotypic distribution when $V/N$ is small we utilized the one-sided Kolmogorov-Smirnov test. This test compares an empirical cumulative distribution function (i.e., a cumulative distribution function generated from simulated data) to a hypothetical cumulative distribution function by providing a distribution for the maximum distance between these curves. More precisely if $F_n(x)$ is the empricial distribution function for a sample of size $n$ and $F(x)$ is the hypothetical distribution function, Kolmogorov-Smirnov statistic is $D_n=\sup_x|F_n(x)-F(x)|$.
 
 ## Derivation of SDE for $\bar x$ and $\sigma^2$ \label{SDE_DERIV}
+
+Picking up from \S\ref{stochastic} of the main text, we have
+\begin{equation}
+\tilde x(t)=\int_\mathbb{R}x\nu(x,t)dx, \ \ \tilde{\tilde\sigma}^2(t)=\int_\mathbb{R}x^2\nu(x,t)dx
+\end{equation}
+and
+\begin{equation}\label{xtilde}
+\tilde x(t)=\tilde x(0)+\int_0^t\int_\mathbb{R}\nu(x,s)m(\nu,x)x+x\sqrt{V\nu(x,s)}\dot W(x,s)dxds,
+\end{equation}
+\begin{equation}\label{stilde}
+\tilde{\tilde\sigma}^2(t)=\tilde{\tilde\sigma}^2(0)+\int_0^t\int_\mathbb{R}\nu(x,s)\left(m(\nu,x)x^2+\mu\right)+x^2\sqrt{V\nu(x,s)}\dot W(x,s)dxds.
+\end{equation}
+
+
+<!--
 
 For $\nu(x,t)$ defined in the main text, $h\in C(\mathbb{R})$ and $t\geq0$ we make the following assumptions:
 
@@ -1358,19 +1377,21 @@ dH(t)=\left(\int_\mathbb{R}h(x)\left(m(\nu,x)\nu(x,t)+\frac{\mu}{2}\Delta\nu(x,t
 
 where $W$ is a standard Brownian motion. In the following subsections we employ this formula under the cases $h(x)=x,x^2$ to obtain SDE for the phenotypic mean and variance.
 
+-->
+
 ### Derivation for trait mean
 
-We set $\tilde x(t)=\int_\mathbb{R}x\nu(x,t)$ and make use of the notation
+We make use of the notation
 
 \begin{equation}
-\begin{matrix}
+\left\{\begin{matrix}
 \|N\|_2 = \sqrt{V\int_\mathbb{R}\nu(x,t)dx}= \sqrt{VN} \\ \\
 \|\tilde x\|_2 = \sqrt{V\int_\mathbb{R}x^2\nu(x,t)dx} \\ \\
 \langle\tilde x,N\rangle = V\int_\mathbb{R}x\nu(x,t)dx=\bar x VN.
-\end{matrix}
+\end{matrix}\right.
 \end{equation}
 
-Applying formula (\ref{SDE_deriv}) provides
+Rewriting formula (\ref{xtilde}) as an SDE provides
 
 \begin{equation}
 d\tilde x=\left(\overline{xm}N+\frac{\mu}{2}\int_\mathbb{R}x\Delta\nu(x,t)dx\right)dt+\|\tilde x\|_2d\tilde W_2,
@@ -1392,16 +1413,16 @@ d\bar x = d\left(\frac{\tilde x}{N}\right)=\frac{\tilde x}{N}\left(\frac{d\tilde
 From Table \ref{mult} of the main text $d\tilde xdN=\langle\tilde x,N\rangle$ and $dN^2=\|N\|_2^2$. Hence,
 
 \begin{equation}
-d\bar x= \overline{xm}dt+\frac{\mu}{2}\int_\mathbb{R}x\Delta p(x,t)dxdt+\frac{\|\tilde x\|_2}{N}d\tilde W_2-\bar x\left(\bar m dt+\sqrt\frac{V}{N}dW_1\right)-\frac{\langle\tilde x,N\rangle}{N^2}dt+\bar x\frac{\|N\|_2^2}{N^2}dt
+d\bar x= \overline{xm}dt+\frac{\|\tilde x\|_2}{N}d\tilde W_2-\bar x\left(\bar m dt+\sqrt\frac{V}{N}dW_1\right)-\frac{\langle\tilde x,N\rangle}{N^2}dt+\bar x\frac{\|N\|_2^2}{N^2}dt
 \end{equation}
 
 \begin{equation*}
-= (\overline{xm}-\bar x\bar m)dt+\frac{\mu}{2}\int_\mathbb{R}x\Delta p(x,t)dxdt+\frac{\|\tilde x\|_2}{N}d\tilde W_2
+= (\overline{xm}-\bar x\bar m)dt+\frac{\|\tilde x\|_2}{N}d\tilde W_2
 -\bar x\sqrt{\frac{V}{N}}d W_1-V\frac{\bar x}{N}dt+V\frac{\bar x}{N}dt
 \end{equation*}
 
 \begin{equation*}
-= \left(\mathrm{Cov}_t(x,m)+\frac{\mu}{2}\int_\mathbb{R}x\Delta p(x,t)dx\right)dt
+=\mathrm{Cov}_t(x,m)
 +\frac{\|\tilde x\|_2}{N}d\tilde W_2-\bar x\sqrt{\frac{V}{N}}d W_1.
 \end{equation*}
 
@@ -1430,25 +1451,25 @@ d W_2=\frac{\int_\mathbb{R}\frac{(x-\bar x)}{N}\sqrt{V\nu(x,t)}\dot W(x,t)dx}{\s
 we can write
 
 \begin{equation}
-d\bar x=\left(\mathrm{Cov}_t(x,m)+\frac{\mu}{2}\int_\mathbb{R}x\Delta p(x,t)dx\right)dt
+d\bar x=\mathrm{Cov}_t(x,m)dt
 +\sqrt{V\frac{\sigma^2}{N}}d W_2.
 \end{equation}
 
 ### Derivation for trait variance
 
-We set $\tilde{\tilde\sigma}^2(t)=\int_{\mathbb R} x^2\nu(x,t)dx$ and make use of the notation
+We make use of the notation
 
 \begin{equation}
-\begin{matrix}
+\left\{\begin{matrix}
 \|\tilde{\tilde\sigma}^2\|_2 = \sqrt{V\int_\mathbb{R}x^4\nu(x,t)dx} \\ \\
 \langle\tilde{\tilde\sigma}^2,N\rangle=V\int_\mathbb{R}x^2\nu(x,t)dx=\overline{x^2}VN.
-\end{matrix}
+\end{matrix}\right.
 \end{equation}
 
-Applying formula (\ref{SDE_deriv}) provides
+Applying formula (\ref{stilde}) provides
   
 \begin{equation}
-d\tilde{\tilde\sigma}^2=\left(\overline{x^2m}N+\frac{\mu}{2}\int_\mathbb{R}x^2\Delta\nu(x,t) dx\right)dt+\|\tilde{\tilde\sigma}^2\|_2d\tilde W_3
+d\tilde{\tilde\sigma}^2=\left(\overline{x^2m}N+\mu N\right)dt+\|\tilde{\tilde\sigma}^2\|_2d\tilde W_3
 \end{equation}
   
 where
@@ -1468,20 +1489,20 @@ d\overline{x^2} = d\left(\frac{\tilde{\tilde\sigma}^2}{N}\right)=\frac{\tilde{\t
 Table \ref{mult} of the main text implies $d\tilde W_3d W_1=\langle\tilde{\tilde\sigma}^2,N\rangle$ and hence
 
 \begin{multline}
-d\overline{x^2}=\left(\overline{x^2m} + \frac{\mu}{2}\int_\mathbb{R}x^2\Delta p(x,t)dx\right)dt+\frac{\|\tilde{\tilde\sigma}^2\|_2}{N}d\tilde W_3
+d\overline{x^2}=\left(\overline{x^2m} + \mu \right)dt+\frac{\|\tilde{\tilde\sigma}^2\|_2}{N}d\tilde W_3
 -\overline{x^2}\left(\bar m dt+\sqrt\frac{V}{N}dW_1\right)-\frac{\langle\tilde{\tilde\sigma}^2,N\rangle}{N^2}dt+\overline{x^2}\frac{\|N\|_2^2}{N^2}dt \\ \\
-=\left(\overline{x^2m}-\overline{x^2}\bar mdt + \frac{\mu}{2}\int_\mathbb{R}x^2\Delta p(x,t)dx\right)dt+\frac{\|\tilde{\tilde\sigma}^2\|_2}{N}d\tilde W_3
+=\left(\overline{x^2m}-\overline{x^2}\bar mdt + \mu\right)dt+\frac{\|\tilde{\tilde\sigma}^2\|_2}{N}d\tilde W_3
 -\overline{x^2}\sqrt{\frac{V}{N}}d W_1
 -\overline{x^2}\frac{V}{N}dt+\overline{x^2}\frac{V}{N}dt \\ \\
-=\left(\mathrm{Cov}_t\Big(x^2,m\Big) + \frac{\mu}{2}\int_\mathbb{R}x^2\Delta pdx \right)dt+\frac{\|\tilde{\tilde\sigma}^2\|_2}{N}d\tilde W_3-\overline{x^2}\sqrt\frac{V}{N}d W_1.
+=\left(\mathrm{Cov}_t\Big(x^2,m\Big) + \mu \right)dt+\frac{\|\tilde{\tilde\sigma}^2\|_2}{N}d\tilde W_3-\overline{x^2}\sqrt\frac{V}{N}d W_1.
 \end{multline}
 
 Setting $F(y,z)=y-z^2$, use It&ocirc;'s formula on $\sigma^2=F(\overline{x^2},\bar x)=\overline{x^2}-\bar x^2$ to obtain:
 
 \begin{multline}
 d\sigma^2=d\overline{x^2}-2\bar xd\bar x-(d\bar x)^2
-=\left(\mathrm{Cov}_t\Big(x^2,m\Big) + \frac{\mu}{2}\int_\mathbb{R}x^2\Delta p(x,t)dx \right)dt+\frac{\|\tilde{\tilde\sigma}^2\|_2}{N}d\tilde W_3-\overline{x^2}\sqrt\frac{V}{N}d W_1 \\ \\
--2\bar x\left(\mathrm{Cov}_t(x,m)dt+\frac{\mu}{2}\int_\mathbb{R}x\Delta p(x,t)dxdt+\sqrt{\frac{V\sigma^2}{N}}d W_2\right)-\left(\mathrm{Cov}_t(x,m)dt+\frac{\mu}{2}\int_\mathbb{R}x\Delta p(x,t)dxdt+\sqrt{\frac{V\sigma^2}{N}}d W_2\right)^2 \\ \\
+=\left(\mathrm{Cov}_t\Big(x^2,m\Big) + \mu \right)dt+\frac{\|\tilde{\tilde\sigma}^2\|_2}{N}d\tilde W_3-\overline{x^2}\sqrt\frac{V}{N}d W_1 \\ \\
+-2\bar x\left(\mathrm{Cov}_t(x,m)+\mu dt+\sqrt{\frac{V\sigma^2}{N}}d W_2\right)-\left(\mathrm{Cov}_t(x,m)dt+\mu dt+\sqrt{\frac{V\sigma^2}{N}}d W_2\right)^2 \\ \\
 =\left(\mathrm{Cov}_t\Big(x^2-2\bar xx,m\Big) + \frac{\mu}{2}\int_\mathbb{R}(x^2-x\bar x)\Delta p(x,t)dx \right)dt+\frac{\|\tilde{\tilde\sigma}^2\|_2}{N}d\tilde W_3-\overline{x^2}\sqrt\frac{V}{N}d W_1-2\bar x\sqrt{\frac{V\sigma^2}{N}}d W_2-\left(\frac{V\sigma^2}{N}\right)dt \\ \\
 =\left(\mathrm{Cov}_t\Big(x-\bar x)^2,m\Big) + \frac{\mu}{2}\int_\mathbb{R}(x-\bar x)^2\Delta p(x,t)dx - \frac{V\sigma^2}{N}\right)dt+\frac{\|\tilde{\tilde\sigma}^2\|_2}{N}d\tilde W_3-\overline{x^2}\sqrt\frac{V}{N}d W_1-2\bar x\sqrt{\frac{V\sigma^2}{N}}d W_2.
 \end{multline}
@@ -1510,7 +1531,7 @@ d W_3=\frac{\int_\mathbb{R}\left((x-\bar x)^2-\sigma^2\right)\sqrt{V\nu(x,t)}\do
 so that
 
 \begin{equation}
-d\sigma^2=\left(\mathrm{Cov}_t\Big((x-\bar x)^2,m\Big)+\frac{\mu}{2}\int_\mathbb{R}(x-\bar x)^2\Delta p(x,t)dx-V\frac{\sigma^2}{N}\right)dt+\sqrt{V\frac{\overline{(x-\bar x)^4}-\sigma^4}{N}}d W_3.
+d\sigma^2=\left(\mathrm{Cov}_t\Big((x-\bar x)^2,m\Big)+\mu-V\frac{\sigma^2}{N}\right)dt+\sqrt{V\frac{\overline{(x-\bar x)^4}-\sigma^4}{N}}d W_3.
 \end{equation}
 
 Table \ref{mult} of the main text implies
