@@ -154,9 +154,9 @@ ggsave("~/Gits/branching.brownian.motion.and.spde/.A White Noise Approach To Evo
 knitr::include_graphics('wn.png')
 ```
 
-However, it turns out that realizations of white noise do not exist as functions in the classical sense. Indeed, since Brownian motion is nowhere differentiable with respect to time, white noise cannot be formally understood as its time derivative. Thus our notation $\dot W$ is only meant to aid intuition and not be taken as formal. A formal understanding is possible by considering white noise as a _measure_-valued process [@Dawson1975; @Walsh] or as a _generalized_ process that acts on classically defined functions or stochastic processes to return either random variables or stochastic processes [@Krylov1981; @DaPrato2014]. Since a measure-valued process can be defined from a generalized process and a generalized process can be defined from a measure-valued process, the distinction between the two is more or less a matter of perspective. However, we find the perspective of white-noise as a generalized process to be a more efficient route for developing heuristics to help with some routine calculations involved with deriving SDE from SPDE. Hence, the notion of a generalized process provides the general idea implemented here. Although the treatments of SPDE provided by Krylov and Rozovskii [-@Krylov1981] and Da Prato and Zabczyk [-@DaPrato2014] extend the theory of SDE to formally treat SPDE in a general and elegant fashion, they require the navigation of an enourmous amount of technical definitions and detailed proofs. To extract some particularly useful results from this theory relevant to our goal of synthesizing the stochastic dynamics of biological populations, we provide a streamlined approach by capitolizing on the solid ground these authors have established. For instance, instead of rigorously proving properties of white-noise, we simply define them to be so, taking solice in the fact that the technical details have been worked out elsewhere.
+However, it turns out that realizations of white noise do not exist as functions in the classical sense. Indeed, since Brownian motion is nowhere differentiable with respect to time, white noise cannot be formally understood as its time derivative. Thus our notation $\dot W$ is only meant to aid intuition and not be taken as formal. A formal understanding is possible by considering white noise as a _measure_-valued process [@Dawson1975; @Walsh] or as a _generalized_ process that acts on classically defined functions or stochastic processes to return either random variables or stochastic processes [@Krylov1981; @DaPrato2014]. Since a measure-valued process can be defined from a generalized process and a generalized process can be defined from a measure-valued process, the distinction between the two is more or less a matter of perspective. However, we find the perspective of white-noise as a generalized process to be a more efficient route for developing heuristics to help with some routine calculations involved with deriving SDE from SPDE. Hence, the notion of a generalized process provides the general idea implemented here. Although the treatments of SPDE provided by Krylov and Rozovskii [-@Krylov1981] and Da Prato and Zabczyk [-@DaPrato2014] extend the theory of SDE to formally treat SPDE in a general and elegant fashion, they require the navigation of an enourmous amount of technical definitions and detailed proofs. To extract some particularly useful results from this theory relevant to our goal of synthesizing the stochastic dynamics of biological populations, we provide a streamlined approach by capitolizing on the solid ground these authors have established. For instance, instead of rigorously proving properties of white-noise, we simply define them to be so, taking solice in the fact that the technical details have been worked out elsewhere. In SM \S\ref{DPZ14} we show how our informal treatment is related to the rigorous treatment provided by Da Prato and Zabczyk [-@DaPrato2014].
 
-Before diving in, we shed a bit of light on the idea of a generalized process. A generalized process is the stochastic analog of a generalized function, such as the Dirac delta function $\delta$. Just as a generalized function operates on classical functions to return a value (e.g., $\delta(f)=f(0)$), a generalized process acts on a set of functions to return a classically defined stochastic process. For a breif primer on the theory of generalized functions, see the addendum to chapter 3 of Kolmogorov and Fomin [-@kolmogorov1999elements].
+Before diving in, we shed a bit of light on the idea of a generalized process. A generalized process is the stochastic analog of a generalized function, such as the Dirac delta function $\delta$. Often one sees $\delta$ defined as a function satisfying the properties $\delta(x)=0$ for $x\neq0$ and $\int_{-\infty}^{+\infty}\delta(x)dx=1$. However, since there is no function that satisfies these properties, we refer to $\delta$ as a generalized function. An alternative definition of $\delta$ considers its action on classically defined functions $f$. In particular, $\delta(f)=f(0)$, which can be heuristically written as $\int_{-\infty}^{+\infty}f(x)\delta(x)dx=f(0)$. Similarly, other generalized functions can be defined by their action on classically defined functions. Then, just as a generalized function operates on classical functions to return a value, a generalized process acts on a set of functions (or processes) to return a random variable (or a classically defined stochastic process). For a brief primer on the theory of generalized functions, see the addendum to chapter 3 of Kolmogorov and Fomin [-@kolmogorov1999elements].
 
 Throughout this section, we minimize notation by writing $\int_{\mathbb{R}}f(x)dx=\int_{-\infty}^{+\infty}f(x)dx$ and similarly $\int_Df(x)dx$ for the integral of $f$ over $D\subset\mathbb{R}$. We define $\mathscr{N}_2$ as the set of stochastic processes $f(x,t)$ that are continuous in $t$ and satisfy $\mathbb{E}\left(\int_0^t\int_\mathbb{R}f^2(x,s)dxds\right)<+\infty$ for each $t\geq0$. The operator $\mathbb{E}$ denotes expectation with respect to the underlying probability space. For each $t\geq0$ we set
 
@@ -205,23 +205,28 @@ Using this informal notation, equations (\ref{exp_WN}) and (\ref{cov_WN}) can be
 \mathbb{C}\left(\int_0^{t_1}\int_\mathbb{R}f(x,s)\dot W(x,s)dxds,\int_0^{t_2}\int_\mathbb{R}g(x,s)\dot W(x,s)dxds\right)
 =\int_0^{t_1\wedge t_2}\int_\mathbb{R}f(x,s)g(x,s)dxds.
 \end{equation}
-To relate these formulae to the common notation used for SDE, we write 
+To relate these formulae to the common notation used for SDE, we write
 \begin{equation}
-d\hat{\mathbf W}_t(f)=\frac{1}{\|f\|_t}\left(\int_\mathbb{R}f(x,t)\dot W(x,t)dx\right)dt,
+\hat f(x,t)=\frac{f(x,t)}{\sqrt{\int_\mathbb{R}f^2(y,t)dy}} \ \text{ and } \ 
+d\hat{\mathbf W}_t(f)=\left(\int_\mathbb{R}\hat f(x,t)\dot W(x,t)dx\right)dt
 \end{equation}
 so that
 \begin{equation}
 \int_0^td\hat{\mathbf W}_s(f)=\int_0^t\int_\mathbb{R}\frac{f(x,s)}{\sqrt{\int_\mathbb{R}f^2(s,y)dy}}\dot W(x,s)dxds.
 \end{equation}
-This implies $\mathbb{E}\big(\int_0^td\hat{\mathbf W}_s(f)\big)=0$, $\mathbb{C}\big(\int_0^{t_1}d\hat{\mathbf W}_s(f),\int_0^{t_2}d\hat{\mathbf W}_s(f)\big)=t_1\wedge t_2$ and, as a function of $t$, $\int_0^td\hat{\mathbf W}_s(f)$ is a standard Brownian motion for any $f\in\mathscr{N}_2$. Hence, $d\hat{\mathbf W}_t(f)$ is analogous to the traditional shorthand used to denote stochastic differentials. Thus, equation (\ref{cov_WN_xi}) effectively extends It&ocirc;'s multiplication table to:
+This implies 
+\begin{equation}
+\mathbb{E}\left(\int_0^td\hat{\mathbf W}_s(f)\right)=0, \ \mathbb{C}\left(\int_0^{t_1}d\hat{\mathbf W}_s(f),\int_0^{t_2}d\hat{\mathbf W}_s(f)\right)=t_1\wedge t_2
+\end{equation}
+and in particular, as a function of $t$, $\int_0^td\hat{\mathbf W}_s(f)$ is a standard Brownian motion for any $f\in\mathscr{N}_2$. Hence, $d\hat{\mathbf W}_t(f)$ is analogous to the traditional shorthand used to denote stochastic differentials. Thus, equation (\ref{cov_WN_xi}) effectively extends It&ocirc;'s multiplication table to:
 \begin{table}[H]
 \centering\caption{An extension of It\^o's multiplication table.}\vspace{0.2cm}
 \begin{tabular}{l|lll}
              & $d\hat{\mathbf W}_t(f)$               & $d\hat{\mathbf W}_t(g)$                & $dt$ \\ \hline
              &                            &                            &      \\
-$d\hat{\mathbf W}_t(f)$ & $dt$                       & $\frac{\left(\int_\mathbb{R}f \ g \ dx\right)dt}{\|f\|_t\|g\|_t}$ & $0$  \\
+$d\hat{\mathbf W}_t(f)$ & $dt$                       & $\left(\int_\mathbb{R}\hat f(x,t)\hat g(x,t)dx\right)dt$ & $0$  \\
              &                            &                            &      \\
-$d\hat{\mathbf W}_t(g)$ & $\frac{\left(\int_\mathbb{R}f \ g \ dx\right)dt}{\|f\|_t\|g\|_t}$ & $dt$                       & $0$  \\
+$d\hat{\mathbf W}_t(g)$ & $\left(\int_\mathbb{R}\hat f(x,t)\hat g(x,t)dx\right)dt$ & $dt$                       & $0$  \\
              &                            &                            &      \\
 $dt$         & $0$                        & $0$                        & $0$
 \end{tabular}\label{mult}
@@ -399,7 +404,7 @@ This is similar to the approach taken by Kimura and Crow [-@Kimura1978] to calcu
 \begin{equation}
 \dot\rho(g,t)=m^*(\rho,g)\rho(g,t)+\frac{\mu}{2}\frac{\partial^2}{\partial^2 g}\rho(g,t)+\sqrt{V\rho(g,t)}\dot W(g,t).
 \end{equation}
-We assume $\rho(g,t)$ is Gaussian which implies its mode coincides with $\bar x$. Furthermore, since $\sigma^2=G+\eta$, we can use equation (\ref{m_rel}) and the chain rule from calculus to find
+We assume $\rho(g,t)$ is Gaussian which implies its mode coincides with $\bar x$. Furthermore, since $\sigma^2=G+\eta$, we can use equation (\ref{m_rel}) and the chain rule from calculus to find (see SM \S\ref{fit2fit})
 \begin{subequations}
 \begin{equation}
 \frac{\partial\bar m}{\partial G}=\frac{\partial\bar m}{\partial\sigma^2}\frac{\partial\sigma^2}{\partial G}=\frac{\partial\bar m}{\partial\sigma^2},
@@ -1286,7 +1291,7 @@ and
 2\sigma^4\left(\frac{\partial\bar m}{\partial\sigma^2}-\overline{\frac{\partial m}{\partial\sigma^2}}\right)=2\sigma^4\left(\frac{\partial}{\partial\sigma^2}\int_\mathbb{R}m(\nu,x)p(x,t)dx-\int_\mathbb{R}p(x,t)\frac{\partial}{\partial\sigma^2}m(\nu,x)dx\right)\\=2\sigma^4\int_\mathbb{R}\frac{(x-\bar x)^2-\sigma^2}{2\sigma^4}m(\nu,x)p(x,t)dx=\int_\mathbb{R}\left((x-\bar x)^2-\sigma^2\right)\big(m(\nu,x)-\bar m\big)p(x,t)dx\\=\mathrm{Cov}_t\Big((x-\bar x)^2,m\Big).
 \end{multline}
 
-## Comparing our treatment of white noise to Da Prato and Zabczyk (2014)
+## Comparing our treatment of white noise to Da Prato and Zabczyk (2014) \label{DPZ14}
 
 Our approach in the main text is inspired by the treatment provided in \S4.2 of Da Prato and Zabczyk [-@DaPrato2014]. Here the authors develop a stochastic integral of operator-valued processes. In particular, they consider processes indexed by time $t\geq0$ valued as Hilbert-Schmidt operators $\Phi(t)$ and define the norm
 \begin{equation}
@@ -1717,14 +1722,26 @@ d W_2d W_3=\frac{\int_\mathbb{R}(x-\bar x)\big((x-\bar x)^2-\sigma^2\big)p(x,t)d
 
 In particular, when $p$ is a Gaussian curve $d W_2d W_3=0$.
 
-## Relating fitness of expressed traits to fitness of breeding values
+## Relating fitness of expressed traits to fitness of breeding values \label{fit2fit}
 
-$$m^*(\rho,g)=\int_\mathbb{R}m(\nu,x)\psi(x,g)dx$$
+Following \S\ref{inheritance} of the main text, we have $\sigma^2=G+\eta$ and
 
-$$\overline{\frac{\partial m^*}{\partial\bar x}}=\int_{\mathbb{R}}\frac{\rho(g,t)}{N(t)}\frac{\partial}{\partial\bar x}\int_\mathbb{R}m(\nu,x)\psi(x,g)dxdg=\int_{\mathbb{R}}\int_\mathbb{R}\frac{\rho(g,t)}{N(t)}\psi(x,g)dg\frac{\partial}{\partial\bar x}m(\nu,x)dx=\int_\mathbb{R}p(x,t)\frac{\partial}{\partial\bar x}m(\nu,x)dx=\overline{\frac{\partial m}{\partial\bar x}}$$
+\begin{equation}
+m^*(\rho,g)=\int_\mathbb{R}m(\nu,x)\psi(x,g)dx.
+\end{equation}
 
+Hence,
 
-$$\overline{\frac{\partial m^*}{\partial G}}=\int_{\mathbb{R}}\frac{\rho(g,t)}{N(t)}\frac{\partial}{\partial G}\int_\mathbb{R}m(\nu,x)\psi(x,g)dxdg=\int_{\mathbb{R}}\int_\mathbb{R}\frac{\rho(g,t)}{N(t)}\psi(x,g)dg\frac{\partial m}{\partial G}dx=\int_\mathbb{R}p(x,t)\frac{\partial m}{\partial\sigma^2}\frac{\partial\sigma^2}{\partial G}dx=\overline{\frac{\partial m}{\partial\sigma^2}}$$
+\begin{multline}
+\overline{\frac{\partial m^*}{\partial\bar x}}=\int_{\mathbb{R}}\frac{\rho(g,t)}{N(t)}\frac{\partial}{\partial\bar x}\int_\mathbb{R}m(\nu,x)\psi(x,g)dxdg= \\
+\int_{\mathbb{R}}\int_\mathbb{R}\frac{\rho(g,t)}{N(t)}\psi(x,g)dg\frac{\partial}{\partial\bar x}m(\nu,x)dx=\int_\mathbb{R}p(x,t)\frac{\partial}{\partial\bar x}m(\nu,x)dx=\overline{\frac{\partial m}{\partial\bar x}}
+\end{multline}
+and
+
+\begin{multline}
+\overline{\frac{\partial m^*}{\partial G}}=\int_{\mathbb{R}}\frac{\rho(g,t)}{N(t)}\frac{\partial}{\partial G}\int_\mathbb{R}m(\nu,x)\psi(x,g)dxdg=\int_{\mathbb{R}}\int_\mathbb{R}\frac{\rho(g,t)}{N(t)}\psi(x,g)dg\frac{\partial m}{\partial G}dx= \\
+\int_\mathbb{R}p(x,t)\frac{\partial m}{\partial\sigma^2}\frac{\partial\sigma^2}{\partial G}dx=\overline{\frac{\partial m}{\partial\sigma^2}}.
+\end{multline}
 
 ## Derivation of diffuse coevolution model \label{diffuse}
 
