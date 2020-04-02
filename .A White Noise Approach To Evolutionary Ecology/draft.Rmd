@@ -13,6 +13,7 @@ output:
     fig_height: 3
     fig_caption: true
 header-includes:
+  - \usepackage{mathtools}
   - \usepackage{mathrsfs}
   - \usepackage{hyperref}
   - \usepackage[left]{lineno}
@@ -32,9 +33,9 @@ Our goal in this manuscript is to develop a rigorous, but accessible approach to
 
 Current theoretical approaches to synthesize evolution and ecology have capitalized on the fact that biological fitness plays a key role in determining both sets of dynamics. While correlation of fitness and genotype is the basis of evolution by natural selection, the mean fitness across all individuals in a population determines the growth, stasis or decline of abundance. In section \ref{deterministic} we review the mathematical formalization of this connection, which has been established in the contexts of population genetics [@9781932846126; @joanroughgarden1979], evolutionary game theory [@Hofbauer1998; @9780674023383; @Lion2018], quantitative genetics [@Lande1982; @Doebeli1996; @Lion2018] and a unifying framework for these three distinct approaches to evolutionary theory [@Champagnat2006] which is intimately related to the approach we take here. 
 
-Reviewing these accomplishments reveals a beautiful synthesis of evolution and population ecology. However, it also reveals a gap in theoretical approaches to incorporate the intrinsically random nature of populations. Specifically, in theoretical quantitative genetics the derivation of a population's response to random genetic drift is derived in discrete time under the assumption of constant effective population size using arguments based on properties of random samples [@Lande1976]. Though this approach conveniently mimics the formalism provided by the Wright-Fisher model of population genetics, real population sizes fluctuate over time. Furthermore, since these fluctuations are themselves stochastic, it seems natural to derive expressions for the evolutionary response to demographic stochasticity and consider how the results relate to characterizations of random genetic drift. This has been done in continuous time for population genetic models without too much technical overhead, assuming a finite number of alleles. However, for populations with a continuum of types, such as a quantitative trait, this becomes a vexing mathematical challenge. Here we close this gap by combining the calculus of white noise with results on rescaled limits of branching Brownian motion processes (BBM) and stochastic partial differential equations (SPDE). Our goal has two components: 1) Establish a novel synthetic approach to theoretical evolutionary ecology that provides a formal connection between demographic stochasticity and random genetic drift in the context of quantitative traits. To show that our approach can be used to develop useful biological insights we derive a model of coevolution in an ecological network and use it to investigate the relationship between competition coefficients and selection gradients. 2) Communicate some useful properties of space-time white noise, BBM and SPDE to as wide of audience as possible. With this goal in mind we will not provide a rigorous treatment of any of these deep subjects. Instead, we introduce a set of heuristics that only require the basic concepts of Reimann integration, partial differentiation and some exposure to Brownian motion and stochastic ordinary differential equations (SDE). For a concise introduction to SDE and Brownian motion, we recommend the primer by Evans [-@9781470410544]. Rigorous treatments of SPDE and rescaled limits of BBM can be found in Walsh [-@Walsh] and Dawson [-@dawson1993measure] respectively.
+Reviewing these accomplishments reveals a beautiful synthesis of evolution and population ecology. However, it also reveals a gap in theoretical approaches to incorporate the intrinsically random nature of populations. Specifically, in theoretical quantitative genetics the derivation of a population's response to random genetic drift is derived in discrete time under the assumption of constant effective population size using arguments based on properties of random samples [@Lande1976]. Though this approach conveniently mimics the formalism provided by the Wright-Fisher model of population genetics, real population sizes fluctuate over time. Furthermore, since these fluctuations are themselves stochastic, it seems natural to derive expressions for the evolutionary response to demographic stochasticity and consider how the results relate to characterizations of random genetic drift. This can be done in continuous time for population genetic models without too much technical overhead, assuming a finite number of alleles. However, for populations with a continuum of types, such as a quantitative trait, this becomes a vexing mathematical challenge. Here we close this gap by combining the calculus of white noise with results on rescaled limits of branching Brownian motion processes (BBM) and stochastic partial differential equations (SPDE). Our goal has two components: 1) Establish a novel synthetic approach to theoretical evolutionary ecology that provides a formal connection between demographic stochasticity and random genetic drift in the context of quantitative traits. To show that our approach can be used to develop useful biological insights we derive a model of coevolution in an ecological network and use it to investigate the relationship between competition coefficients and selection gradients. 2) Communicate some useful properties of space-time white noise, BBM and SPDE to as wide of audience as possible. With this goal in mind we will not provide a rigorous treatment of any of these deep subjects. Instead, we introduce a set of heuristics that only require the basic concepts of Reimann integration, partial differentiation and some exposure to Brownian motion and stochastic ordinary differential equations (SDE). For a concise introduction to SDE and Brownian motion, we recommend the primer by Evans [-@9781470410544]. Rigorous treatments of SPDE and rescaled limits of BBM can be found in Walsh [-@Walsh] and Dawson [-@dawson1993measure] respectively.
 
-To provide motivation for the stochastic equations developed later and background for our model of coevolution, we begin with \S\ref{deterministic} by briefly summarizing derivations of deterministic dynamics of biological populations. Starting with a partial differential equation (PDE), we arrive at a general set of ordinary differential equations modelling the dynamics of abundance, trait mean and trait variance. From this we observe that replacing the PDE with a SPDE provides a path to derive SDE describing the evolutionary response to demographic stochasticity. We accomplish this in \S\ref{wnc} by introducing a set of mathematical tools based on the calculus of white noise and discuss how a diffusion limit of a spatially structured branching process leads to the natural SPDE appropriate for our study. The diffusion limit in turn provides a rigorous method for constructing fitness functions used in models of evolutionary ecology. We employ these tools to derive a system of SDE generalizing our deterministic results to account for demographic stochasticity. However, although biologically insightful, these equations remain difficult to analyze and implement numerically. In \S\ref{equations} we use an assumption of normally distributed trait values to simplify these expressions into formulae that are much easier to work with. We then account for the constraint of adaptive evolution on the amount of heritable variation in a population by extending these results via a model of imperfect inheritance. The resulting equations coincide with classical results in quantitative genetics as a special case. In \S\ref{coev} we combine the derived equations of population dynamics with classical niche theory to formulate a model of coevolution across a guild of $S$ species participating in exploitative competition along a common resource continuum. In SM \S\ref{diffuse} we apply a classical theorem on rescaled limits of BBM that allow for ecological interactions to provide a rigorous derivation. To gain biological insight, in \S\ref{dynamics} we numerically integrate our model of coevolution for $S=100$ species, tracking the dynamics of traits and abundances, under scenarios of weak and strong competition. We include an account of the natural history of the simulated system and discuss the significance of demographic stochasticity for structuring ecological communities. In \S\ref{ecoevo} we provide expressions for selection gradients and competition coefficients implied by our model and use these expressions to investigate the relationship between the strengths of competition and coevolution. Finally, \S\ref{conclusion} concludes with a summary of accomplishments, a few remarks on the limits of this approach and future directions to incorporate more explicitly the genetic architecture of populations, feedbacks with ecosystem processes and the macroevolutionary history of interacting lineages.
+To provide motivation for the stochastic equations developed later and background for our model of coevolution, we begin with \S\ref{deterministic} by briefly summarizing derivations of deterministic dynamics of biological populations. Starting with a partial differential equation (PDE), we arrive at a general set of ordinary differential equations modelling the dynamics of abundance, trait mean and trait variance. From this we observe that replacing the PDE with a SPDE provides a path to derive SDE describing the evolutionary response to demographic stochasticity. We accomplish this in \S\ref{wnc} by introducing a set of mathematical tools based on the calculus of white noise and discuss how a diffusion limit of a spatially structured branching process leads to the natural SPDE appropriate for our study. The diffusion limit in turn provides a rigorous method for constructing fitness functions used in models of evolutionary ecology. We employ these tools to derive a system of SDE generalizing our deterministic results to account for demographic stochasticity. However, although biologically insightful, these equations remain difficult to analyze and implement numerically. In \S\ref{equations} we use an assumption of normally distributed trait values to simplify these expressions into formulae that are much easier to work with. We then account for the constraint of adaptive evolution on the amount of heritable variation in a population by extending these results via a model of imperfect inheritance. The resulting equations coincide with classical results in quantitative genetics as a special case. In \S\ref{coev} we combine the derived equations of population dynamics with classical niche theory to formulate a model of coevolution across a guild of $S$ species participating in exploitative competition along a common resource continuum. In SM \S\ref{diffuse} we apply a classical theorem on rescaled limits of BBM that allow for ecological interactions to provide a rigorous derivation. To gain biological insight, in \S\ref{dynamics} we numerically integrate our model of coevolution for $S=100$ species, tracking the dynamics of traits and abundances, under scenarios of weak and strong competition. We include an account of the natural history of the simulated system and discuss the significance of demographic stochasticity for structuring ecological communities. In \S\ref{ecoevo} we provide expressions for selection gradients and competition coefficients implied by our model and use these expressions to investigate the relationship between the degree of competition and coevolution. Finally, \S\ref{conclusion} concludes with a summary of accomplishments, a few remarks on the limits of this approach and future directions to incorporate more explicitly the genetic architecture of populations, feedbacks with ecosystem processes and the macroevolutionary history of interacting lineages.
 
 # The framework
 
@@ -91,7 +92,7 @@ Using our assumptions on mutation and rate of growth, we show in SM \S\ref{finit
 =(m(\nu,x)-\bar m(t)) p(x,t)+\frac{\mu}{2}\frac{\partial^2}{\partial x^2}p(x,t).
 \end{multline}
 
-This result closely resembles Kimura's continuum-of-alleles model [@Kimura1965; @Brger1986]. The primary difference being that our model utilizes diffusion instead of convolution with an arbitrary mutation kernel. Of course, our model of mutation can be derived as an approximation to Kimura's model, which has been referred to as the Gaussian allelic approximation [in reference to the distribution of mutational effects at a given locus of a genome on the values of traits, @9780471986539], the infinitesimal model [in reference to modelling continuous traits as being encoded by an infinite number of loci each having infinitesimal effect, @Barton2017] and the Gaussian descendants approximation [in reference to offspring trait values being normally distributed around their parental values, @Turelli2017]. Alternatively, since diffusion is the continuous-time equivalent to convolution against a Gaussian kernel (SM \S\ref{diffconvequiv}), equation (\ref{p_PDE}) can also be seen as a special case of the continuum-of-alleles model. 
+This result closely resembles Kimura's continuum-of-alleles model [@Kimura1965; @Brger1986]. The primary difference being that our model utilizes diffusion instead of convolution with an arbitrary mutation kernel. Of course, our model of mutation can be derived as an approximation to Kimura's model, which has been referred to as the Gaussian allelic approximation [in reference to the distribution of mutational effects at a given locus of a genome on the values of traits, @Lande1975; but see also @9780471986539], the infinitesimal model [in reference to modelling continuous traits as being encoded by an infinite number of loci each having infinitesimal effect, @Barton2017] and the Gaussian descendants approximation [in reference to offspring trait values being normally distributed around their parental values, @Turelli2017]. Alternatively, since diffusion is the continuous-time equivalent to convolution against a Gaussian kernel (SM \S\ref{diffconvequiv}), equation (\ref{p_PDE}) can also be seen as a special case of the continuum-of-alleles model. 
 
 The covariance of fitness and phenotype across the population is defined as
 \begin{equation}
@@ -105,11 +106,11 @@ Hence, the dynamics of the mean trait $\bar x(t)$ can be derived as
 =\mathrm{Cov}_t\Big(m(\nu,x),x\Big).
 \end{multline}
 
-Equation (\ref{detmean}) is a continuous time analog of the well known Robertson-Price equation without transmission bias [@Robertson1966; @PRICE1970; @FRANK2012; @Queller2017; @Lion2018]. The covariance of fitness and phenotype creates change in $\bar x$ to maximize mean fitness $\bar m$. Since this change is driven by a covariance with respect to phenotypic diversity, the response in mean trait to selection is mediated by the phenotypic variance. In particular, when $\sigma^2=0$, $\bar x$ will not respond to selection. The result $\int_{-\infty}^{+\infty} x\frac{\partial^2}{\partial x^2} p(x,t)dx=0$ can be found by applying integration by parts. Following the approach taken to calculate the evolution of $\bar x$, we find the response of phenotypic variation to this model of selection and mutation is
+Equation (\ref{detmean}) is a continuous time analog of the well known Robertson-Price equation without transmission bias [@Robertson1966; @PRICE1970; @FRANK2012; @Queller2017; @Lion2018]. Whether or not the covariance of fitness and phenotype creates change in $\bar x$ to maximize mean fitness $\bar m$ depends on the degree to which selection is frequency dependent [@Lande1976]. Since this change is driven by a covariance with respect to phenotypic diversity, the response in mean trait to selection is mediated by the phenotypic variance. In particular, when $\sigma^2=0$, $\bar x$ will not respond to selection. The result $\int_{-\infty}^{+\infty} x\frac{\partial^2}{\partial x^2} p(x,t)dx=0$ can be found by applying integration by parts. Following the approach taken to calculate the evolution of $\bar x$, we find the response of phenotypic variation to this model of selection and mutation is
 \begin{equation}\label{vardyn_det}
 \frac{d}{dt}\sigma^2(t)=\mathrm{Cov}_t\Big(m(\nu,x),(x-\bar x)^2\Big)+\mu.
 \end{equation}
-For the sake of space we relegate the derivation of $d\sigma^2/dt$ to SM \S\ref{var_deriv}. In the absence of mutation equation (\ref{vardyn_det}) agrees with the result derived by Lion [-@Lion2018] for discrete phenotypes. From a statistical perspective, if we think of $(x-\bar x)^2$ as a square error, then in analogy to the dynamics of the mean trait, we see that the response in $\sigma^2$ to selection can be expressed as a covariance of fitness and square error, which is defined in analogy to $\mathrm{Cov}_t(m(\nu,x),x)$. This covariance also creates change in $\sigma^2$ that maximizes mean fitness $\bar m$, which can be positive or negative depending on whether selection is stabilizing or disruptive.
+For the sake of space we relegate the derivation of $d\sigma^2/dt$ to SM \S\ref{var_deriv}. In the absence of mutation equation (\ref{vardyn_det}) agrees with the result derived by Lion [-@Lion2018] for discrete phenotypes. From a statistical perspective, if we think of $(x-\bar x)^2$ as a square error, then in analogy to the dynamics of the mean trait, we see that the response in $\sigma^2$ to selection can be expressed as a covariance of fitness and square error, which is defined in analogy to $\mathrm{Cov}_t(m(\nu,x),x)$. Just as for the evolution of $\bar x(t)$, this covariance also creates change in $\sigma^2$ that can either increase or decrease mean fitness $\bar m$, depending on whether or not individual fitness depends on the distribution of traits across the entire population. The effect of selection on phenotypic variance can be positive or negative depending on whether selection is stabilizing or disruptive.
 
 In SM \S\ref{SDE_DERIV}, we extend these results to include the effects of demographic stochasticity. Similar to the approach taken by Champagnat, Ferriére and Méléard [-@Champagnat2006], we begin with a BBM that models populations as discrete sets of reproducing individuals whose vital rates depend on their trait value as well as the state of the entire population. Taking a large population size limit and keeping our assumption of single dimensional traits, we employ a pair of classical results that show, under the appropriate rescaling in time, phenotypic space and population density, a sequence of rescaled BBM converges to a limiting process that can be characterized by a SPDE [@Mlard1993; @zeng1998absolute]. The limiting processes of rescaled BBM have been referred to as measure-valued Markov processes [@dawson1993measure] or superprocesses [@alisonetheridge2000]. Under the simplifying assumptions inherited from our treatment of deterministic dynamics and an additional assumption on demographic stochasticity, we obtain as a special case a relatively simple expression for an SPDE that generalizes equation (\ref{eq1}). The simplicity of our special case allows us to use properties of space-time white noise processes to derive a set of SDE that generalize equations (\ref{N_det}), (\ref{detmean}) and (\ref{vardyn_det}) to include the effects of demographic stochasticity. Classical expressions for the effects of random genetic drift on the evolution of mean traits are obtained as a special case.
 
@@ -451,7 +452,7 @@ To determine the potential for competition between individuals with niche locati
 \mathcal O_{ij}(x_i,x_j)=\int_{-\infty}^{+\infty}u_i(\zeta,x_i)u_j(\zeta,x_j)d\zeta=\frac{U_iU_j}{\sqrt{2\pi(w_i+w_j)}}\exp\left(-\frac{(x_i-x_j)^2}{2(w_i+w_j)}\right).
 \end{equation}
 
-A notable criticism of using niche overlap to measure the intensity of competition points to cases where populations competiting on multiple niche axes exhibit overlap on at least one of the axes, but no overall niche overlap [@Holt1987]. Thus niche overlap on lower-dimensional projections of some multivariate niche space does not imply the populations compete. To illustrate with a simple example, consider two populations competing for space on the plane $\mathbb{R}^2$. If the spatial distributions of the two populations overlap, then they will overlap on both spatial axes. However, if the populations do not overlap on at least one of the spatial axes, they will have no overall spatial overlap. Furthermore, even if the species overlap on both spatial axes, they need not have any overall spatial overlap. This final result corresponds to the fact that components of niche space do not necessarily interact multiplicatively to determine the consequences for the intensity of competition. In another component of Holt's [-@Holt1987] critique, an argument is made for the potential of competition occuring without any overlap in niche space. However, this argument is based on the practical difficulty of identifying every resource axis populations are competing on and how these axes interact to determine fitness consequences. Our model avoids these caveats by assuming competition only occurs along a single dimensional resource gradient. To map the degree of niche overlap to fitness, we assume competition between individuals with niche locations $x_i$ and $x_j$ additively decreases the Malthusian fitness for the individual in species $i$ by $c_i\mathcal{O}_{ij}(x_i,x_j)$ for some $c_i\geq0$. In SM \S\ref{diffuse} we combine this niche model with equations (\ref{N}), (\ref{xbarfinal}) and (\ref{Gfinal}) to find
+A notable criticism of using niche overlap to measure the intensity of competition points to cases where populations competiting on multiple niche axes exhibit overlap on at least one of the axes, but no overall niche overlap [@Holt1987]. Thus niche overlap on lower-dimensional projections of some multivariate niche space does not imply the populations compete. To illustrate with a simple example, consider two populations competing for space on the plane $\mathbb{R}^2$. If the spatial distributions of the two populations overlap, then they will overlap on both spatial axes. However, if the populations do not overlap on at least one of the spatial axes, they will have no overall spatial overlap. Furthermore, even if the species overlap on both spatial axes, they need not have any overall spatial overlap. This final result corresponds to the fact that components of niche space do not necessarily interact multiplicatively to determine the consequences for the intensity of competition. In another component of Holt's [-@Holt1987] critique, an argument is made for the potential of competition occuring without any overlap in niche space. However, this argument is based on the practical difficulty of identifying every resource axis populations are competing on and how these axes interact to determine fitness consequences. Our model avoids these caveats by assuming competition only occurs along a single dimensional resource gradient. To map the degree of niche overlap to fitness, we assume competition between individuals with niche locations $x_i$ and $x_j$ additively decreases the Malthusian fitness for the individual in species $i$ by $c_i\mathcal{O}_{ij}(x_i,x_j)$ for some $c_i\geq0$. We refer to $c_i$ as the sensitivity to competition for species $i$. In SM \S\ref{diffuse} we combine this niche model with equations (\ref{N}), (\ref{xbarfinal}) and (\ref{Gfinal}) to find
 
 \begin{subequations}\label{comm_dynamics}
 \begin{multline}\label{N_comm}
@@ -489,7 +490,7 @@ Temporal dynamics for each scenario are provided in Figure \ref{temporal}. This 
 
 After about $125.0$ units of time, the community appears to have shaken off the initial conditions and entered into a qualitatively distinct phase of dynamics. Aside from a few outliers, most of the species remain clustered together in their state variables. This lasts for approximately $375.0$ units of time until, at around time $500.0$, a drastic change occurs. At this moment the tightly packed cluster of species begins to fan out in all three state variables. Simultaneously, we observe large a shift in mean traits for higher values and in additive genetic variances for lower values. Upon inspecting our calculations, we diagnose the reason for this shift. The outlier species that were initially pushed away from the common abiotic optimum ($0.0$ in this case) evolved a significant reduction in the quantity of heritable variation ($\approx60\%$) due to directional selection induced by competition. This reduction in heritable variation slowed adaptation, causing these species to linger on the outskirts of niche space, some longer than others. In the meantime the rest of the community, being tightly packed, experienced greater competition which led to diminished abundances for these species and caused some members of the core group to veer away from the abiotic optimum. The reduced abundances of the core group led to reduced competition overall. As a result, the outlier populations were given a slight increase in growth rate, enough to allow them to increase their abundances orders of magnitude higher than the species in the core group and giving them more weight in driving the evolution of other species. Many of these heavy-hitting outlier species had already been maintaining negative mean traits, but around time $500.0$ the high abundance species with positive mean traits began to experience enough intraspecific competition to override interspecific competition and begin evolving towards the abiotic optimum. The sudden imbalance of these high abundance species effectively induced a single large competitive exclusion event pushing the majority of the community far away from the abiotic optimum. After this shift the cluster began to slowly bloom in all three state variables as species took advantage of novel asymmetries in their competitive abilities mediated by a new distribution of mean trait values across the community. About $125.0$ units of time later, the community reached a qualitatively new phase of dynamics. If we kept running the numerical integrator, we would continue to see similar drama unfolding over and over again as minute stochastic changes contribute to asymmetries which slowly build into drastic shifts.
 
-The strong competition scenario is not quite as showy. Although the dynamics of trait means and variances tend to be far more stochastic than in the weak competition scenario, the community overall appears to quickly reach some statistical equilibrium and remain there. However, the abundances across all species in the community are very low due to strength of competition being an order of magnitude higher than in the weak competition case. Most of the species maintain abundances greater than $1000.0$, but we found one species that dropped to an abundance of about $50.0$. If we let the numerical integrator run long enough in this case, we will likely see many of the species go extinct.
+The strong competition scenario is not quite as showy. Although the dynamics of trait means and variances tend to be far more stochastic than in the weak competition scenario, the community overall appears to quickly reach some statistical equilibrium and remain there. However, the abundances across all species in the community are very low due to competition sensitivies being an order of magnitude higher than in the weak competition case. Most of the species maintain abundances greater than $1000.0$, but we found one species that dropped to an abundance of about $50.0$. If we let the numerical integrator run long enough in this case, we will likely see many of the species go extinct.
 
 Finding ways to interpret simulated dynamics provides a useful arena to exercise biological reasoning. However, it does not fulfill our desire to quantify the patterns and processes present in competing communities. In the next subsection we take a step in this direction by using our model to derive formula for selection gradients and competition coefficients. To investigate their relationship, we calculate their covariances using simplifying assumptions on species abundances and intraspecific trait variances. We then investigate how these covariances change with the ratio of variance of interspecific mean traits to variance of intraspecific individual traits and use a numerical approach to investigate correlations between the strength of pairwise coevolution and competition coefficients.
 
@@ -500,7 +501,7 @@ Parameter     & Description & Value                                           \\
 $R$         & innate growth rate, see \S\ref{ecoevo}  & $1.0$      \\
 $\theta$    & abiotic optimum & $0.0$                              \\
 $a$         & strength of abiotic selection & $0.01$               \\
-$c$         & strength of competition & $\{1.0\times10^{-7},5.0\times10^{-6}\}$ \\
+$c$         & sensitivity to competition & $\{1.0\times10^{-7},5.0\times10^{-6}\}$ \\
 $w$         & niche breadth & $0.1$                               \\
 $U$         & total niche use & $1.0$                              \\
 $\eta$      & segregation variance & $1.0$                         \\
@@ -865,7 +866,7 @@ Hence, $dN_i(t)$ can be expressed as
 dN_i(t)=r_i(t)\left(1-\sum_{j=1}^S\alpha_{ij}(t)N_j(t)\right)N_i(t)dt+\sqrt{V_iN_i(t)}dW_1(t).
 \end{equation}
 
-Note that although $r_i(t)$ is referred to in the coexistence literature as the intrinsic growth rate of the population, $R_i$ is a deeper intrinsic quantity. For now we refer to $R_i$ as the _innate_ growth rate. With this connection formally established, researchers may pursue a postmodern coexistence theory that naturally includes the evolutionary dynamics of populations and the effects of demographic stochasticity.
+Note that although $r_i(t)$ is referred to in the coexistence literature as the intrinsic growth rate of the population, $R_i$ is a deeper intrinsic quantity. For now we refer to $R_i$ as the _innate_ growth rate. Previous work has shown the importance of demographic stochasticity [@Schreiber2017] and evolutionary dynamics [@Schreiber2018] in determining ceoxistence of competing species. However, these studies consider evolution and stochasticity separately. With the connection outlined in this section formally established, researchers may pursue a postmodern coexistence theory that naturally includes both the evolutionary dynamics of populations and the effects of demographic stochasticity in a simple synthetic framework.
 
 In SM \S\ref{diffuse} we show that the standardized directional selection gradient [sensu @Lande1983] induced by species $j$ on species $i$ can be computed as
 
@@ -1101,7 +1102,7 @@ In the opposite scenario where competition is much stronger than abiotic stabili
 
 In summary, we see the relation between competition coefficients and selection is highly non-trivial and depends on the relative magnitudes of different ecological processes shaping the community. However, this does not address the relation between competition coefficients and coevolution per se. In SM \S\ref{coef_grad_moms} we show that calculating a formula for the covariance between competition coefficients and the metric of coevolution $\mathfrak{C}$ introduced above provides a difficult analytical challenge. Instead of confronting this challenge we build on our numerical approach used to justify analytical approximations of $\mathrm{Cov}_{f_{\bar X}}(\alpha,|\beta|)$ and $\mathrm{Cov}_{f_{\bar X}}(\alpha,\gamma)$ to approximate the correlation of $\alpha$ and $\mathfrak{C}$. This numerical approach inherits the assumptions of homogeneous background parameters such as the mutation rate $\mu$ and abiotic optima $\theta$, but allows us to relax the assumption that $N$ and $G$ are constant across species and time. 
 
-In particular, we numerically integrated system (\ref{comm_dynamics}) for $T_1=1000.0$ units of time and then continued to integrate for $T_2=1000.0$ units of time. We then calculate the covariance between the quantities $\alpha$ and $\mathfrak{C}$ across $S=100$ species for each of the last $T_2$ time steps. We assume the temporal average of these covariances across the last $T_2$ units of time approximates the expectation at equilibrium. We repeated this approach for randomly drawn $a$ and $c$ until our sample size reached $1000$. In Figure \ref{cor_coev_fig} we plot the temporally averaged values of $\mathrm{Cov}_{f_{\bar X}}(\alpha,\mathfrak{C})$ against the strength of competition $c$. Using a cubic regression, we see the correlation of coevolutionary selection gradients and competition coefficeints is negative at variance ratios below $0.5$, zero at variance ratios between $0.5$ and $1.0$, and drops below zero again at variance ratios above $1.0$.
+In particular, we numerically integrated system (\ref{comm_dynamics}) for $T_1=1000.0$ units of time and then continued to integrate for $T_2=1000.0$ units of time. We then calculate the covariance between the quantities $\alpha$ and $\mathfrak{C}$ across $S=100$ species for each of the last $T_2$ time steps. We assume the temporal average of these covariances across the last $T_2$ units of time approximates the expectation at equilibrium. We repeated this approach for randomly drawn $a$ and $c$ until our sample size reached $1000$. In Figure \ref{cor_coev_fig} we plot the temporally averaged values of $\mathrm{Cov}_{f_{\bar X}}(\alpha,\mathfrak{C})$ against the sensitivity to competition $c$. Using a cubic regression, we see the correlation of coevolutionary selection gradients and competition coefficeints is negative at variance ratios below $0.5$, zero at variance ratios between $0.5$ and $1.0$, and drops below zero again at variance ratios above $1.0$.
 
 ```{r, eval=F, echo=F}
 require(ggplot2)
@@ -1169,7 +1170,7 @@ Throughout this supplement, we set use dot notation for time derivatives so that
 
 ## Sufficient conditions for finite mean, variance and total abundance in the deterministic case \label{finite}
 
-Recall that $m(\nu,x)$ is shorthand for $m(\nu(x,t),x)$. That is, $m:[0,+\infty)\times\mathbb{R}\to\mathbb{R}$. Following our assumptions of the main text, we have that $m(y,x)$ is differentiable with respect to both $x$ and $y$ and there exists $r\in\mathbb{R}$ such that $m(y,x)\leq r$ for each $y\geq0$ and $x\in\mathbb{R}$. Hence, we can apply Proposition 1.21 of Cantrell and Cosner [-@Cantrell2004] to show that $\nu(x,t)$ remains differentiable with respect to $t$ and twice differentiable with respect to $x$ for all $t\geq0$.
+Recall that $m(\nu,x)$ is shorthand for $m(\nu(x,t),x)$. That is, $m:[0,+\infty)\times\mathbb{R}\to\mathbb{R}$. Following our assumptions of the main text, we have that $m(y,x)$ is differentiable with respect to both $x$ and $y$ and there exists $r\in\mathbb{R}$ such that $m(y,x)\leq r$ across all $y\geq0$ and $x\in\mathbb{R}$. Hence, we can apply Proposition 1.21 of Cantrell and Cosner [-@Cantrell2004] to show that $\nu(x,t)$ remains differentiable with respect to $t$ and twice differentiable with respect to $x$ for all $t\geq0$.
 
 As in the main text, we also assume the initial condition $\nu(x,0)$ satisfies
 \begin{equation}
@@ -1194,14 +1195,22 @@ we have
 \begin{equation}
 \nu_0(x,t)=\int_{\mathbb{R}}\Phi(x-y,t)\nu(y,0)dy.
 \end{equation}
-In the more general case, when $m(\nu,x)\equiv r\in\mathbb{R}$, equation (\ref{PDE_SM}) has the solution $\nu_r(x,t)=e^{rt}\nu_0(x,t)$. Hence, $\nu_r(x,t)\geq0$ for all $x\in\mathbb{R}$ and $\int_\mathbb{R}\nu_r(x,t)dx=e^{rt}N(0)<+\infty$ for all $t\geq0$. Furthermore, denoting $N_r(t)=\int_\mathbb{R}\nu_r(x,t)dx$, $p_r(x,t)=\nu_r(x,t)/N_r(t)$, $\bar x_r(t)=\int_\mathbb{R}xp_r(x,t)dx$ and $\sigma^2_r(t)=\int_\mathbb{R}(x-\bar x_r(t))^2p_r(x,t)dx$, we have
+In the more general case, when $m(\nu,x)\equiv r\in\mathbb{R}$, equation (\ref{PDE_SM}) has the solution $\nu_r(x,t)=e^{rt}\nu_0(x,t)$. Hence, $\nu_r(x,t)\geq0$ for all $x\in\mathbb{R}$ and $\int_\mathbb{R}\nu_r(x,t)dx=e^{rt}N(0)<+\infty$ for all $t\geq0$. Furthermore, denoting 
+\begin{equation}
+\begin{matrix}
+N_r(t)&=&\int_\mathbb{R}\nu_r(x,t)dx, \\
+p_r(x,t)&=&\nu_r(x,t)/N_r(t), \\
+\bar x_r(t)&=&\int_\mathbb{R}xp_r(x,t)dx, \\
+\sigma^2_r(t)&=&\int_\mathbb{R}(x-\bar x_r(t))^2p_r(x,t)dx, 
+\end{matrix}
+\end{equation}
+we have
 \begin{equation}
 \bar x_r(t)=\int_\mathbb{R}x\int_\mathbb{R}\Phi(x-y,t)p(y,0)dydx=\int_\mathbb{R}yp(y,0)dy=\bar x(0),
 \end{equation}
 \begin{equation}
 \sigma_r^2(t)=\int_\mathbb{R}(x-\bar x_r(t))^2\int_\mathbb{R}\Phi(x-y,t)p(y,0)dydx=\int_\mathbb{R}\Big((y-\bar x(0))^2+\mu t\Big)p(y,0)dy=\sigma^2(0)+\mu t.
 \end{equation}
-
 Hence, $|\bar x_r(t)|,\sigma_r^2(t)<+\infty$ for all $t\geq0$. For the sake of contradiction, suppose there exists $x\in\mathbb{R}$ and $t\geq0$ such that $\nu(x,t)>\nu_r(x,t)$. Then
 \begin{equation}
 \nu(x,t)-\nu(x,0)=\int_0^tm(\nu,x)\nu(x,s)+\frac{\mu}{2}\Delta\nu(x,s)ds>\int_0^tr\nu_r(x,s)+\frac{\mu}{2}\Delta\nu_r(x,s)ds=\nu_r(x,t)-\nu(x,0)
@@ -1218,41 +1227,31 @@ for each $t\geq0$.
 
 ## The relation between diffusion and convolution with a Gaussian kernel \label{diffconvequiv}
 
-Let $g:\mathbb{R}^d\to\mathbb{R}$ be smooth. Consider the deterministic Cauchy problem
-
+For continuous $g:\mathbb{R}^d\to\mathbb{R}$, consider the deterministic Cauchy problem
 \begin{equation}\label{heateqn}
 \left\{\begin{matrix}
 \dot f(x,t)=&\Delta f(x,t), & (x,t)\in\mathbb{R}^d\times(0,\infty)\\
 f(x,t)=&g(x), & (x,t)\in\mathbb{R}^d\times\{0\}.
-\end{matrix}\right.  \tag{SM1.1}
+\end{matrix}\right.
 \end{equation}
-
 According to Evans [-@lawrenceevans2010], the fundamental solution of (\ref{heateqn}) is
-
 \begin{equation}
-\Phi(x,t)=\frac{1}{(4\pi t)^{d/2}}\exp\left(-\frac{|x|^2}{4t}\right), \ (x,t)\in(0,\infty)\times\mathbb{R}^d, \tag{SM1.2}
+\Phi(x,t)=\frac{1}{(4\pi t)^{d/2}}\exp\left(-\frac{|x|^2}{4t}\right), \ (x,t)\in(0,\infty)\times\mathbb{R}^d,
 \end{equation}
-
 where $|x|=\sqrt{\sum_ix_i^2}$. The solution $f(x,t)$ of PDE (\ref{heateqn}) is then given by the convolution
-
 \begin{equation}
-f(x,t)=\int_{\mathbb{R}^d}\Phi(x-y,t)g(y)dy, \ (x,t)\in(0,\infty)\times\mathbb{R}^d. \tag{SM1.3}
+f(x,t)=\int_{\mathbb{R}^d}\Phi(x-y,t)g(y)dy, \ (x,t)\in(0,\infty)\times\mathbb{R}^d.
 \end{equation}
-
 Hence, by the fundamental theorem of calculus,
 
-\begin{equation}
-f(x,t)+\int_t^{t+1}\dot f(x,s)ds=f(x,t+1) \tag{SM1.4}
-\end{equation}
-
-$$=\int_{\mathbb{R}^d}\Phi(x-y,t+1)g(y)dy=\int_{\mathbb{R}^d}\int_{\mathbb{R}^d}\Phi(x-y,1)\Phi(y-z,t)g(z)dzdy$$
-
-$$=\int_{\mathbb{R}^d}\Phi(x-y,1)f(t,y)dy.$$
-
+\begin{multline}
+f(x,t)+\int_t^{t+1}\dot f(x,s)ds=f(x,t+1) \\
+=\int_{\mathbb{R}^d}\Phi(x-y,t+1)g(y)dy=\int_{\mathbb{R}^d}\int_{\mathbb{R}^d}\Phi(x-y,1)\Phi(y-z,t)g(z)dzdy \\
+=\int_{\mathbb{R}^d}\Phi(x-y,1)f(t,y)dy.
+\end{multline}
 In particular,
-
 \begin{equation}
-f(x,t)+\int_t^{t+1}\Delta f(x,s)ds=\int_{\mathbb{R}^d}\Phi(1,x-y)f(y,t)dy. \tag{SM1.5}
+f(x,t)+\int_t^{t+1}\Delta f(x,s)ds=\int_{\mathbb{R}^d}\Phi(1,x-y)f(y,t)dy.
 \end{equation}
 
 ## Deterministic dynamics of $\sigma^2(t)$ \label{var_deriv}
@@ -1262,9 +1261,7 @@ Picking up from the main text \S\ref{deterministic},
 \begin{multline}
 \dot{\sigma}^2(t)=\frac{d}{dt}\int_\mathbb{R}(x-\bar x(t))^2p(x,t)dx=\int_\mathbb{R}2(x-\bar x(t))\dot{\bar x}(t)+(x-\bar x(t))^2\dot p(x,t)dx\\=\int_\mathbb{R}(x-\bar x(t))^2\left((m(\nu,x)-\bar m(t))p(x,t)+\frac{\mu}{2}\frac{\partial^2}{\partial x^2}p(x,t)\right)dx\\=\int_\mathbb{R}\left((x-\bar x(t))^2-\sigma^2(t)+\sigma^2(t)\right)(m(\nu,x)-\bar m(t))p(x,t)+(x-\bar x(t))^2\frac{\mu}{2}\frac{\partial^2}{\partial x^2}p(x,t)dx\\=\mathrm{Cov}_t\Big((x-\bar x(t))^2,m(\nu,x)\Big)+\frac{\mu}{2}\int_\mathbb{R}(x-\bar x(t))^2\frac{\partial^2}{\partial x^2}p(x,t)dx.
 \end{multline}
-
 Applying integration by parts twice yields
-
 \begin{equation}
 \int_{-\infty}^{+\infty}(x-\bar x(t))^2\frac{\partial^2}{\partial x^2}p(x,t)dx=2.
 \end{equation}
@@ -1288,6 +1285,28 @@ and
 \begin{multline}
 2\sigma^4\left(\frac{\partial\bar m}{\partial\sigma^2}-\overline{\frac{\partial m}{\partial\sigma^2}}\right)=2\sigma^4\left(\frac{\partial}{\partial\sigma^2}\int_\mathbb{R}m(\nu,x)p(x,t)dx-\int_\mathbb{R}p(x,t)\frac{\partial}{\partial\sigma^2}m(\nu,x)dx\right)\\=2\sigma^4\int_\mathbb{R}\frac{(x-\bar x)^2-\sigma^2}{2\sigma^4}m(\nu,x)p(x,t)dx=\int_\mathbb{R}\left((x-\bar x)^2-\sigma^2\right)\big(m(\nu,x)-\bar m\big)p(x,t)dx\\=\mathrm{Cov}_t\Big((x-\bar x)^2,m\Big).
 \end{multline}
+
+## Comparing our treatment of white noise to Da Prato and Zabczyk (2014)
+
+Our approach in the main text is inspired by the treatment provided in \S4.2 of Da Prato and Zabczyk [-@DaPrato2014]. Here the authors develop a stochastic integral of operator-valued processes. In particular, they consider processes indexed by time $t\geq0$ valued as Hilbert-Schmidt operators $\Phi(t)$ and define the norm
+\begin{equation}
+\|\Phi\|_t=\sqrt{\mathbb{E}\left(\int_0^t\mathrm{Tr}[\Phi(s)\Phi^*(s)]ds\right)}, \ t\geq0.
+\end{equation}
+In our case, we only consider the so-called multiplication operators. That is, processes that consist of operators $\Phi(t)$ having the form $\Phi(t)g(x)=\varphi(x,t)g(x)$ such that $\varphi(\cdot,t)\in L^2(\mathbb{R})$ a.s. for each $t\geq0$. In this case $\Phi(t)=\Phi^*(t)$ and
+\begin{equation}
+\|\Phi\|_t=\|\varphi\|_t=\sqrt{\mathbb{E}\left(\int_0^t\int_\mathbb{R}\varphi^2(x,s)dxds\right)}, \ t\geq0.
+\end{equation}
+Da Prato and Zabczyk [-@DaPrato2014] form the space $\mathscr{N}^2_W(0,T)$ of Hilbert-Schmidt operator-valued predictable processes $\Phi(t)$ that satisfy $\|\Phi\|_T<+\infty$ for some $T>0$. This corresponds to our more specialized space $\mathscr{N}_2$ that consists of $L^2(\mathbb{R})$ valued processes $\varphi(x,t)$ such that $\|\varphi\|_t<+\infty$ for all $t\geq0$. In their treatment, space-time white noise is denoted by $W(t)$, where the spatial dependency is suppressed for the sake of rigor. For $\Phi\in\mathscr{N}^2_W(0,T)$, they denote the stochastic integral for $t\in[0,T]$ by $\Phi\cdot W(t)$. The authors then prove the following:
+
+  > __Proposition 4.28__ _Assume that $\Phi_1,\Phi_2\in\mathscr{N}^2_W(0,T)$. Then_
+  >
+  > $$\mathbb{E}(\Phi_i\cdot W(t))=0, \ \ \mathbb{E}(\|\Phi_i\cdot W(t)\|^2)<+\infty,$$
+  >
+  > __Corollory 4.29__ _Under the same assumptions as Proposition 4.28,_
+  >
+  > $$\mathbb{C}(\Phi_1\cdot W(t),\Phi_2\cdot W(s))=\mathbb{E}\left(\int_0^{t\wedge s}\mathrm{Tr}[\Phi_2(r)\Phi_1^*(r)]dr\right).$$
+
+Simplifying these expressions for the multiplication operators described above returns equations (\ref{exp_WN_xi}) and (\ref{cov_WN_xi}) of the main text.
 
 ## Simulating the rescaled process and numerical evidence of approximate normality \label{numerical}
 
@@ -1547,7 +1566,7 @@ d\tilde x=\left(\overline{xm}N+\frac{\mu}{2}\int_\mathbb{R}x\Delta\nu(x,t)dx\rig
 where,
 
 \begin{equation}
-d\tilde{ W}_2=d\hat{\mathbf W}_{\sqrt{V x^2\nu}}=\frac{1}{\|\tilde x\|_2}\int_\mathbb{R}x\sqrt{V\nu(x,t)}\dot W(x,t)dxdt.
+d\tilde{ W}_2=d\hat{\mathbf W}_t(\sqrt{V x^2\nu})=\frac{1}{\|\tilde x\|_2}\int_\mathbb{R}x\sqrt{V\nu(x,t)}\dot W(x,t)dxdt.
 \end{equation}
 
 Using It&ocirc;'s quotient rule on $\bar x=\tilde x/N$, we obtain
@@ -1622,7 +1641,7 @@ d\tilde{\tilde\sigma}^2=\left(\overline{x^2m}N+\mu N\right)dt+\|\tilde{\tilde\si
 where
 
 \begin{equation}
-d\tilde{W}_3=d\hat{\mathbf W}_{\sqrt{V x^4\nu}}
+d\tilde{W}_3=d\hat{\mathbf W}_t(\sqrt{V x^4\nu})
 =\frac{1}{\|\tilde{\tilde\sigma}^2\|_2}\int_\mathbb{R}x^2\sqrt{V\nu(x,t)}\dot W(x,t)dx.
 \end{equation}
 
