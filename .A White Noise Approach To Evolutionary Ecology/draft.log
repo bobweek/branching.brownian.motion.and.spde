@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.3.28)  30 MAR 2020 15:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.3.28)  1 APR 2020 17:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -471,7 +471,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 LaTeX Warning: Reference `' on page 5 undefined on input line 369.
 
 [5]
-<wn.png, id=213, 361.35pt x 180.675pt>
+<wn.png, id=209, 361.35pt x 180.675pt>
 File: wn.png Graphic file (type png)
 <use wn.png>
 Package pdftex.def Info: wn.png  used on input line 507.
@@ -482,156 +482,147 @@ Package pdftex.def Info: wn.png  used on input line 507.
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.577 \end{equation}
-                     \begin{equation}\label{cov_WN} <./wn.png>]
-Overfull \hbox (19.31172pt too wide) in paragraph at lines 628--631
-\T1/lmr/m/n/10 To re-late these for-mu-lae to the com-mon no-ta-tion used for S
-DE, we write $\OML/lmm/m/it/10 d[]\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 f\OT1/lmr/m
-/n/10 ) = [] [] \OML/lmm/m/it/10 dt$
- []
-
-[8] [9pdfTeX warning (ext4): destination with the same identifier (name{table.1
-}) has been already used, duplicate ignored
+                     \begin{equation}\label{cov_WN} <./wn.png>] [8] [9pdfTeX wa
+rning (ext4): destination with the same identifier (name{table.1}) has been alr
+eady used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.730   \textbf
-               {Spatial movement:} Each offspring is born at the current] [10]
-<rescaled_plots.png, id=277, 433.62pt x 433.62pt>
+l.722   \textbf
+               {Reproductive law:} When a birth event occurs a random] [10]
+<rescaled_plots.png, id=276, 433.62pt x 433.62pt>
 File: rescaled_plots.png Graphic file (type png)
 <use rescaled_plots.png>
-Package pdftex.def Info: rescaled_plots.png  used on input line 844.
+Package pdftex.def Info: rescaled_plots.png  used on input line 846.
 (pdftex.def)             Requested size: 433.63878pt x 433.63878pt.
 [11] [12pdfTeX warning (ext4): destination with the same identifier (name{figur
 e.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.897 
-       <./rescaled_plots.png>]
-
-LaTeX Warning: Reference `m_cond' on page 13 undefined on input line 904.
-
-[13] [14] [15]
-LaTeX Font Info:    Trying to load font information for U+euf on input line 112
-8.
+l.894 
+       <./rescaled_plots.png>] [13] [14]
+LaTeX Font Info:    Trying to load font information for U+euf on input line 110
+9.
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
-) [16] [17] [18] [19]
-<community_dynamics.pdf, id=419, 469.755pt x 361.35pt>
+) [15] [16] [17] [18]
+<community_dynamics.pdf, id=408, 469.755pt x 361.35pt>
 File: community_dynamics.pdf Graphic file (type pdf)
 <use community_dynamics.pdf>
-Package pdftex.def Info: community_dynamics.pdf  used on input line 1452.
+Package pdftex.def Info: community_dynamics.pdf  used on input line 1433.
 (pdftex.def)             Requested size: 469.75386pt x 361.34912pt.
-[20pdfTeX warning (ext4): destination with the same identifier (name{table.2}) 
-has been already used, duplicate ignored
+[19] [20pdfTeX warning (ext4): destination with the same identifier (name{table
+.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1498 \end{equation}
-                     ] [21pdfTeX warning (ext4): destination with the same iden
-tifier (name{figure.3}) has been already used, duplicate ignored
+l.1443 ...cological-interactions-and-coevolution}}
+                                                  pdfTeX warning (ext4): destin
+ation with the same identifier (name{figure.3}) has been already used, duplicat
+e ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1498 \end{equation}
-                      <./community_dynamics.pdf>]
-<on_pl.png, id=441, 252.945pt x 252.945pt>
+l.1443 ...cological-interactions-and-coevolution}}
+                                                   <./community_dynamics.pdf>]
+<on_pl.png, id=429, 252.945pt x 252.945pt>
 File: on_pl.png Graphic file (type png)
 <use on_pl.png>
-Package pdftex.def Info: on_pl.png  used on input line 1532.
+Package pdftex.def Info: on_pl.png  used on input line 1513.
 (pdftex.def)             Requested size: 252.94823pt x 252.94823pt.
-[22pdfTeX warning (ext4): destination with the same identifier (name{figure.4})
- has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1552 
-        <./on_pl.png (PNG copy)>]
+[21]
 </home/bb/Gits/branching.brownian.motion.and.spde/.A White Noise Approach To Ev
-olutionary Ecology/cov.png, id=450, 469.755pt x 180.675pt>
+olutionary Ecology/cov.png, id=441, 469.755pt x 180.675pt>
 File: /home/bb/Gits/branching.brownian.motion.and.spde/.A White Noise Approach 
 To Evolutionary Ecology/cov.png Graphic file (type png)
 <use /home/bb/Gits/branching.brownian.motion.and.spde/.A White Noise Approach T
 o Evolutionary Ecology/cov.png>
 Package pdftex.def Info: /home/bb/Gits/branching.brownian.motion.and.spde/.A Wh
-ite Noise Approach To Evolutionary Ecology/cov.png  used on input line 1584.
+ite Noise Approach To Evolutionary Ecology/cov.png  used on input line 1565.
 (pdftex.def)             Requested size: 469.75386pt x 180.67455pt.
-[23pdfTeX warning (ext4): destination with the same identifier (name{figure.5})
+[22pdfTeX warning (ext4): destination with the same identifier (name{figure.4})
  has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1618 
+l.1599 
+        <./on_pl.png (PNG copy)>] [23pdfTeX warning (ext4): destination with th
+e same identifier (name{figure.5}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1644 
         </home/bb/Gits/branching.brownian.motion.and.spde/.A White Noise Approa
 ch To Evolutionary Ecology/cov.png>]
 </home/bb/Gits/branching.brownian.motion.and.spde/.A White Noise Approach To Ev
-olutionary Ecology/Cαℭp.png, id=469, 289.08pt x 180.675pt>
+olutionary Ecology/Cαℭp.png, id=464, 289.08pt x 180.675pt>
 File: /home/bb/Gits/branching.brownian.motion.and.spde/.A White Noise Approach 
 To Evolutionary Ecology/Cαℭp.png Graphic file (type png)
 <use /home/bb/Gits/branching.brownian.motion.and.spde/.A White Noise Approach T
 o Evolutionary Ecology/Cαℭp.png>
 Package pdftex.def Info: /home/bb/Gits/branching.brownian.motion.and.spde/.A Wh
-ite Noise Approach To Evolutionary Ecology/Cαℭp.png  used on input line 1682
+ite Noise Approach To Evolutionary Ecology/Cαℭp.png  used on input line 1663
 .
 (pdftex.def)             Requested size: 289.07928pt x 180.67455pt.
-[24] [25pdfTeX warning (ext4): destination with the same identifier (name{figur
-e.6}) has been already used, duplicate ignored
+[24pdfTeX warning (ext4): destination with the same identifier (name{figure.6})
+ has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1755 
+l.1712 
         </home/bb/Gits/branching.brownian.motion.and.spde/.A White Noise Approa
-ch To Evolutionary Ecology/Cαℭp.png>] [26] [27] [28] [29pdfTeX warning (ext4
-): destination with the same identifier (name{equation.5.67}) has been already 
-used, duplicate ignored
+ch To Evolutionary Ecology/Cαℭp.png>] [25] [26] [27] [28] [29pdfTeX warning 
+(ext4): destination with the same identifier (name{equation.5.70}) has been alr
+eady used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.2028 \end{multline}
+l.2009 \end{multline}
                      pdfTeX warning (ext4): destination with the same identifie
-r (name{equation.5.67}) has been already used, duplicate ignored
+r (name{equation.5.70}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.2028 \end{multline}
+l.2009 \end{multline}
                      pdfTeX warning (ext4): destination with the same identifie
-r (name{equation.5.67}) has been already used, duplicate ignored
+r (name{equation.5.70}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.2028 \end{multline}
+l.2009 \end{multline}
                      pdfTeX warning (ext4): destination with the same identifie
-r (name{equation.5.67}) has been already used, duplicate ignored
+r (name{equation.5.70}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.2028 \end{multline}
+l.2009 \end{multline}
                      ] [30pdfTeX warning (ext4): destination with the same iden
-tifier (name{equation.5.67}) has been already used, duplicate ignored
+tifier (name{equation.5.70}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.2068 \end{equation}
+l.2049 \end{equation}
                      ]
 
-LaTeX Warning: Reference `' on page 31 undefined on input line 2136.
+LaTeX Warning: Reference `' on page 31 undefined on input line 2117.
 
 [31]
 
-LaTeX Warning: Reference `' on page 32 undefined on input line 2170.
+LaTeX Warning: Reference `' on page 32 undefined on input line 2151.
 
 [32]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 2
-220.
+201.
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [33] [34] [35] [36]
-Overfull \hbox (22.70622pt too wide) detected at line 2503
+Overfull \hbox (22.70622pt too wide) detected at line 2484
  []$[] \OMS/lmsy/m/n/10 ^^@ \OT1/lmr/m/n/10 2[] [] \OMS/lmsy/m/n/10 ^^@ [][]$ 
  []
 
 
-Overfull \hbox (10.15744pt too wide) detected at line 2503
+Overfull \hbox (10.15744pt too wide) detected at line 2484
  []$[] \OT1/lmr/m/n/10 = [] \OML/lmm/m/it/10 dt \OT1/lmr/m/n/10 + []\OML/lmm/m/
 it/10 d[] \OMS/lmsy/m/n/10 ^^@ [][]\OML/lmm/m/it/10 dW[] \OMS/lmsy/m/n/10 ^^@ \
 OT1/lmr/m/n/10 2[][]\OML/lmm/m/it/10 dW[] \OMS/lmsy/m/n/10 ^^@ [] \OML/lmm/m/it
@@ -639,7 +630,7 @@ OT1/lmr/m/n/10 2[][]\OML/lmm/m/it/10 dW[] \OMS/lmsy/m/n/10 ^^@ [] \OML/lmm/m/it
  []
 
 [37] [38]
-Overfull \hbox (21.925pt too wide) detected at line 2555
+Overfull \hbox (21.925pt too wide) detected at line 2536
 [] \OT1/lmr/m/n/10 = [][] [][] [][] \OML/lmm/m/it/10 m\OT1/lmr/m/n/10 (\OML/lmm
 /m/it/10 ^^W; x\OT1/lmr/m/n/10 )\OML/lmm/m/it/10  \OT1/lmr/m/n/10 (\OML/lmm/m/i
 t/10 x; g\OT1/lmr/m/n/10 )\OML/lmm/m/it/10 dxdg \OT1/lmr/m/n/10 = [][] [][] []\
@@ -652,48 +643,48 @@ t/10 ^^W; x\OT1/lmr/m/n/10 )\OML/lmm/m/it/10 dx \OT1/lmr/m/n/10 = []
 
 [39]
 
-LaTeX Warning: Reference `m_cond' on page 40 undefined on input line 2672.
+LaTeX Warning: Reference `m_cond' on page 40 undefined on input line 2653.
 
 [40] [41] [42] [43] [44] [45]
 </home/bb/Gits/branching.brownian.motion.and.spde/.A White Noise Approach To Ev
-olutionary Ecology/corrs.png, id=750, 469.755pt x 180.675pt>
+olutionary Ecology/corrs.png, id=745, 469.755pt x 180.675pt>
 File: /home/bb/Gits/branching.brownian.motion.and.spde/.A White Noise Approach 
 To Evolutionary Ecology/corrs.png Graphic file (type png)
 <use /home/bb/Gits/branching.brownian.motion.and.spde/.A White Noise Approach T
 o Evolutionary Ecology/corrs.png>
 Package pdftex.def Info: /home/bb/Gits/branching.brownian.motion.and.spde/.A Wh
-ite Noise Approach To Evolutionary Ecology/corrs.png  used on input line 2959.
+ite Noise Approach To Evolutionary Ecology/corrs.png  used on input line 2940.
 (pdftex.def)             Requested size: 469.75386pt x 180.67455pt.
 [46] [47pdfTeX warning (ext4): destination with the same identifier (name{figur
 e.7}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.3049 
+l.3030 
         </home/bb/Gits/branching.brownian.motion.and.spde/.A White Noise Approa
 ch To Evolutionary Ecology/corrs.png>] [48] [49] [50] [51]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3521.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3502.
 [52]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 3521.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3502.
 (./draft.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3521.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3521.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3502.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3502.
 
 Package rerunfilecheck Info: File `draft.out' has not changed.
-(rerunfilecheck)             Checksum: 2C384680C0D87AB5B92B002CB39DF7C5;8891.
+(rerunfilecheck)             Checksum: CB2C9D6BF1BE52C3995C22FACE939A45;8683.
 
 LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 3521.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 3502.
  ) 
 Here is how much of TeX's memory you used:
- 11015 strings out of 482913
- 159819 string characters out of 5959590
- 419174 words of memory out of 5000000
- 25627 multiletter control sequences out of 15000+600000
+ 11012 strings out of 482913
+ 159751 string characters out of 5959590
+ 418877 words of memory out of 5000000
+ 25623 multiletter control sequences out of 15000+600000
  614004 words of font info for 86 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  34i,15n,34p,622b,419s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -723,10 +714,10 @@ nts/type1/public/lm/lmtt10.pfb></home/bb/.TinyTeX/texmf-dist/fonts/type1/public
 msfonts/symbols/msbm5.pfb></home/bb/.TinyTeX/texmf-dist/fonts/type1/public/amsf
 onts/symbols/msbm7.pfb></home/bb/.TinyTeX/texmf-dist/fonts/type1/public/rsfs/rs
 fs10.pfb>
-Output written on draft.pdf (52 pages, 11013581 bytes).
+Output written on draft.pdf (52 pages, 11012721 bytes).
 PDF statistics:
- 1089 PDF objects out of 1200 (max. 8388607)
- 986 compressed objects within 10 object streams
- 450 named destinations out of 1000 (max. 500000)
- 292 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1085 PDF objects out of 1200 (max. 8388607)
+ 982 compressed objects within 10 object streams
+ 451 named destinations out of 1000 (max. 500000)
+ 284 words of extra memory for PDF output out of 10000 (max. 10000000)
 

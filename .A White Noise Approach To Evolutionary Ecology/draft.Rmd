@@ -204,7 +204,11 @@ Using this informal notation, equations (\ref{exp_WN}) and (\ref{cov_WN}) can be
 \mathbb{C}\left(\int_0^{t_1}\int_\mathbb{R}f(x,s)\dot W(x,s)dxds,\int_0^{t_2}\int_\mathbb{R}g(x,s)\dot W(x,s)dxds\right)
 =\int_0^{t_1\wedge t_2}\int_\mathbb{R}f(x,s)g(x,s)dxds.
 \end{equation}
-To relate these formulae to the common notation used for SDE, we write $d\hat{\mathbf W}_t(f)=\frac{1}{\|f\|_2(t)}\left(\int_\mathbb{R}f(x,t)\dot W(x,t)dx\right)dt$ so that
+To relate these formulae to the common notation used for SDE, we write 
+\begin{equation}
+d\hat{\mathbf W}_t(f)=\frac{1}{\|f\|_t}\left(\int_\mathbb{R}f(x,t)\dot W(x,t)dx\right)dt,
+\end{equation}
+so that
 \begin{equation}
 \int_0^td\hat{\mathbf W}_s(f)=\int_0^t\int_\mathbb{R}\frac{f(x,s)}{\sqrt{\int_\mathbb{R}f^2(s,y)dy}}\dot W(x,s)dxds.
 \end{equation}
@@ -214,9 +218,9 @@ This implies $\mathbb{E}\big(\int_0^td\hat{\mathbf W}_s(f)\big)=0$, $\mathbb{C}\
 \begin{tabular}{l|lll}
              & $d\hat{\mathbf W}_t(f)$               & $d\hat{\mathbf W}_t(g)$                & $dt$ \\ \hline
              &                            &                            &      \\
-$d\hat{\mathbf W}_t(f)$ & $dt$                       & $\frac{\left(\int_\mathbb{R}f \ g \ dx\right)dt}{\|f\|_2\|g\|_2}$ & $0$  \\
+$d\hat{\mathbf W}_t(f)$ & $dt$                       & $\frac{\left(\int_\mathbb{R}f \ g \ dx\right)dt}{\|f\|_t\|g\|_t}$ & $0$  \\
              &                            &                            &      \\
-$d\hat{\mathbf W}_t(g)$ & $\frac{\left(\int_\mathbb{R}f \ g \ dx\right)dt}{\|f\|_2\|g\|_2}$ & $dt$                       & $0$  \\
+$d\hat{\mathbf W}_t(g)$ & $\frac{\left(\int_\mathbb{R}f \ g \ dx\right)dt}{\|f\|_t\|g\|_t}$ & $dt$                       & $0$  \\
              &                            &                            &      \\
 $dt$         & $0$                        & $0$                        & $0$
 \end{tabular}\label{mult}
@@ -247,9 +251,9 @@ Since $\nu(x,t)$ is not generally differentiable in $x$ or $t$, the derivatives 
 \int_\mathbb{R}\nu(x,t)f(x)dx-\int_\mathbb{R}\nu(x,0)f(x)dx=\int_0^t\int_\mathbb{R}\nu(x,s)\left(mf(x)+\frac{\mu}{2}\frac{\partial^2}{\partial x^2}f(x)\right)dsdx \\
 +\int_0^t\int_\mathbb{R}f(x)\sqrt{V\nu(x,s)}\dot W(x,s)dxds, \ \forall \ f\in C_b^2(\mathbb{R}).
 \end{multline}
-Evans [-@lawrenceevans2010] provides a nice introduction to weak derivatives. For more on the general theory of SPDE see Walsh [-@Walsh]. Note that since $\nu(x,t)$ is the density of a finite measure, it is integrable for each $t\geq0$. Thus, since for some $M>0$, $|f(x)|\leq M$ for every $x\in\mathbb{R}$, setting $\varphi(x,t)=f(x)\sqrt{V\nu(x,t)}$ implies $\varphi\in\mathscr{N}_2$. Hence, the white noise integral on the right-hand side of equation (\ref{neutral_int}) can be understood using the heuristics introduced above. Evaluating equation (\ref{neutral_int}) in the particular case of $f(x)\equiv1$ returns the total mass process, which we refer to as the total abundance $N(t)$.
+This expression is referred to as the _mild_ solution of (\ref{neutral_SPDE}). Evans [-@lawrenceevans2010] provides a nice introduction to weak derivatives. For more on the general theory of SPDE see Walsh [-@Walsh] and Da Prato and Zabczyk [-@DaPrato2014]. Note that since $\nu(x,t)$ is the density of a finite measure, it is integrable for each $t\geq0$. Thus, since for some $M>0$, $|f(x)|\leq M$ for every $x\in\mathbb{R}$, setting $\varphi(x,t)=f(x)\sqrt{V\nu(x,t)}$ implies $\varphi\in\mathscr{N}_2$. Hence, the white noise integral on the right-hand side of equation (\ref{neutral_int}) can be understood using the heuristics introduced above. Evaluating equation (\ref{neutral_int}) in the particular case of $f(x)\equiv1$ returns the total mass process, which we refer to as the total abundance $N(t)$.
 
-A convergence theorem for the diffusion limit of a generalization of BBM was established by Watanabe [-@Watanabe1968]. Dawson [-@Dawson1975] suggested that, for spatial dimension $d=1$, this diffusion limit should admit a density process that satisfies a SPDE. Konna and Shiga [-@Konno1988] and Reimers [-@Reimers1989] independently proved Dawson's suggestion was indeed correct. The diffusion limit of this more general branching process (in arbitrary spatial dimension) is referred to as the Dawson-Watanabe superprocess [@alisonetheridge2000]. Conditioning the Dawson-Watanabe superprocess to have constant mass returns the Fleming-Viot process [@Etheridge1991; @Perkins1991] which has been popular in studies of spatial population genetics. In particular, an extension of the Fleming-Viot process, known as the $\Lambda$-Fleming-Viot process, was introduced by Bertoin and Le Gall [-@Bertoin2003] and coined by Etheridge [-@Etheridge2008] where it was used to resolve some technical challenges in modelling isolation by distance [@Felsenstein1975; see also @Barton2013; and @Barton2019]. Although this provides an impressive list of accomplishments, the Dawson-Watanabe superprocess falls short of our needs. In particular this process assumes individuals do not interact and thus precludes its ability to model ecological interactions. However, this concern has been addressed, leading to constuctions of superprocesses that account for interactions among individuals. In the next subsection we summarize the main results in this area and introduce the SPDE that provides the basis for our approach to theoretical evolutionary ecology.
+A convergence theorem for the diffusion limit of a generalization of BBM was established by Watanabe [-@Watanabe1968]. Dawson [-@Dawson1975] suggested that, for spatial dimension $d=1$, this diffusion limit should admit a density process that satisfies a SPDE. Konna and Shiga [-@Konno1988] and Reimers [-@Reimers1989] independently proved Dawson's suggestion was indeed correct. The diffusion limit of this more general branching process (in arbitrary spatial dimension) is referred to as a Dawson-Watanabe superprocess [@alisonetheridge2000]. Conditioning a Dawson-Watanabe superprocess to have constant mass returns a Fleming-Viot process [@Etheridge1991; @Perkins1991] which has been popular in studies of spatial population genetics. In particular, an extension of Fleming-Viot processes, known as $\Lambda$-Fleming-Viot processes, were introduced by Bertoin and Le Gall [-@Bertoin2003] and coined by Etheridge [-@Etheridge2008] where it was used to resolve some technical challenges in modelling isolation by distance [@Felsenstein1975; see also @Barton2013; and @Barton2019]. Although this provides an impressive list of accomplishments, the Dawson-Watanabe superprocess falls short of our needs. In particular this process assumes individuals do not interact and thus precludes its ability to model ecological interactions. However, this concern has been addressed, leading to constuctions of superprocesses that account for interactions among individuals. In the next subsection we summarize the main results in this area and introduce the SPDE that provides the basis for our approach to theoretical evolutionary ecology.
 
 __Interacting superprocesses__
 
@@ -284,37 +288,53 @@ Recall, we use $\nu(x,t)$ to denote the density of a superprocess, given it exis
 \begin{equation}\label{SPDE}
 \frac{\partial}{\partial t}\nu(x,t)=m(\nu,x)\nu(x,t)+\frac{\mu}{2}\frac{\partial^2}{\partial x^2}\nu(x,t)+\sqrt{V\nu(x,t)}\dot W(x,t).
 \end{equation}
-Note that, comparing equation (\ref{SPDE}) to equation (3.5) of Li [-@zeng1998absolute], our $m$ and $V$ correspond to Li's $b$ and $c$ respectively. Denoting $C_1^+(\mathbb{R})$ the set of non-negative, continuous, integrable functions on $\mathbb{R}$, it is important to note that, under the assumptions made in Méléard and Roelly [-@meleard1992interacting; -@Mlard1993] and Li [-@zeng1998absolute], equation (\ref{SPDE}) is only formal when $m(y,x)$ is bounded across all combinations of $y\geq0$ and $x\in\mathbb{R}$. However, recalling our condition $m(y,x)\leq r\in\mathbb{R}$, the growth rates we consider are only bounded above. Replacing $m(y,x)$ with its upper-bound demonstrates that the associated superprocess should still admit an integrable density. That is, we should still be able to compute the total mass process $N(t)$. In fact, in the proof of the construction of the interacting superprocess as the limit of rescaled branching diffusions, Méléard and Roelly [-@meleard1992interacting; -@Mlard1993] assumed $m(\nu,x)$ to be bounded to guarantee the total mass process will have finite mean and variance. This allowed them to employ a tightness criterion for sequences of measures and show the rescaled processes converge to a superprocess with finite total mass. Li's [-@zeng1998absolute] result builds directly off of Méléard and Roelly's construction, inheriting the assumption of boundedness for $m(\nu,x)$. However, in Li [-@zeng1998absolute], the sufficiency of $m(\nu,x)$ being bounded above is even more clear since Li works explicitly with a common upperbound for both $m(\nu,x)$ and $V$. Hence, one can repeat the necessary proofs replacing the assumption that $m(\nu,x)$ is bounded with the assumption that $m(\nu,x)$ is merely bounded above to derive the same results.
+Comparing equation (\ref{SPDE}) to equation (3.5) of Li [-@zeng1998absolute], our $m$ and $V$ correspond to Li's $b$ and $c$ respectively. It is important to note that, under the assumptions made in Méléard and Roelly [-@meleard1992interacting; -@Mlard1993] and Li [-@zeng1998absolute], equation (\ref{SPDE}) is only formal when $m(y,x)$ is bounded across all combinations of $y\geq0$ and $x\in\mathbb{R}$. However, recalling our condition $m(y,x)\leq r\in\mathbb{R}$, the growth rates we consider are only bounded above. Yet, in the proof of the construction of the interacting superprocess as the limit of rescaled branching diffusions, Méléard and Roelly [-@meleard1992interacting; -@Mlard1993] assumed $m(y,x)$ to be bounded to guarantee the total mass process will have finite mean and variance, for finite $t\geq0$. This allowed the authors to employ a tightness criterion for sequences of measures and show the rescaled processes converge to a superprocess with finite total mass. Li's [-@zeng1998absolute] result builds directly off of Méléard and Roelly's construction, inheriting the assumption of boundedness for $m(y,x)$. However, in Li [-@zeng1998absolute], the sufficiency of $m(y,x)$ being bounded above is even more clear since Li works explicitly with a common upperbound for both $m(y,x)$ and $V$. Hence, one can repeat the necessary proofs replacing the assumption that $m(y,x)$ is bounded with the assumption that $m(y,x)$ is merely bounded above to derive the same results.
 
-What remains is to show the spatial mean and variance are finite, assuming finite initial conditions. That is, setting $M_n(t)=\int_\mathbb{R}|x|^n\nu(x,t)dx$, we want $M_1(0),M_2(0),M_4(0)<\infty$ to imply $M_1(t),M_2(t),M_4(t)<\infty$ for each $t>0$ (it turns out we need $M_4(t)<\infty$ for the SDE describing the evolution of phenotypic variance). By condition (\ref{m_cond}), we see that $m(\nu,x)$ drops quadratically as $x$ leaves $\theta$. In SM \S\ref{finite} we show that, when $V=0$, this form of fitness generates a restoring force that ensures a finite mean and variance. Since mutation causes finite perturbations we do not expect it to overcome this restoring force in the stochastic case. If anything, we suspect a large mutation variance to merely increase the genetic load of the population and drive it to extinction. Indeed, this suggestion is supported by equilibrium of the corresponding deterministic system found in SM \S\ref{numerical}. However, to establish further support, in SM \S\ref{numerical} we investigate these claims by comparing simulations of the BBM with selection to analytical solutions of the PDE obtained from equation (\ref{SPDE}) by setting $V=0$. The results suggest our assertions are sound, but they have yet to be rigorously justified. For now, we leave this as an open problem and assume spatial means and variances are finite for every $t\in[0,\infty)$. In the next subsection we derive an SDE for the abundance of a population and report the SDE for the trait mean $\bar x$ and trait variance $\sigma^2$. For the sake of space, derivations of $d\bar x$ and $d\sigma^2$ can be found in SM \S\ref{SDE_DERIV}.
-
-### Deriving SDE from a SPDE \label{SDEriv}
-
-The dynamics of abundance (referred to in the superprocess literature as the total mass process) are obtained by defining the process $N(t)=\int_{\mathbb{R}}\nu(x,t)dx$ and evaluating expression 
-
-\begin{multline}\label{neat_trick}
-\int_\mathbb{R}f(x)\nu(x,t)dx-\int_\mathbb{R}f(x)\nu(x,0)dx \\
-=\int_0^t\int_\mathbb{R}\nu(x,s)\left(m(\nu,x)f(x)+\frac{\mu}{2}\frac{\partial^2}{\partial x^2} f(x)\right)dxds+\int_0^t\int_\mathbb{R}f(x)\sqrt{V\nu(x,s)}\dot W(x,s)dxds
+With solutions to SPDE (\ref{SPDE}) well defined for any growth rate bounded above, we can calculate the total mass process $N(t)$ using the mild solution of (\ref{SPDE}) with $f(x)\equiv1\in C_b^2(\mathbb{R})$ (the symbol "$\equiv$" means equal to for every $x$). That is,
+\begin{multline}
+N(t)=N(0)+\int_0^t\int_\mathbb{R}\nu(x,s)\left(m(\nu,x)\cdot1+\frac{\mu}{2}\frac{\partial^2}{\partial x^2}1\right)+1\sqrt{V\nu(x,s)}\dot W(x,s)dsdx \\
+=N(0)+\int_0^t\bar m(s)N(s)dt+\int_0^t\sqrt{VN(s)}d\hat{\mathbf{W}}_s(\sqrt{\nu(x,s)}),
 \end{multline}
-with $f(x)\equiv1$ to obtain
-\begin{equation}
-N(t)-N(0)=\bar m(t)N(t)+\int_0^t\int_\mathbb{R}\sqrt{V\nu(x,s)}\dot W(x,s)dxds.
-\end{equation}
-Equation (\ref{cov_WN_xi}) implies
-\begin{equation}
-\mathbb{V}\left(\int_0^t\int_\mathbb{R}\sqrt{V\nu(x,s)}\dot W(x,s)dxds\right)=\int_0^t\int_\mathbb{R}V\nu(x,s)dxds=\int_0^tV N(s)ds.
-\end{equation}
-Following the notation introduced in \S\ref{wnc_intro}, we have
-\begin{equation}
-\int_0^td\hat{\mathbf W}_s(\sqrt{V\nu(x,s)})=\int_0^t\int_\mathbb{R}\frac{\sqrt{V\nu(x,s)}}{\sqrt{V N(s)}}\dot W(x,s)dxds
-\end{equation}
-is, as a function of $t$, a standard Brownian motion. To clean up notation set $dW_1(t)=d\hat{\mathbf W}_t(\sqrt{V\nu(x,t)})$. Then we can write an SDE for $N$ which we provide in the following section.
 
-Unfortunately, the same trick does not work for calculating SDE for the mean and variance of traits. Indeed, setting $f(x)=x,x^2$ and evaluating expression (\ref{neat_trick}) will lead to SDE that miscalculate the effect of mutation and hence are clearly incorrect results. Obtaining the correct results turns out to require some very involved calculations which we perform in SM \S\ref{SDE_DERIV}.
+where
+\begin{equation}
+\bar m(t)=\frac{1}{N(t)}\int_\mathbb{R}m(\nu,x)\nu(x,t)dx,
+\end{equation}
+and
+\begin{equation}
+\int_0^td\hat{\mathbf{W}}_s(\sqrt{\nu(x,s)})=\int_0^t\int_\mathbb{R}\frac{\sqrt{\nu(x,s)}}{\sqrt{\int_\mathbb{R}\nu(x,s)dx}}\dot W(x,s)dxds.
+\end{equation}
+Setting $W_1(t)=\hat{\mathbf{W}}_t(\sqrt{\nu(x,t)})$, we can use traditional stochastic differential notation to write
+\begin{equation}
+dN=\bar mNdt+\sqrt{VN}dW_1.
+\end{equation}
+To find the associated SDE for $\bar x(t)$ and $\sigma^2(t)$, we want to repeat the same approach for $f(x)=x,x^2$ and apply It&ocirc;'s lemma. However, for these cases $f\notin C^2_b(\mathbb{R})$ since $f$ will not be bounded. Hence, the goal is to show that $\int_\mathbb{R}(|x|+x^2)\nu(x,t)dx<+\infty$ for all $t>0$ given this condition is satisfied by $\nu(x,0)$. Let us begin by supposing we can apply the mild solution to $f(x)=x,x^2$. Setting $\tilde x(t)=\int_\mathbb{R}x\nu(x,t)dx$, we have
+\begin{equation}
+\tilde x(t)=\tilde x(0)+\int_0^t\int_\mathbb{R}\nu(x,s)m(\nu,x)x+x\sqrt{V\nu(x,s)}\dot W(x,s)dxds.
+\end{equation}
+Similarly, setting $\tilde{\tilde\sigma}^2(t)=\int_\mathbb{R}x^2\nu(x,t)dx$, we have
+\begin{equation}
+\tilde{\tilde\sigma}^2(t)=\tilde{\tilde\sigma}^2(0)+\int_0^t\int_\mathbb{R}\nu(x,s)\left(m(\nu,x)x^2+\mu\right)+x^2\sqrt{V\nu(x,s)}\dot W(x,s)dxds.
+\end{equation}
+Since $\bar x(t)=\tilde x(t)/N(t)$ and $\sigma^2(t)=\tilde{\tilde\sigma}^2(t)/N(t)-\bar x^2(t)$, we can use It&ocirc;'s lemma to derive SDE for $\bar x(t)$ and $\sigma^2(t)$, which we perform in SM \S\ref{SDE_DERIV}. We do not make any general assertions about the existence or uniqueness of $\bar x(t)$ or $\sigma^2(t)$.
+
+<!--
+
+__Superprocesses without densities__
+
+The superprocesses we consider here allow function-valued representations (i.e., densities such as $\nu(x,t)$) only in the case of spatial dimension $d=1$. However, if we are willing to let go of function-valued representations, we are free to study superprocesses for greater spatial dimensions. Dawson [-@dawson1993measure] provides an excellent resource for this subject. Futhermore, the literature on these more general processes includes models of ecological interactions including competition. We summarize a few results important to our model of diffuse coevolution here.
+
+Denoting $C^k(\mathbb{R}^d)$ the set of functions on $\mathbb{R}^d$ with continuous derivatives up to order $k$ and $\Delta=\sum_{i=1}^d\frac{\partial^2}{\partial x_i^2}$ the Laplacian operator on $C^2(\mathbb{R}^d)$, we define the operator $A:C^2(\mathbb{R}^d)\to C^0(\mathbb{R}^d)$ by
+\begin{equation}
+A=\frac{\mu}{2}\Delta+r-\frac{a}{2}(\theta-x)^2,
+\end{equation}
+for fixed $r,\theta\in\mathbb{R}$ and $\mu,a>0$.
+
+-->
 
 ## Equations of evolutionary and demographic dynamics \label{equations}
 
-In SM \S\ref{SDE_DERIV} we use our assumptions that trait mean and variance are finite and that variance in reproductive output $V\geq0$ does not depend on $x$ or $\nu(x,t)$ to show SDE for $N(t)$, $\bar x(t)$ and $\sigma^2(t)$ can be expressed as
+In SM \S\ref{SDE_DERIV} we show SDE for $N(t)$, $\bar x(t)$ and $\sigma^2(t)$ can be expressed as
 \begin{subequations}\label{gen_eqns}
 \begin{equation}\label{N}
 dN(t)=\bar m(t)N(t)dt+\sqrt{V N(t)}dW_1(t),
@@ -326,7 +346,7 @@ d\bar x(t)=\mathrm{Cov}_t\Big(x,m(\nu,x)\Big)dt+\sqrt{V\frac{\sigma^2(t)}{N(t)}}
 d\sigma^2(t)=\left(\mathrm{Cov}_t\Big((x-\bar x(t))^2,m(\nu,x)\Big)+\mu-V\frac{\sigma^2(t)}{N(t)}\right)dt+\sqrt{V\frac{\overline{(x-\bar x(t))^4}-\sigma^4(t)}{N(t)}}dW_3(t),
 \end{equation}
 \end{subequations}
-where $W_1$, $W_2$ and $W_3$ are standard Brownian motions. Dividing by $dt$ one can interpret equations (\ref{gen_eqns}) as if they are ordinary differential equations, but this not technically rigorous since Brownian motion is nowhere differentiable with respect to time. In SM \S\ref{SDE_DERIV} we show that in general $W_1$ is independent of both $W_2$ and $W_3$, but $W_2$ and $W_3$ covary.
+where $W_1$, $W_2$ and $W_3$ are standard Brownian motions. We note that conditions on the growth rate $m$ to guarantee existence and uniqueness of solutions to (\ref{xbar_gen}) and (\ref{sig2_gen}) have yet to be investigated. However, our results on the deterministic PDE suggest that $m(y,x)$ bounded above and differentiable in both arguments is sufficient. Dividing by $dt$ one can interpret equations (\ref{gen_eqns}) as if they are ordinary differential equations, but this not technically rigorous since Brownian motion is nowhere differentiable with respect to time. In SM \S\ref{SDE_DERIV} we show that in general $W_1$ is independent of both $W_2$ and $W_3$, but $W_2$ and $W_3$ covary.
 
 There is quite a bit we can learn from expressions (\ref{gen_eqns}). Firstly, setting $V=0$ recovers the deterministic dynamics derived in \S\ref{deterministic}. Alternatively, one can take $N(t)\to\infty$ to recover the deterministic dynamics for $\bar x(t)$ and $\sigma^2(t)$. Characteristically, we note the effect of demographic stochasticity on abundance grows with $\sqrt{N(t)}$. Hence, dividing by $N$, we find the effects of demographic stochasticity on the per-capita growth rate diminish with increased abundance. Relating the response to demographic stochasticity derived here to the effect of random genetic drift derived in classic quantitative genetic theory, if we set $\sigma^2(t)=\sigma^2$ and $N(t)=N$ constant with respect to time, then integrating the stochastic term in equation (\ref{xbar_gen}) over a single unit of time returns a normally distributed random variable with mean zero and variance equal to $V\sigma^2/N$. In particular, assuming perfect inheritance, when reproductive variance is unity ($V=1$) this random variable coincides with the effect of random genetic drift on the change in mean trait over a single generation derived using sampling arguments [@Lande1976]. There is also an interesting connection with classical population genetics. A fundamental result from early population genetic theory is the expected reduction in diversity due to the chance loss of alleles in finite populations [@Fisher1923; @Wright97]. This expected reduction in diversity due to random genetic drift is captured by the third term in the deterministic component of expression (\ref{sig2_gen}), particularly $-V\sigma^2(t)/N(t)$. The component of SDE (\ref{sig2_gen}) describing random fluctuations in $\sigma^2(t)$ is more complicated and is proportional to the root of the difference between the centralized fourth moment of $p(x,t)$ and $\sigma^4(t)$. These expressions can be used to investigate the dynamics of the mean and variance for general $\nu(x,t)$. However, in the next subsection we simplify these expressions by approximating $\nu(x,t)$ with a Gaussian curve. In SM \S\ref{SDE_DERIV} we show that under the Gaussian case $W_1,W_2$ and $W_3$ are independent.
 
