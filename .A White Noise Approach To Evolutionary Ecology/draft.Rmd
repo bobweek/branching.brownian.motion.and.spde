@@ -83,7 +83,7 @@ To derive a replicator-mutator equation from equation (\ref{eq1}), we employ the
 =\int_{-\infty}^{+\infty} m(\nu,x)\nu(x,t)dx+\int_{-\infty}^{+\infty}\frac{\mu}{2}\frac{\partial^2}{\partial x^2}\nu(x,t)dx \\
 =N(t)\int_{-\infty}^{+\infty} m(\nu,x)p(x,t)dx=\bar m(t) N(t).
 \end{multline}
-Using our assumptions on mutation and rate of growth, we show in SM \S\ref{} $\nu(x,t)$ is twice differentiable with respect to $x$ and $\int_{-\infty}^{+\infty}\nu(x,t)dx<\infty$ for all $t\geq0$. This implies that we are justified in swapping the order of differentiation and integration and the result $\int_{-\infty}^{+\infty}\frac{\partial^2}{\partial x^2}\nu(x,t)dx=0$ can be derived from the fundamental theorem of calculus. Biological reasoning agrees with this latter result since mutation neither creates nor destroys individuals, but merely changes their type from their parental type. Taking the same approach, we derive the dynamics of the phenotypic distribution $p(x,t)$ in response to selection and muation as
+Using our assumptions on mutation and rate of growth, we show in SM \S\ref{finite} $\nu(x,t)$ is twice differentiable with respect to $x$ and $\int_{-\infty}^{+\infty}\nu(x,t)dx<\infty$ for all $t\geq0$. This implies that we are justified in swapping the order of differentiation and integration and the result $\int_{-\infty}^{+\infty}\frac{\partial^2}{\partial x^2}\nu(x,t)dx=0$ can be derived from the fundamental theorem of calculus. Biological reasoning agrees with this latter result since mutation neither creates nor destroys individuals, but merely changes their type from their parental type. Taking the same approach, we derive the dynamics of the phenotypic distribution $p(x,t)$ in response to selection and muation as
 
 \begin{multline}\label{p_PDE}
 \frac{\partial}{\partial t}p(x,t)=\frac{\partial}{\partial t}\frac{\nu(x,t)}{N(t)}=\frac{1}{N^2(t)}\left(N(t)\frac{\partial}{\partial t}\nu(x,t)-\nu(x,t)\frac{d}{dt}N(t)\right) \\
@@ -883,7 +883,150 @@ Below we investigate the correspondence of interaction intensity and coevolution
 
 To measure the total evolutionary change in species $i$ induced by species $j$, we form the metric $\Psi_{ij}=|\beta_{ij}|+|\gamma_{ij}|$. The top row of Figure \ref{net} displays interaction networks under weak and strong competition where the edge width connecting species $i$ and $j$ is proportional to $\alpha_{ij}\alpha_{ji}$. The bottom row of Figure \ref{net} displays the distributions of pairwise coevolutionary change, which we measure for species $i$ and $j$ via $\mathfrak{C}_{ij}=\Psi_{ij}\Psi_{ji}$, under weak and strong competition.
 
-```{r, echo=F, fig.align='center', fig.cap='\\label{net}Networks of interspecific interactions parameterized by competition coffecients (top row) and distributions of pairwise coevolution (bottom row) under the scenarios of weak competition (left) and strong competition (right) at time $t=1.0\\times 10^3$ Node sizes are proportional to population sizes. Edge widths and shade are monotonically increasing functions of pairwise coevolution.'}
+```{r, eval=F, echo=F}
+require("ggplot2")
+require("gridExtra")
+require("reshape")
+
+####################
+#                  #
+# weak competition #
+#                  #
+####################
+
+smpl_wc1e3 = read.csv("/home/bb/Gits/branching.brownian.motion.and.spde/sample_path_wc1e3.csv")
+
+#
+# calculating strength of coevolution
+#
+
+x = smpl_wc1e3$x
+G = smpl_wc1e3$G
+N = smpl_wc1e3$N
+
+w = 0.1
+c = 1e-8
+eta = 1.0
+R = 1.0
+a = 1e-2
+th = 0
+S = length(x)
+
+b = matrix(0,nc=S,nr=S)
+C = matrix(0,nc=S,nr=S)
+alpha = matrix(0,nc=S,nr=S)
+beta = matrix(0,nc=S,nr=S)
+gamma = matrix(0,nc=S,nr=S)
+for( i in 1:S){
+  for( j in 1:S ){
+    
+    r = R - a*( (x[i]-th)^2 + G[i] + eta )/2
+    
+    b[i,j] = 1/( G[i]+G[j]+2*(w+eta) )
+    
+    alpha[i,j] = c*sqrt(b[i,j]/(2*pi))*exp(-b[i,j]*(x[i]-x[j])^2/2) / r
+    
+    beta[i,j] = c*N[j]*b[i,j]*(x[i]-x[j])*sqrt(b[i,j]/(2*pi))*exp(-b[i,j]*(x[i]-x[j])^2/2)
+    
+    gamma[i,j] = c*N[j]*b[i,j]*(1 - b[i,j]*(x[i]-x[j])^2)*sqrt(b[i,j]/(2*pi))*exp(-b[i,j]*(x[i]-x[j])^2/2)
+    
+    C[i,j] = abs(beta[i,j]) + abs(gamma[i,j])
+    
+  }
+}
+
+Cvec = NULL
+for(i in 1:S){
+  for(j in i:S)
+    if( i!=j ) Cvec = c(Cvec,C[i,j])
+}
+
+avec = NULL
+for(i in 1:S){
+  for(j in i:S)
+    if( i!=j ) avec = c(avec,alpha[i,j])
+}
+
+Cadf_WC = data.frame(Coev=Cvec,Comp=avec, Which="WC")
+
+######################
+#                    #
+# strong competition #
+#                    #
+######################
+
+smpl_mc1e3 = read.csv("/home/bb/Gits/branching.brownian.motion.and.spde/sample_path_mc1e3.csv")
+
+#
+# calculating strength of coevolution
+#
+
+x = smpl_mc1e3$x
+G = smpl_mc1e3$G
+N = smpl_mc1e3$N
+
+w = 0.1
+c = 5e-7
+eta = 1.0
+R = 1.0
+a = 1e-2
+th = 0
+S = length(x)
+
+b = matrix(0,nc=S,nr=S)
+C = matrix(0,nc=S,nr=S)
+alpha = matrix(0,nc=S,nr=S)
+beta = matrix(0,nc=S,nr=S)
+gamma = matrix(0,nc=S,nr=S)
+for( i in 1:S){
+  for( j in 1:S ){
+    
+    r = R - a*( (x[i]-th)^2 + G[i] + eta )/2
+    
+    b[i,j] = 1/( G[i]+G[j]+2*(w+eta) )
+    
+    alpha[i,j] = c*sqrt(b[i,j]/(2*pi))*exp(-b[i,j]*(x[i]-x[j])^2/2) / r
+    
+    beta[i,j] = c*N[j]*b[i,j]*(x[i]-x[j])*sqrt(b[i,j]/(2*pi))*exp(-b[i,j]*(x[i]-x[j])^2/2)
+    
+    gamma[i,j] = c*N[j]*b[i,j]*(1 - b[i,j]*(x[i]-x[j])^2)*sqrt(b[i,j]/(2*pi))*exp(-b[i,j]*(x[i]-x[j])^2/2)
+    
+    C[i,j] = abs(beta[i,j]) + abs(gamma[i,j])
+    
+  }
+}
+
+Cvec = NULL
+for(i in 1:S){
+  for(j in i:S)
+    if( i!=j ) Cvec = c(Cvec,C[i,j])
+}
+
+avec = NULL
+for(i in 1:S){
+  for(j in i:S)
+    if( i!=j ) avec = c(avec,alpha[i,j])
+}
+
+Cadf_SC = data.frame(Coev=Cvec,Comp=avec, Which="SC")
+
+# bivariate plot
+Cadf = rbind(Cadf_WC,Cadf_SC)
+
+on_pl = ggplot(Cadf_SC, aes(Coev,Comp)) + 
+  scale_x_log10(limits=c(1e-5,2e-4)) + 
+  geom_density_2d(col="black",n=200) +
+  geom_density_2d(data=Cadf_WC, linetype="dashed", col="black") +
+  theme_minimal() + xlab("Pairwise Coevolution") + ylab("")
+
+on_pl2 = on_pl + facet_grid(rows=vars(Which), scales="free_y") + 
+  ylab("Competition Coefficient") + theme(strip.background = element_blank(), strip.text.y = element_blank())
+
+ggsave("~/Gits/branching.brownian.motion.and.spde/.A White Noise Approach To Evolutionary Ecology/on_pl.png",on_pl2,device="png",width=3.5,height=3.5,units="in")
+```
+
+
+```{r, echo=F, fig.align='center', fig.cap='\\label{net}Bivariate distributions of competition coffecients (y-axis) and pairwise coevolution (x-axis) under the scenarios of weak competition (dashed line) and strong competition (solid line) after simulating for $t=1000.0$ units of time. Simulations were ran for $S=1000$ species. Parameters are the same as in Table 2, except we used $c=1\\times 10^{-8}$ for weak competition and $c=5\\times 10^{-7}$ for strong competition in order to account for increased species richness.'}
 knitr::include_graphics('on_pl.png')
 ```
 
@@ -984,13 +1127,13 @@ __Limitations of diffusion limits__
 
 As noted by Feller [-@feller1951], diffusion limits provide reasonable approximations for large populations, but relatively small populations require discrete models. Hence, as a diffusion limit, SPDE (\ref{SPDE}) restricts parameter values to regions that maintain large population sizes. Although this suggests an important restriction on any model developed under this framework by implying populations are not at risk of extinction, the SDE describing abundance dynamics technically permits extinction. However, for small abundances, pathology emerges in the evolution of trait means and variances. In particular, stochastic components of the SDE describing the evolution of $\bar x$ and $\sigma^2$ diverge towards infinite values as $N\to0$. Hence, studies of evolutionary rescue and colonization-extinction dynamics that incorporate phenotypic evolution should be pursued via a different approach. A natural alternative can be developed utilizing the underlying BBM that SPDE (\ref{SPDE}) is a diffusion limit of (see section \ref{stochastic}). This process explicitly tracks individuals throughout their life-history and captures reproduction as branching events. Hence, BBM processes model population size as a non-negative integer instead of a continuously varying number. In particular, the pathological behavior described for the diffusion limit does not occur for BBM as population size goes to zero.
 
-__The genetic architecture and distributions of traits and the role of sexual reproduction__
+__The genetic architecture and distributions of traits__
 
 Our treatment of inheritance and our approach to model coevolution rest on the assumptions of normally distributed breeding values and expressed phenotypes along with asexual reproduction. However, real traits are not encoded by an infinite number of loci each contributing an additive infinitesimal effect (as required by the infinitesimal model), mutations are not inherited as normally distributed deviations from parental breeding values (as required by the Gaussian descendents model) and many populations of interest exhibit non-random sexual reproduction. Departures from this model of genetic architecture can produce more complex distributions of breeding values and expressed traits. Such deviations can be reinforced via strong non-Gaussian selection surfaces, including the surface $m(\nu,x)$ we have derived from niche theory, along with non-random mating in sexually reproducing populations. However, Gaussian approximations are convenient since they are defined by their mean and variance. Future work investigating the effects of non-normally distributed traits on the structure and dynamics of ecological communities will therefore need to confront higher moments such as skew and kurtosis, ideally integrating previously established mathematical approaches to derive the dynamics of these higher moments [@Dbarre2015EvolutionOQ].
 
 An alternative approach to breaking the assumption of normally distributed trait values is the development of explicit multilocus models. These models describe the contributions of alleles at particular loci in the genome to the development of quantitative traits. Tracking the fluctuations of allele frequencies then allows theoreticians to investigate the dynamics of phenotypic distributions that deviate from normality. This approach has a long history in theoretical quantitative genetics [@bulmer1980; @pmid7851785; @Kirkpatrick1727] and coevolutionary theory [@Nuismer2005; @Kopp2006; @Nuismer2007]. However, work to investigate the role of genetic architecture in mediating feedbacks between the dynamics of population abundances and the distributions of traits mediating ecological interactions has apparently only just begun [@Schreiber2018; @Patel2019].
 
-__The role of ecological stoichiometry__
+__Ecological stoichiometry__
 
 Our treatment of both biotic and abiotic selection neglects important chemical constraints of biological reality. For instance, the resource we assume species are competing over is modelled as a static quantity. However, real resources can be dynamic quantities. Such theoretical quantities may reflect abiotic cycles of material and energy or whole trophic layers comprised of prey, hosts or mutualists. Although resource dynamics have been captured theoretically in consumer-resource models [@davidtilman1982], developing a more realistic model of resource competition must incorporate details on the ecophysiology of organisms [@michelloreau2010]. Doing so will help clarify the feedback between the evolution of populations and the ecosystem processes they are a part of. 
 
@@ -1188,7 +1331,7 @@ We begin by describing the branching random walk before introducing our scheme t
 \nu(x,t)=\sum_{i=1}^{N(t)}\delta(x-\xi_i(t)),
 \end{equation}
 
-where $\delta(x-\xi_i(t))$ denotes the point mass located at $\xi_i(t)$. To allow for imperfect heritability, we also track the set of breeding values which, at time $t$, is denoted by $\{\gamma_1(t),\dots,\gamma_{N(t)}(t)\}$ and should not be confused with the quadratic selection gradients discussed in \S\ref{} of the main text. Then the distribution of breeding values can be written as
+where $\delta(x-\xi_i(t))$ denotes the point mass located at $\xi_i(t)$. To allow for imperfect heritability, we also track the set of breeding values which, at time $t$, is denoted by $\{\gamma_1(t),\dots,\gamma_{N(t)}(t)\}$ and should not be confused with the quadratic selection gradients discussed in \S\ref{diffuse} of the main text. Then the distribution of breeding values can be written as
 
 \begin{equation}
 \rho(g,t)=\sum_{i=1}^{N(t)}\delta(g-\gamma_i(t)).
@@ -1206,7 +1349,7 @@ Then if we require the $i$th individual to have mean number offspring $\mathscr 
 q(\nu,\xi_i)=\frac{\mathscr{W}(\nu,\xi_i)}{V}, \ s(\nu,\xi_i)=\frac{\mathscr{W}^2(\nu,\xi_i)}{V-\mathscr{W}(\nu,\xi_i)}.
 \end{equation}
 
-The imposes the restriction $V>\mathscr{W}(\nu,\xi_i)$. For each offpsring produced by the individual with breeding value $\gamma_i(t)$, we assign indepently drawn breeding values normally distributed around $\gamma_i(t)$ with variance $\mu$. After breeding values have been assigned, we randomly draw trait values for each offpsring as described above. For an overview of our model of inheritance, see \S\ref{} of the main text. This summarizes the basic structure of our simulation. To impose selection and density dependent growth rates, we set
+The imposes the restriction $V>\mathscr{W}(\nu,\xi_i)$. For each offpsring produced by the individual with breeding value $\gamma_i(t)$, we assign indepently drawn breeding values normally distributed around $\gamma_i(t)$ with variance $\mu$. After breeding values have been assigned, we randomly draw trait values for each offpsring as described above. For an overview of our model of inheritance, see \S\ref{inheritance} of the main text. This summarizes the basic structure of our simulation. To impose selection and density dependent growth rates, we set
 
 \begin{equation}
 \mathscr{W}(\nu,\xi_i)=\exp\left(r-\frac{a}{2}(\theta-\xi_i)^2-c\int_\mathbb{R}\nu(x,t)dx\right),
@@ -1503,8 +1646,8 @@ Setting $F(y,z)=y-z^2$, use It&ocirc;'s formula on $\sigma^2=F(\overline{x^2},\b
 d\sigma^2=d\overline{x^2}-2\bar xd\bar x-(d\bar x)^2
 =\left(\mathrm{Cov}_t\Big(x^2,m\Big) + \mu \right)dt+\frac{\|\tilde{\tilde\sigma}^2\|_2}{N}d\tilde W_3-\overline{x^2}\sqrt\frac{V}{N}d W_1 \\ \\
 -2\bar x\left(\mathrm{Cov}_t(x,m)+\mu dt+\sqrt{\frac{V\sigma^2}{N}}d W_2\right)-\left(\mathrm{Cov}_t(x,m)dt+\mu dt+\sqrt{\frac{V\sigma^2}{N}}d W_2\right)^2 \\ \\
-=\left(\mathrm{Cov}_t\Big(x^2-2\bar xx,m\Big) + \frac{\mu}{2}\int_\mathbb{R}(x^2-x\bar x)\Delta p(x,t)dx \right)dt+\frac{\|\tilde{\tilde\sigma}^2\|_2}{N}d\tilde W_3-\overline{x^2}\sqrt\frac{V}{N}d W_1-2\bar x\sqrt{\frac{V\sigma^2}{N}}d W_2-\left(\frac{V\sigma^2}{N}\right)dt \\ \\
-=\left(\mathrm{Cov}_t\Big(x-\bar x)^2,m\Big) + \frac{\mu}{2}\int_\mathbb{R}(x-\bar x)^2\Delta p(x,t)dx - \frac{V\sigma^2}{N}\right)dt+\frac{\|\tilde{\tilde\sigma}^2\|_2}{N}d\tilde W_3-\overline{x^2}\sqrt\frac{V}{N}d W_1-2\bar x\sqrt{\frac{V\sigma^2}{N}}d W_2.
+=\left(\mathrm{Cov}_t\Big(x^2-2\bar xx,m\Big) + \mu \right)dt+\frac{\|\tilde{\tilde\sigma}^2\|_2}{N}d\tilde W_3-\overline{x^2}\sqrt\frac{V}{N}d W_1-2\bar x\sqrt{\frac{V\sigma^2}{N}}d W_2-\left(\frac{V\sigma^2}{N}\right)dt \\ \\
+=\left(\mathrm{Cov}_t\Big(x-\bar x)^2,m\Big) + \mu - \frac{V\sigma^2}{N}\right)dt+\frac{\|\tilde{\tilde\sigma}^2\|_2}{N}d\tilde W_3-\overline{x^2}\sqrt\frac{V}{N}d W_1-2\bar x\sqrt{\frac{V\sigma^2}{N}}d W_2.
 \end{multline}
 
 In light of
