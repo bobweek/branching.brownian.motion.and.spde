@@ -79,7 +79,7 @@ with the initial condition $\nu(x,0)$ described above. This PDE is semilinear du
 \begin{equation}
 m(\nu,x)=r-\frac{a}{2}(\theta-x)^2-c\int_{-\infty}^{+\infty}\nu(y,t)dy
 \end{equation}
-where $r\in\mathbb{R}$ is the intrinsic growth rate in the absence of abiotic selection, $a>0$ is the strength of stabilizing selection around the phenotypic optimum $\theta\in\mathbb{R}$, $c>0$ captures the sensitivity of fitness to intraspecific competition and we have set $\kappa(x,y)=1$. This exemplary fitness function has a few convenient properties that we breifly take note of. First, the effect of competition induces a local carrying capacity on the population, leading to a finite equilibrium abundance over bounded subsets of $\mathbb{R}$. Second, abiotic selection prevents the abundance density from diffusing too far from the abiotic optimum, leading to a finite equilibrial abundance across all of $\mathbb{R}$, $\lim_{t\to\infty}N(t)=\tfrac{1}{c}(r-\tfrac{1}{2}\sqrt{a\mu})$, finite equilibrial mean trait $\lim_{t\to\infty}\bar x(t)=\theta$ and finite equilibrial phenotypic variance $\lim_{t\to\infty}\sigma^2(t)=\sqrt{\mu/a}$, so long as $|\bar x(0)|<+\infty$, $\sigma^2(0),N(0)>0$ and $r\geq\sqrt{a\mu}/2$. We prove these statements in SM \S\ref{equilib}. By replacing $\kappa(x,y)=1$ with a particular Gaussian function, we will find in \S\ref{coev} and SM \S\ref{diffuse} this fitness function becomes equivalent to a fitness function derived from niche theory that we use to model coevolution driven by resource competition.
+where $r\in\mathbb{R}$ is the intrinsic growth rate in the absence of abiotic selection, $a>0$ is the strength of stabilizing selection around the phenotypic optimum $\theta\in\mathbb{R}$, $c>0$ captures the sensitivity of fitness to intraspecific competition and we have set $\kappa(x,y)=1$. This exemplary fitness function has a few convenient properties that we breifly take note of. First, the effect of competition induces a local carrying capacity on the population, leading to a finite equilibrium abundance over bounded subsets of $\mathbb{R}$. Second, abiotic selection prevents the abundance density from diffusing too far from the abiotic optimum, leading to a finite equilibrial abundance across all of $\mathbb{R}$, $\lim_{t\to\infty}N(t)=\tfrac{1}{c}(r-\tfrac{1}{2}\sqrt{a\mu})$, finite equilibrial mean trait $\lim_{t\to\infty}\bar x(t)=\theta$ and finite equilibrial phenotypic variance $\lim_{t\to\infty}\sigma^2(t)=\sqrt{\mu/a}$, so long as $\bar x(0)\in\mathbb{R}$, $\sigma^2(0),N(0)\in(0,+\infty)$ and $r>\sqrt{a\mu}/2$. We prove these statements in SM \S\ref{equilib}. By replacing $\kappa(x,y)=1$ with a particular Gaussian function, we will find in \S\ref{coev} and SM \S\ref{diffuse} this fitness function becomes equivalent to a fitness function derived from niche theory that we use to model coevolution driven by resource competition.
 
 To derive a replicator-mutator equation from equation (\ref{eq1}), we employ the chain rule from calculus. Writing $\bar m(t)=\int_{-\infty}^{+\infty}m(\nu,x)p(x,t)dx$ for the mean fitness, we have
 
@@ -1186,7 +1186,7 @@ Throughout this supplement, we set use dot notation for time derivatives so that
 
 ## Sufficient conditions for finite mean, variance and total abundance in the deterministic case \label{finite}
 
-Recall that $m(\nu,x)$ is shorthand for $m(\nu(x,t),x)$. That is, $m:[0,+\infty)\times\mathbb{R}\to\mathbb{R}$. Following our assumptions of the main text, we have that $m(y,x)$ is differentiable with respect to both $x$ and $y$ and there exists $r\in\mathbb{R}$ such that $m(y,x)\leq r$ across all $y\geq0$ and $x\in\mathbb{R}$. As in the main text, we also assume the initial condition $\nu(x,0)$ satisfies
+Recall that $m(\nu,x)$ is shorthand for $m(K(\nu)(x,t),x)$. That is, $m:[0,+\infty)\times\mathbb{R}\to\mathbb{R}$. Following our assumptions of the main text, we have that $m(h,x)$ is differentiable with respect to both $x$ and $h$ and there exists $r\in\mathbb{R}$ such that $m(h,x)\leq r$ across all $h\geq0$ and $x\in\mathbb{R}$. As in the main text, we also assume the initial condition $\nu(x,0)$ satisfies
 \begin{equation}
 N(0)=\int_{\mathbb{R}}\nu(x,0)dx<+\infty,
 \end{equation}
@@ -1229,7 +1229,7 @@ Hence, $|\bar x_r(t)|,\sigma_r^2(t)<+\infty$ for all $t\geq0$. For the sake of c
 \begin{equation}
 \nu(x,t)-\nu(x,0)=\int_0^tm(\nu,x)\nu(x,s)+\frac{\mu}{2}\Delta\nu(x,s)ds>\int_0^tr\nu_r(x,s)+\frac{\mu}{2}\Delta\nu_r(x,s)ds=\nu_r(x,t)-\nu(x,0)
 \end{equation}
-which implies there exists $y\geq0$ and $x\in\mathbb{R}$ such that $m(y,x)>r$. But this contradicts our assumption $m(y,x)\leq r$ for all $y\geq0$ and $x\in\mathbb{R}$. So we have $\nu(x,t)\leq\nu_r(x,t)$ for each $x\in\mathbb{R}$ and $t\geq0$. This implies that $N(t)=\int_\mathbb{R}\nu(x,t)dx<+\infty$,
+which implies there exists $h\geq0$ and $x\in\mathbb{R}$ such that $m(h,x)>r$. But this contradicts our assumption $m(h,x)\leq r$ for all $h\geq0$ and $x\in\mathbb{R}$. So we have $\nu(x,t)\leq\nu_r(x,t)$ for each $x\in\mathbb{R}$ and $t\geq0$. This implies that $N(t)=\int_\mathbb{R}\nu(x,t)dx<+\infty$,
 \begin{equation}
 0\leq\int_\mathbb{R}x^2\nu(x,t)dx\leq\int_\mathbb{R}x^2\nu_r(x,t)dx<+\infty
 \end{equation}
@@ -1316,7 +1316,7 @@ Here we set out to show, given appropriate initial conditions, $N_\infty=\lim_{t
 \begin{equation}\label{m_log_stab}
 m(\nu,x)=r-\frac{a}{2}(\theta-x)^2-c\int_\mathbb{R}\nu(y,t)dy
 \end{equation}
-for $\theta\in\mathbb{R}$, $\mu\geq0$, $a,c>0$ and $r\geq\tfrac{1}{2}\sqrt{\mu a}$. Set $\nu_\infty(x)=\lim_{t\to\infty}\nu(x,t)$ and $p_\infty(x)=\nu_\infty(x)/N_\infty$, when these quantities exist. The mean fitness can be calculated as
+for $\theta\in\mathbb{R}$, $\mu\geq0$, $a,c>0$ and $r>\tfrac{1}{2}\sqrt{\mu a}$. When it exists, set $\nu_\infty(x)=\lim_{t\to\infty}\nu(x,t)$. The mean fitness can be calculated as
 \begin{equation}
 \bar m(t)=r-\frac{a}{2}((\theta-\bar x(t))^2-\sigma^2(t))-cN(t), \ \ \forall \ \ t\geq0.
 \end{equation}
@@ -1332,7 +1332,7 @@ which has the solution
 \begin{equation}
 \nu_\infty(x)=\frac{N_\infty}{\sqrt{2\pi}}\left(\frac{a}{\mu}\right)^{\frac{1}{4}}\exp\left(-\frac{(\theta-x)^2}{2\sqrt{\mu/a}}\right).
 \end{equation}
-From this expression we infer $\bar x_\infty=\theta$ and $\sigma^2_\infty=\sqrt{\mu/a}$. Hence $N_\infty=\frac{1}{c}\left(r-\frac{1}{2}\sqrt{a\mu}\right)$. This holds for any initial $\nu(\cdot,0)\in L^1(\mathbb{R})$ such that $\bar x(0)\in\mathbb{R}, \ \sigma^2(0),N(0)>0$.
+From this expression we infer $\bar x_\infty=\theta$ and $\sigma^2_\infty=\sqrt{\mu/a}$. Hence $N_\infty=\frac{1}{c}\left(r-\frac{1}{2}\sqrt{a\mu}\right)$. This holds for any initial $\nu(\cdot,0)\in L^1(\mathbb{R})$ such that $\bar x(0)\in\mathbb{R}, \ \sigma^2(0),N(0)\in(0,+\infty)$.
 
 ## Deterministic dynamics of $\sigma^2(t)$ \label{var_deriv}
 
