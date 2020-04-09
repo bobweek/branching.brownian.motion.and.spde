@@ -1184,9 +1184,50 @@ Although top-down approaches to community ecology, such as the Maximum Entropy T
 
 Throughout this supplement, we set use dot notation for time derivatives so that $\dot f(x,t)=\frac{\partial }{\partial t}f(x,t)$ and set $\Delta=\sum_{i=1}^d\frac{\partial^2}{\partial x_i^2}$ the Laplace operator on $\mathbb{R}^d$, except in \S\ref{caC} where $\Delta$ represents a random variable.
 
+## Existence, uniqueness and regularity of solution to deterministic PDE (\ref{eq1}) of the main text \label{regular}
+
+Here we show that solutions to the PDE described in the main text exist, are unique and are twice continuously differentiable with respect to space. Our approach is an adaptation of that taken in chapter 9 \S2.2 of Volpert [-@Volpert2014].
+
+Recall that the PDE we consider is of the form
+\begin{equation}\label{PDE_supp}
+\begin{matrix}
+\dot\nu(x,t)=m(\nu,x)\nu(x,t)+\frac{\mu}{2}\Delta\nu(x,t), \\
+\\
+\nu(x,0)=u(x),
+\end{matrix}
+\end{equation}
+where $m(\nu,x)\leq r\in\mathbb{R}$ is shorthand for $m((K\nu)(x,t),x)$ and $(K\nu)(x,t)=\int_\mathbb{R}\kappa(x,y)\nu(y,t)dy$ for some non-negative, bounded $\kappa$. Denoting $C(\mathbb{R})$ the set of continuous functions on $\mathbb{R}$ and $L^1(\mathbb{R})$ the Lebesgue space of integrable functions on $\mathbb{R}$ (ie, the set of functions $f:\mathbb{R}\to\mathbb{R}$ that satisfy $\|f\|_1=\int_\mathbb{R}|f(x)|dx<+\infty$ under the equivalence relation $f=g$ iff $\|f-g\|_1=0$), we assume a continuous and integrable initial condition $\nu(\cdot,0)=u\in L^1(\mathbb{R})\cap C(\mathbb{R})$. We now prove the existence and uniqueness of solutions to this Cauchy problem.
+
+Set 
+\begin{equation}
+\Phi(x,t)=\frac{\exp\left(-x^2/2\mu t\right)}{\sqrt{2\pi\mu t}}.
+\end{equation}
+Then the semigroup $\{S(t)\}_{t\geq0}$ given by 
+\begin{equation}
+S(t)v=\left\{\begin{matrix}
+\int_0^t\frac{\mu}{2}\Delta\nu(x,s)ds=\int_\mathbb{R}\Phi(x-y,t)v(y)dy, & t>0 \\
+ & \\
+v, &t=0
+\end{matrix}\right.
+\end{equation}
+for all $v\in L^\infty(\mathbb{R})$ satisfies $\|S(t)v\|_1=\|v\|_1$ for all $t\geq0$ and $v\in L^1(\mathbb{R})$. We also define the operator
+\begin{equation}
+(Fv)(x)=m\left(\int_\mathbb{R}\kappa(x,y)v(y)dy,x\right)v(x), \ \ \forall \ \ v\in L^1(\mathbb{R}).
+\end{equation}
+Thus $\|Fv\|_1\leq |r| \ \|v\|_1$ for all $v\in L^1(\mathbb{R})$ which implies $F$ is Lipschitz continuous. For $T>0$ set $L^{\infty,1}([0,T]\times\mathbb{R})$ as the set of functions $\nu:[0,T]\to L^1(\mathbb{R})$ that satisfy $\|\nu\|_{1,T}=\sup_{t\in[0,T]}\|\nu(t)\|_1<+\infty$ and consider the operator $G$ defined on $L^{\infty,1}([0,T]\times\mathbb{R})$ for fixed $u\in L^1(\mathbb{R})$ by
+\begin{equation}
+(Gv)(t)=S(t)u+\int_0^tS(t-s)(Fv(s))ds \ \ \forall \ \ t\in[0,T].
+\end{equation}
+Then for any $t\in[0,T]$ and $\nu_1,\nu_2\in L^{\infty,1}([0,T]\times\mathbb{R})$,
+
+\begin{multline}
+\|G\nu_1-G\nu_2\|_{1,T}=\sup_{t\in[0,T]}\left\|\int_0^tS(t-s)(F\nu_1(s)-F\nu_2(s))ds\right\|_1 \\ \leq \sup_{t\in[0,T]}t|r|\|\nu_1(t)-\nu_2(t)\|_1\leq T|r|\|\nu_1-\nu_2\|_{1,T}.
+\end{multline}
+Hence, when $T<\frac{1}{|r|}$ the operator $G$ is a contraction operator. In this case we apply Banach's fixed point theorem to demonstrate $G$ has a unique fixed point. That is, there exists a unique $\nu\in L^{\infty,1}([0,T]\times\mathbb{R})$ such that $G\nu=\nu$. Then, for $\nu=\nu(x,t)$ and considering $\nu(t)$ the function $x\to\nu(x,t)$, we have by definition $\nu$ is the mild solution of PDE (\ref{PDE_supp}) with initial condition $\nu(0)=u$. To extend this to arbitrarily large $T$ we take a similar approach as Evans [-@lawrenceevans2010] and choose $T_1<\frac{1}{|r|}$ and apply the above argument to the interval $[T_1,2T_1]$. Repeating this task a finite number of times shows $\nu$ is the mild solution of PDE (\ref{PDE_supp}) with initial condition $\nu(0)=u$ for arbitrarily large $T>0$. Applying lemma 3.3.2 of Henry [-@Henry1981] we have that the mild solution $\nu$ is in fact a strong solution to the Cauchy problem defined by PDE (\ref{PDE_supp}) with initial condition $\nu(0)=u$ for $t\in[0,T]$. In particular, following example 3.6 of Henry [-@Henry1981], this implies that $\nu(t)\in D(\Delta)$ for each $t\in(0,T)$ where $D(\Delta)=W^{2,2}(\mathbb{R})$ is the Sobolov space of square integrable functions with weak derivatives at least of order $2$. Then, according to a Sobolov embedding theorem [@Henry1981], we have $D(\Delta)\subset C^2(\mathbb{R})$ and hence solutions to the Cauchy problem (\ref{PDE_supp}) are twice continuously differentiable in their spatial parameter.
+
 ## Sufficient conditions for finite mean, variance and total abundance in the deterministic case \label{finite}
 
-Recall that $m(\nu,x)$ is shorthand for $m\big((K\nu)(x,t),x\big)$. That is, $m:[0,+\infty)\times\mathbb{R}\to\mathbb{R}$. Following our assumptions of the main text, we have that $m(h,x)$ is differentiable with respect to both $x$ and $h$ and there exists $r\in\mathbb{R}$ such that $m(h,x)\leq r$ across all $h\geq0$ and $x\in\mathbb{R}$. As in the main text, we also assume the initial condition $\nu(x,0)$ satisfies
+Recall that $m(\nu,x)$ is shorthand for $m\big((K\nu)(x,t),x\big)$. That is, $m:[0,+\infty)\times\mathbb{R}\to\mathbb{R}$. Following our assumptions of the main text, we have that $m(h,x)$ is differentiable with respect to both $x$ and $h$ and there exists $r\in\mathbb{R}$ such that $m(h,x)\leq r$ across all $h\geq0$ and $x\in\mathbb{R}$. As in the main text, we also assume the initial condition $\nu(x,0)$ is continuous in $x$ and satisfies
 \begin{equation}
 N(0)=\int_{\mathbb{R}}\nu(x,0)dx<+\infty,
 \end{equation}
@@ -1201,7 +1242,7 @@ where $p(x,0)=\nu(x,0)/N(0)$, and we consider the PDE
 \dot\nu(x,t)=m(\nu,x)\nu(x,t)+\frac{\mu}{2}\Delta\nu(x,t).
 \end{equation}
 
-Replacing $m$ with it's upper bound $r\in\mathbb{R}$, equation (\ref{PDE_SM}) reduces to a simple parabolic equation that can be solved using standard techniques [@stanleyfarlow1993]. In particular, when $m(\nu,x)\equiv0$ denote the solution to (\ref{PDE_SM}) by $\nu_0(x,t)$. Then, denoting
+In SM \S\ref{regular} we have shown PDE (\ref{PDE_SM}) with an integrable initial condition has a classical solution. Replacing $m$ with it's upper bound $r\in\mathbb{R}$, equation (\ref{PDE_SM}) reduces to a simple parabolic equation that can be solved using standard techniques [@stanleyfarlow1993]. In particular, when $m(\nu,x)\equiv0$ denote the solution to (\ref{PDE_SM}) by $\nu_0(x,t)$. Then, denoting
 \begin{equation}
 \Phi(x,t)=\frac{\exp\left(-x^2/2\mu t\right)}{\sqrt{2\pi\mu t}},
 \end{equation}
@@ -1238,58 +1279,6 @@ and in particular
 0\leq\sigma^2(t)+\bar x^2(t)=\frac{1}{N(t)}\int_\mathbb{R}x^2\nu(x,t)dx<+\infty
 \end{equation}
 for each $t\geq0$.
-
-## Regularity of deterministic solution \label{regular}
-
-Here we show that solutions to the PDE described in the main text are twice continuously differentiable with respect to space and differentiable with respect to time. Our approach is an adaptation of that taken by Volpert [-@Volpert2014].
-
-Recall that the PDE we consider is of the form
-\begin{equation}\label{PDE_supp}
-\dot\nu(x,t)=m(\nu,x)\nu(x,t)+\frac{\mu}{2}\Delta\nu(x,t),
-\end{equation}
-where $m(\nu,x)$ bounded above by $r\in\mathbb{R}$ is shorthand for $m((K\nu)(x,t),x)$ and $(K\nu)(x,t)=\int_\mathbb{R}\kappa(x,y)\nu(y,t)dy$ for some non-negative, bounded $\kappa$. Denoting $L^1(\mathbb{R})$ the Lebesgue space of integrable functions on $\mathbb{R}$ (ie, the set of functions $f:\mathbb{R}\to\mathbb{R}$ that satisfy $\|f\|_1=\int_\mathbb{R}|f(x)|dx<+\infty$ under the equivalence relation $f=g$ iff $\|f-g\|_1=0$), we assume $\nu(\cdot,0)\in L^1(\mathbb{R})$. Under these assumptions, we have already proved in SM \S\ref{finite} that $\nu(\cdot,t)\in L^1(\mathbb{R})$ for all $t\geq0$. Before proving the regularity of $\nu(x,t)$, we review the approach taken by Volpert [-@Volpert2014].
-
-__Volperts approach__
-
-In chapter 9 \S2.2 of Volpert [-@Volpert2014] complimentary conditions are assumed where $\kappa(x,y)=\varphi(x-y)$ for some integrable function $\varphi$ and initial condition $\nu(\cdot,0)\in L^\infty(\mathbb{R})$, where $L^\infty(\mathbb{R})$ is the Lebesgue space of bounded functions on $\mathbb{R}$ (ie, the set of functions $f:\mathbb{R}\to\mathbb{R}$ satisfying $\|f\|_\infty=\sup_{x\in\mathbb{R}}|f(x)|<+\infty$ under the equivalence relation $f=g$ iff $\|f-g\|_\infty=0$). Instead of the growth term $m(\nu,x)\nu(x,t)$ of PDE (\ref{PDE_supp}), Volpert worked with $f(\nu(x,t),(K\nu)(x,t))$ for some function $f:\mathbb{R}^2\to\mathbb{R}$ differentiable with respect to both arguments and satisfying, for some $q\geq0$,
-\begin{equation}
-f(x,y)\leq q(1+|x|+|y|), \ \forall \ x,y\in\mathbb{R}.
-\end{equation}
-Under these conditions, Volpert used semigroup theory to prove the solution $\nu(x,t)$ takes values in $L^\infty(\mathbb{R})$ for all $t\geq0$ and is differentiable with respect to time and twice continuously differentiable with respect to space. In particular, defining $\nu(t)$ as the function $x\to\nu(x,t)$ and keeping $\Phi(x,t)$ as defined in SM \S\ref{finite}, Volpert states the semigroup $\{S(t)\}_{t\geq0}$ given by 
-\begin{equation}
-S(t)\nu(0)=\int_0^t\frac{\mu}{2}\Delta\nu(x,s)ds=\int_\mathbb{R}\Phi(x-y,t)\nu(y,0)dy, \ \ \forall \ \ t\geq0, \ \nu(0)\in L^\infty(\mathbb{R})
-\end{equation}
-satisfies $\|S(t)\nu(0)\|_\infty\leq\|\nu(0)\|_\infty$ for all $t\geq0$ and $\nu(0)\in L^\infty(\mathbb{R})$. By setting
-\begin{equation}
-F(v)=f\left(v(x),\int_\mathbb{R}\varphi(x-y)v(y)dy\right), \ \ \forall \ \ v\in L^\infty(\mathbb{R}),
-\end{equation}
-Volpert notes that $F$ is locally Lipschitz continuous on $L^\infty(\mathbb{R})$ and in particular $\|F(v)\|_\infty\leq q\|v\|_\infty$. Hence, under Volperts conditions, solutions to PDE (\ref{PDE_supp}), given they exist, can be written as
-\begin{equation}\label{volp_sol}
-\nu(t)=S(t)\nu(0)+\int_0^tS(t-s)F(\nu(s))ds \ \ \forall \ \ t\geq0, \ \nu(0)\in L^\infty(\mathbb{R}).
-\end{equation}
-Volpert interprets the right-hand-side of equation (\ref{volp_sol}) as an operator $T$ acting on functions $v\in L^\infty(\mathbb{R}\times[0,\tau])$ with $\tau>0$. The space $L^\infty(\mathbb{R}\times[0,\tau])$ is given the norm $\|v\|_\infty^\infty=\max_{t\in[0,\tau]}\|v(t)\|_\infty$. The operator $T$ is claimed to have a single fixed point for sufficiently small $\tau$, which means that there exists exactly one function $v$ such that $Tv=v$. That is, there exists $v\in L^\infty(\mathbb{R}\times[0,\tau])$ such that
-\begin{equation}
-v(t)=(Tv)(t)=S(t)v(0)+\int_0^tS(t-s)(Fv)(s)ds\in L^\infty(\mathbb{R}) \ \ \forall \ \ t\in[0,\tau].
-\end{equation}
-Volpert merely states this is easy to conclude and the regularity conditions follow from it. We expand on why this is so. 
-
-Combining the results $\|S(t)v(s)\|_\infty\leq\|v(s)\|_\infty$, $\|Fv(s)\|_\infty\leq q\|v(s)\|_\infty$ for all $t\geq0$, $s\in[0,\tau]$ and $v\in L^\infty(\mathbb{R}\times[0,\tau])$ with Minkowski's inequality, we have
-\begin{equation}
-\|Tv\|_\infty^\infty\leq\|v\|_\infty^\infty+q\tau\|v\|_\infty^\infty=(1+q\tau)\|v\|_\infty^\infty.
-\end{equation}
-Hence, for each $\tau>0$, $T$ is a contraction mapping on $L^\infty(\mathbb{R}\times[0,\tau])$. Banach's fixed point theorem therefore implies $T$ has exactly one fixed point. This holds for all $\tau>0$ which implies the existence and uniqueness of solutions to PDE (\ref{PDE_supp}) under Volpert's conditions. Hence, the solutions are differentiable with respect to time. Since $S(t)v$ is twice differentiable with respect to space for all $t\geq0$ and since $f$ is differentiable with respect to both arguments, $\int_0^tS(t-s)(Fv)(s)ds$ is twice differentiable with respect to space. Hence, solutions to PDE (\ref{PDE_supp}) are twice differentiable with respect to space.
-
-__Adapting Volperts approach to our context__
-
-To adapt Volperts approach to our situation, note that $\|S(t)\nu(0)\|_1=\|\nu(0)\|_1$ for all $\nu(0)\in L^1(\mathbb{R})$ and, setting
-\begin{equation}
-(Fv)(x)=m\left(\int_\mathbb{R}\kappa(x,y)v(y)dy,x\right)v(x), \ \ \forall \ \ v\in L^1(\mathbb{R}),
-\end{equation}
-we have $\|Fv\|_1\leq r\|v\|_1$ for all $v\in L^1(\mathbb{R})$. Hence, when they exist, solutions to PDE (\ref{PDE_supp}) under our assumptions can be written as
-\begin{equation}
-\nu(t)=S(t)\nu(0)+\int_0^tS(t-s)(F\nu(s))ds \ \ \forall \ \ t\geq0, \ \nu(0)\in L^1(\mathbb{R}).
-\end{equation}
-Then, using the same arguments employed by Volpert [-@Volpert2014], we conclude solutions to PDE (\ref{PDE_supp}) under our conditions exist, are unique and exhibit the desired regularity conditions.
 
 ## The relation between diffusion and convolution with a Gaussian kernel \label{diffconvequiv}
 
