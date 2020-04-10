@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.4.9)  9 APR 2020 18:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.4.9)  9 APR 2020 21:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -459,43 +459,43 @@ File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 
 {/home/bob/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 2
-45.
+44.
 (/home/bob/.TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
-45.
+44.
 (/home/bob/.TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-245.
+244.
 (/home/bob/.TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-245.
+244.
 (/home/bob/.TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 245.
+(Font)              <10> on input line 244.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 245.
+(Font)              <7> on input line 244.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 245.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 245
+(Font)              <5> on input line 244.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 244
 .
 (/home/bob/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 245
+LaTeX Font Info:    Trying to load font information for U+msb on input line 244
 .
 (/home/bob/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for U+rsfs on input line 24
-5.
+4.
 (/home/bob/.TinyTeX/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 ) [2] [3] [4] [5] [6]
@@ -678,7 +678,7 @@ exmf-dist/fonts/type1/public/lm/lmtt10.pfb></home/bob/.TinyTeX/texmf-dist/fonts
 /type1/public/amsfonts/symbols/msbm10.pfb></home/bob/.TinyTeX/texmf-dist/fonts/
 type1/public/amsfonts/symbols/msbm7.pfb></home/bob/.TinyTeX/texmf-dist/fonts/ty
 pe1/public/rsfs/rsfs10.pfb>
-Output written on draft.pdf (53 pages, 1916692 bytes).
+Output written on draft.pdf (53 pages, 1916619 bytes).
 PDF statistics:
  1125 PDF objects out of 1200 (max. 8388607)
  1019 compressed objects within 11 object streams
