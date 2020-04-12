@@ -73,7 +73,7 @@ N(0)=\int_{-\infty}^{+\infty}\nu(x,0)dx<+\infty,
 \begin{equation}
 \sigma^2(0)=\int_{-\infty}^{+\infty}(x-\bar x(0))^2p(x,0)dx<+\infty,
 \end{equation}
-where $\bar x(t)$ and $\sigma^2(t)$ are respectively the mean trait and phenotypic variance at time $t\geq0$. Second, we assume selection is determined by the growth rate $m(h,x)$ that is differentiable with respect to both arguments and is bounded above by some $r\in\mathbb{R}$ for all $x\in\mathbb{R}$ and $h\geq0$. We denote by $K$ an operator that takes functions such as $\nu(x,t)$ as its argument and returns other functions that may still depend on the spatial variable $x$ and the temporal variable $t$. For our application we will be focused on operators $K$ that can be written as $(K\nu)(x,t)=\int_{-\infty}^{+\infty}\kappa(x,y)\nu(y,t)dy$ for some non-negative and bounded bivariate function $\kappa$. We set $h=(K\nu)(x,t)$ to account for nonlocal effects of the abundance density $\nu(x,t)$ on the fitness of individuals with trait value $x$ [@Volpert2014]. An example of a nonlocal effect comes from competition for a common resource among all individuals in a population regardless of their trait value. In this case all individuals in the population effect each others fitness' even though they may exhibit diverse trait values. The term nonlocal comes from interpreting the trait value as spatial location. From here on we abbreviate $m(h,x)=m\big((K\nu)(x,t),x\big)$ to just $m(\nu,x)$. Third, we assume mutation is captured by diffusion with coefficient $\frac{\mu}{2}$. With these technicalities addressed we model the demographic dynamics of a population and the dynamics of a quantitative character simultaneously by the PDE
+where $\bar x(t)$ and $\sigma^2(t)$ are respectively the mean trait and phenotypic variance at time $t\geq0$. Second, we assume selection is determined by the growth rate $m(h,x)$ that is differentiable with respect to both arguments and is bounded above by some $r\in\mathbb{R}$ for all $x\in\mathbb{R}$ and $h\geq0$. We denote by $K$ an operator that takes functions such as $\nu(x,t)$ as its argument and returns other functions that may still depend on the spatial variable $x$ and the temporal variable $t$. For our application we will be focused on operators $K$ that can be written as $(K\nu)(x,t)=\int_{-\infty}^{+\infty}\kappa(x-y)\nu(y,t)dy$ for some non-negative and bounded function $\kappa$. We set $h=(K\nu)(x,t)$ to account for nonlocal effects of the abundance density $\nu(x,t)$ on the fitness of individuals with trait value $x$ [@Volpert2014]. An example of a nonlocal effect comes from competition for a common resource among all individuals in a population regardless of their trait value. In this case all individuals in the population effect each others fitness' even though they may exhibit diverse trait values. The term nonlocal comes from interpreting the trait value as spatial location. From here on we abbreviate $m(h,x)=m\big((K\nu)(x,t),x\big)$ to just $m(\nu,x)$. Third, we assume mutation is captured by diffusion with coefficient $\frac{\mu}{2}$. With these technicalities addressed we model the demographic dynamics of a population and the dynamics of a quantitative character simultaneously by the PDE
 \begin{equation}\label{eq1}
 \frac{\partial}{\partial t}\nu(x,t)=m(\nu,x)\nu(x,t)+\frac{\mu}{2}\frac{\partial^2}{\partial x^2}\nu(x,t)
 \end{equation}
@@ -81,7 +81,7 @@ with the initial condition $\nu(x,0)$ described above. This PDE is semilinear du
 \begin{equation}\label{special_m}
 m(\nu,x)=r-\frac{a}{2}(\theta-x)^2-c\int_{-\infty}^{+\infty}\nu(y,t)dy
 \end{equation}
-where $r\in\mathbb{R}$ is the intrinsic growth rate in the absence of abiotic stabilizing selection, $a>0$ is the strength of abiotic stabilizing selection around the phenotypic optimum $\theta\in\mathbb{R}$, $c>0$ captures the sensitivity of fitness to intraspecific competition and we have set $\kappa(x,y)=1$ so that competitive interactions cause the same reduction in fitness regardless of trait value. This exemplary fitness function has a few convenient properties that we breifly take note of. First, the effect of competition induces a local carrying capacity on the population, leading to a finite equilibrium abundance over bounded subsets of $\mathbb{R}$. Second, abiotic selection prevents the abundance density from diffusing too far from the abiotic optimum, leading to a finite equilibrial abundance across all of $\mathbb{R}$, $\lim_{t\to\infty}N(t)=\tfrac{1}{c}(r-\tfrac{1}{2}\sqrt{a\mu})$, finite equilibrial mean trait $\lim_{t\to\infty}\bar x(t)=\theta$ and finite equilibrial phenotypic variance $\lim_{t\to\infty}\sigma^2(t)=\sqrt{\frac{\mu}{a}}$, so long as $\bar x(0)\in\mathbb{R}$, $\sigma^2(0)\in[0,+\infty)$, $N(0)\in(0,+\infty)$ and $r>\frac{1}{2}\sqrt{a\mu}>0$. We prove these statements in SM \S\ref{equilib}. Note in particular the coincidence of equilibrial phenotypic variance predicted by this model and that predicted by the classic Gaussian allelic model of quantitative genetics [@Lande1975; @9780471986539; @Johnson2005]. By replacing $\kappa(x,y)=1$ in expression (\ref{special_m}) with a particular Gaussian function, we will find in \S\ref{coev} and SM \S\ref{diffuse} this fitness function becomes equivalent to a fitness function derived from niche theory that we use to model coevolution driven by resource competition.
+where $r\in\mathbb{R}$ is the intrinsic growth rate in the absence of abiotic stabilizing selection, $a>0$ is the strength of abiotic stabilizing selection around the phenotypic optimum $\theta\in\mathbb{R}$, $c>0$ captures the sensitivity of fitness to intraspecific competition and we have set $\kappa(x-y)=1$ so that competitive interactions cause the same reduction in fitness regardless of trait value. This exemplary fitness function has a few convenient properties that we breifly take note of. First, the effect of competition induces a local carrying capacity on the population, leading to a finite equilibrium abundance over bounded subsets of $\mathbb{R}$. Second, abiotic selection prevents the abundance density from diffusing too far from the abiotic optimum, leading to a finite equilibrial abundance across all of $\mathbb{R}$, $\lim_{t\to\infty}N(t)=\tfrac{1}{c}(r-\tfrac{1}{2}\sqrt{a\mu})$, finite equilibrial mean trait $\lim_{t\to\infty}\bar x(t)=\theta$ and finite equilibrial phenotypic variance $\lim_{t\to\infty}\sigma^2(t)=\sqrt{\frac{\mu}{a}}$, so long as $\bar x(0)\in\mathbb{R}$, $\sigma^2(0)\in[0,+\infty)$, $N(0)\in(0,+\infty)$ and $r>\frac{1}{2}\sqrt{a\mu}>0$. We prove these statements in SM \S\ref{equilib}. Note in particular the coincidence of equilibrial phenotypic variance predicted by this model and that predicted by the classic Gaussian allelic model of quantitative genetics [@Lande1975; @9780471986539; @Johnson2005]. By replacing $\kappa(x-y)=1$ in expression (\ref{special_m}) with a particular Gaussian function, we will find in \S\ref{coev} and SM \S\ref{diffuse} this fitness function becomes equivalent to a fitness function derived from niche theory that we use to model coevolution driven by resource competition.
 
 To derive a replicator-mutator equation from equation (\ref{eq1}), we employ the chain rule from calculus. Writing $\bar m(t)=\int_{-\infty}^{+\infty}m(\nu,x)p(x,t)dx$ for the mean fitness, we have
 
@@ -465,12 +465,12 @@ The effect of abiotic stabilizing selection on the fitness for an individual of 
 To determine the potential for competition between individuals with niche locations $x_i$ and $x_j$, belonging to species $i$ and $j$ respectively, we compute the niche overlap
 
 \begin{equation}
-\mathcal O_{ij}(x_i,x_j)=\int_{-\infty}^{+\infty}u_i(\zeta,x_i)u_j(\zeta,x_j)d\zeta=\frac{U_iU_j}{\sqrt{2\pi(w_i+w_j)}}\exp\left(-\frac{(x_i-x_j)^2}{2(w_i+w_j)}\right).
+\mathcal O_{ij}(x_i-x_j)=\int_{-\infty}^{+\infty}u_i(\zeta,x_i)u_j(\zeta,x_j)d\zeta=\frac{U_iU_j}{\sqrt{2\pi(w_i+w_j)}}\exp\left(-\frac{(x_i-x_j)^2}{2(w_i+w_j)}\right).
 \end{equation}
 
 A notable criticism of using niche overlap to measure the intensity of competition points to cases where populations competiting on multiple niche axes exhibit overlap on at least one of the axes, but no overall niche overlap [@Holt1987]. Thus niche overlap on lower-dimensional projections of some multivariate niche space does not imply the populations compete. To illustrate with a simple example, consider two populations competing for space on the plane $\mathbb{R}^2$. If the spatial distributions of the two populations overlap, then they will overlap on both spatial axes. However, if the populations do not overlap on at least one of the spatial axes, they will have no overall spatial overlap. Furthermore, even if the species overlap on both spatial axes, they need not have any overall spatial overlap. This final result corresponds to the fact that components of niche space do not necessarily interact multiplicatively to determine the consequences for the intensity of competition. In another component of Holt's [-@Holt1987] critique, an argument is made for the potential of competition occuring without any overlap in niche space. However, this argument is based on the practical difficulty of identifying every resource axis populations are competing on and how these axes interact to determine fitness consequences. Our model avoids these caveats by assuming competition only occurs along a single dimensional resource gradient. 
 
-To map the degree of niche overlap to fitness, we assume competition between individuals with niche locations $x_i$ and $x_j$ additively decreases the Malthusian fitness for the individual in species $i$ by $c_i\mathcal{O}_{ij}(x_i,x_j)$ for some $c_i\geq0$. We refer to $c_i$ as the sensitivity to competition for species $i$. The term $c_i\mathcal{O}_{ij}(x_i,x_j)$ coincides with a special case of a term used to capture competition in Dawson's geostochastic logistic model, an SPDE model developed to study the combined effects of demographic stochasticity, spatial dispersion and locally finite carrying capacity [@Dawson1978]. In relation to the example fitness function discussed in \S\ref{deterministic}, consider $\kappa(x_i,x_j)=\mathcal{O}_{ij}(x_i,x_j)$. In SM \S\ref{diffuse} we combine our treatment of resource competition with equations (\ref{N}), (\ref{xbarfinal}) and (\ref{Gfinal}) to find
+To map the degree of niche overlap to fitness, we assume competition between individuals with niche locations $x_i$ and $x_j$ additively decreases the Malthusian fitness for the individual in species $i$ by $c_i\mathcal{O}_{ij}(x_i-x_j)$ for some $c_i\geq0$. We refer to $c_i$ as the sensitivity to competition for species $i$. The term $c_i\mathcal{O}_{ij}(x_i-x_j)$ coincides with a special case of a term used to capture competition in Dawson's geostochastic logistic model, an SPDE model developed to study the combined effects of demographic stochasticity, spatial dispersion and locally finite carrying capacity [@Dawson1978]. In relation to the example fitness function discussed in \S\ref{deterministic}, consider $\kappa(x_i-x_j)=\mathcal{O}_{ij}(x_i-x_j)$. In SM \S\ref{diffuse} we combine our treatment of resource competition with equations (\ref{N}), (\ref{xbarfinal}) and (\ref{Gfinal}) to find
 
 \begin{subequations}\label{comm_dynamics}
 \begin{multline}\label{N_comm}
@@ -1196,7 +1196,7 @@ Recall that the PDE we consider is of the form
 \nu(x,0)=u(x),
 \end{matrix}
 \end{equation}
-where $m(\nu,x)\leq r\in\mathbb{R}$ is shorthand for $m((K\nu)(x,t),x)$ and $(K\nu)(x,t)=\int_\mathbb{R}\kappa(x,y)\nu(y,t)dy$ for some non-negative, bounded $\kappa$. Denoting $C(\mathbb{R})$ the set of continuous functions on $\mathbb{R}$ and $L^1(\mathbb{R})$ the Lebesgue space of integrable functions on $\mathbb{R}$ (ie, the set of functions $f:\mathbb{R}\to\mathbb{R}$ that satisfy $\|f\|_1=\int_\mathbb{R}|f(x)|dx<+\infty$ under the equivalence relation $f=g$ iff $\|f-g\|_1=0$), we assume a continuous and integrable initial condition $\nu(\cdot,0)=u\in L^1(\mathbb{R})\cap C(\mathbb{R})$. We now prove the existence and uniqueness of solutions to this Cauchy problem.
+where $m(\nu,x)\leq r\in\mathbb{R}$ is shorthand for $m((K\nu)(x,t),x)$ and $(K\nu)(x,t)=\int_\mathbb{R}\kappa(x-y)\nu(y,t)dy$ for some non-negative, bounded $\kappa$. Denoting $C(\mathbb{R})$ the set of continuous functions on $\mathbb{R}$ and $L^1(\mathbb{R})$ the Lebesgue space of integrable functions on $\mathbb{R}$ (ie, the set of functions $f:\mathbb{R}\to\mathbb{R}$ that satisfy $\|f\|_1=\int_\mathbb{R}|f(x)|dx<+\infty$ under the equivalence relation $f=g$ iff $\|f-g\|_1=0$), we assume a continuous and integrable initial condition $\nu(\cdot,0)=u\in L^1(\mathbb{R})\cap C(\mathbb{R})$. We now prove the existence and uniqueness of solutions to this Cauchy problem.
 
 Set 
 \begin{equation}
@@ -1212,7 +1212,7 @@ v, &t=0
 \end{equation}
 for all $v\in L^\infty(\mathbb{R})$ satisfies $\|S(t)v\|_1=\|v\|_1$ for all $t\geq0$ and $v\in L^1(\mathbb{R})$. We also define the operator
 \begin{equation}
-(Fv)(x)=m\left(\int_\mathbb{R}\kappa(x,y)v(y)dy,x\right)v(x), \ \ \forall \ \ v\in L^1(\mathbb{R}).
+(Fv)(x)=m\left(\int_\mathbb{R}\kappa(x-y)v(y)dy,x\right)v(x), \ \ \forall \ \ v\in L^1(\mathbb{R}).
 \end{equation}
 Thus $\|Fv\|_1\leq |r| \ \|v\|_1$ for all $v\in L^1(\mathbb{R})$ which implies $F$ is Lipschitz continuous. For $T>0$ set $L^{\infty,1}([0,T]\times\mathbb{R})$ as the set of functions $\nu:[0,T]\to L^1(\mathbb{R})$ that satisfy $\|\nu\|_{1,T}=\sup_{t\in[0,T]}\|\nu(t)\|_1<+\infty$ and consider the operator $G$ defined on $L^{\infty,1}([0,T]\times\mathbb{R})$ for fixed $u\in L^1(\mathbb{R})$ by
 \begin{equation}
@@ -1223,7 +1223,18 @@ Then for any $t\in[0,T]$ and $\nu_1,\nu_2\in L^{\infty,1}([0,T]\times\mathbb{R})
 \begin{multline}
 \|G\nu_1-G\nu_2\|_{1,T}=\sup_{t\in[0,T]}\left\|\int_0^tS(t-s)(F\nu_1(s)-F\nu_2(s))ds\right\|_1 \\ \leq \sup_{t\in[0,T]}t|r|\|\nu_1(t)-\nu_2(t)\|_1\leq T|r|\|\nu_1-\nu_2\|_{1,T}.
 \end{multline}
-Hence, when $T<\frac{1}{|r|}$ the operator $G$ is a contraction operator. In this case we apply Banach's fixed point theorem to demonstrate $G$ has a unique fixed point. That is, there exists a unique $\nu\in L^{\infty,1}([0,T]\times\mathbb{R})$ such that $G\nu=\nu$. Then, for $\nu=\nu(x,t)$ and considering $\nu(t)$ the function $x\to\nu(x,t)$, we have by definition $\nu$ is the mild solution of PDE (\ref{PDE_supp}) with initial condition $\nu(0)=u$. To extend this to arbitrarily large $T$ we take a similar approach as Evans [-@lawrenceevans2010] and choose $T_1<\frac{1}{|r|}$ and apply the above argument to the interval $[T_1,2T_1]$. Repeating this task a finite number of times shows $\nu$ is the mild solution of PDE (\ref{PDE_supp}) with initial condition $\nu(0)=u$ for arbitrarily large $T>0$. Applying lemma 3.3.2 of Henry [-@Henry1981] we have that the mild solution $\nu$ is in fact a strong solution to the Cauchy problem defined by PDE (\ref{PDE_supp}) with initial condition $\nu(0)=u$ for $t\in[0,T]$. In particular, following example 3.6 of Henry [-@Henry1981], this implies that $\nu(t)\in D(\Delta)$ for each $t\in(0,T)$ where $D(\Delta)=W^{2,2}(\mathbb{R})$ is the Sobolov space of square integrable functions with weak derivatives at least of order $2$. Then, according to a Sobolov embedding theorem [@Henry1981], we have $D(\Delta)\subset C^2(\mathbb{R})$ and hence solutions to the Cauchy problem (\ref{PDE_supp}) are twice continuously differentiable in their spatial parameter.
+Hence, when $T<\frac{1}{|r|}$ the operator $G$ is a contraction operator. In this case we apply Banach's fixed point theorem to demonstrate $G$ has a unique fixed point. That is, there exists a unique $\nu\in L^{\infty,1}([0,T]\times\mathbb{R})$ such that $G\nu=\nu$. Then, for $\nu=\nu(x,t)$ and considering $\nu(t)$ the function $x\to\nu(x,t)$, we have by definition $\nu$ is the mild solution of PDE (\ref{PDE_supp}) with initial condition $\nu(0)=u$. To extend this to arbitrarily large $T$ we take a similar approach as Evans [-@lawrenceevans2010] and choose $T_1<\frac{1}{|r|}$ and apply the above argument to the interval $[T_1,2T_1]$. Repeating this task a finite number of times shows $\nu$ is the mild solution of PDE (\ref{PDE_supp}) with initial condition $\nu(0)=u$ for arbitrarily large $T>0$. 
+
+We shift our focus to showing mild solutions $\nu$ to PDE (\ref{PDE_supp}) are twice differentiable in $x$ and hence are classical solutions. Applying lemma 3.3.2 of Henry [-@Henry1981] we have that the mild solution $\nu$ is in fact a strong (but necessarily classical) solution to the Cauchy problem defined by PDE (\ref{PDE_supp}) with initial condition $\nu(0)=u$ for $t\in[0,T]$. In particular, this implies that $\nu(t)\in D(\Delta)$ for each $t\in(0,T)$ where $D(\Delta)=W^{2,1}(\mathbb{R})$ is the Sobolov space of integrable functions with weak derivatives at least of order $2$. Since $\frac{1}{p}\geq\frac{1}{p+1}\geq\frac{1}{p}-2$ for all $p\geq1$, the Sobolov embedding theorem [@Henry1981] implies $D(\Delta)\subset L^p(\mathbb{R})$, the Lebesgue space of $p$-integrable functions on $\mathbb{R}$, for all $p\geq1$. Hence $D(\Delta)\subset W^{2,p}(\mathbb{R})$, the Sobolov space of $p$-integrable functions with weak derivatives at least of order $2$, for all $p\geq1$. 
+
+If $v\in C^{2+\delta}(\mathbb{R})$ for some $\delta>0$, then 
+\begin{equation}
+(Kv)(\cdot)=\int_\mathbb{R}\kappa(\cdot-y)v(y)dy=\int_\mathbb{R}\kappa(y)v(\cdot-y)dy\in C^{2+\delta}(\mathbb{R}),
+\end{equation}
+and, since we assume $m(h,x)$ is continuous in both arguments, $Fv=m(Kv,\cdot)v\in C^\delta$.
+
+
+Why is $F\nu\in C^\delta(\mathbb{R})$ for some $\delta>0$? Why does this imply $\nu(\cdot,t)\in C^{2+\delta}(\mathbb{R})$ for all $t\in(0,T)$? This argument holds for all $T>0$. Hence, solutions to the Cauchy problem (\ref{PDE_supp}) are twice continuously differentiable in their spatial parameter for all $t>0$.
 
 ## Sufficient conditions for finite mean, variance and total abundance in the deterministic case \label{finite}
 
@@ -1823,7 +1834,7 @@ In this section we provide a derivation of our model of diffuse coevolution driv
 The reduction in fitness for an individual of species $i$ caused by competition is captured multiplicatively by $0<C_i\leq1$. Biologically this assumes all competitors affect individuals of a given species equally by consuming the same amount of resources. This is a mean-field interaction since any individual that consumes resources has an effect on the fitness of all other individuals competing for the same resources. Denote by $x_{ij}$ the trait value of the $j$-th individual belonging to species $i$. The set of trait values across all individuals in the community at time $t\geq0$ is written $X=\{x_{ij}\}$. We denote by $\mathscr{B}_{ij}$ a function that maps $X$ to the cumulative effect of all competitive interactions on the fitness of the $j$-th individual in species $i$. Since individuals do not compete with themselves the net multiplicative effects on fitness of both interspecific and intraspecific competition on the $j$-th individual in species $i$ can be summarized by
 
 \begin{equation}
-\mathscr B_{ij}(X)=C_i^{\sum_{l\neq j}\mathcal{O}_{ii}(x_{ij},x_{il})+\sum_{k\neq i}\sum_{l=1}^{n_k}\mathcal{O}_{ik}(x_{ij},x_{kl})},
+\mathscr B_{ij}(X)=C_i^{\sum_{l\neq j}\mathcal{O}_{ii}(x_{ij}-x_{il})+\sum_{k\neq i}\sum_{l=1}^{n_k}\mathcal{O}_{ik}(x_{ij}-x_{kl})},
 \end{equation}
 
 where $\mathcal{O}_{ij}$, defined in the main text, measures the overlap in resource use between individuals of species $i$ and $j$ as a function of their niche-centers. Writing $\mathscr W_{ij}(X)$ as the average number of offspring left by the $j$-th individual of species $i$, we have
@@ -1837,35 +1848,35 @@ where $\mathscr{A}_i(x)=\int_\mathbb{R}e_i(\zeta)u_i(\zeta,x)d\zeta$ accounts fo
 We now turn to a diffusion limit. Since we have more than one population, we take the diffusion limit for each population one at a time starting with population $1$. We write $\pmb n=(n_1,\dots,n_S)$. Following Méléard and Roelly [-@Mlard1993; -@meleard1992interacting] we rescale generation time and individual mass to $\frac{1}{n_1}$ and mean of the reproductive law to
 
 \begin{equation}
-\mathscr W_{1j}^{(\pmb n)}(X)=\mathscr{A}_1(x_{1j})^{1/n_1}\exp\left(\frac{\ln C_1}{n_1^2}\sum_{l\neq j}\mathcal{O}_{11}(x_{1j},x_{1l})+\frac{\ln C_1}{n_1}\sum_{k\neq i}\frac{1}{n_k}\sum_{l=1}^{n_k}\mathcal{O}_{1k}(x_{1j},x_{kl})\right).
+\mathscr W_{1j}^{(\pmb n)}(X)=\mathscr{A}_1(x_{1j})^{1/n_1}\exp\left(\frac{\ln C_1}{n_1^2}\sum_{l\neq j}\mathcal{O}_{11}(x_{1j}-x_{1l})+\frac{\ln C_1}{n_1}\sum_{k\neq i}\frac{1}{n_k}\sum_{l=1}^{n_k}\mathcal{O}_{1k}(x_{1j}-x_{kl})\right).
 \end{equation}
 
 For large $n_1$, we have the approximation
 
 \begin{equation}
-\mathscr W_{1j}^{(\pmb n)}(X)\approx\mathscr{A}_1(x_{1j})^{1/n_1}\left(1+\frac{\ln C_1}{n_1^2}\sum_{l\neq j}\mathcal{O}_{11}(x_{1j},x_{1l})+\frac{\ln C_1}{n_1}\sum_{k\neq 1}\frac{1}{n_k}\sum_{l=1}^{n_k}\mathcal{O}_{1k}(x_{1j},x_{kl})\right).
+\mathscr W_{1j}^{(\pmb n)}(X)\approx\mathscr{A}_1(x_{1j})^{1/n_1}\left(1+\frac{\ln C_1}{n_1^2}\sum_{l\neq j}\mathcal{O}_{11}(x_{1j}-x_{1l})+\frac{\ln C_1}{n_1}\sum_{k\neq 1}\frac{1}{n_k}\sum_{l=1}^{n_k}\mathcal{O}_{1k}(x_{1j}-x_{kl})\right).
 \end{equation}
 Hence
 \begin{equation}
-\lim_{n_1\to\infty}n_1\left(\mathscr W_{1j}^{(\pmb n)}(X)-1\right)=\ln\mathscr{A}_1(x_{1j})+\left(\int_\mathbb{R}\mathcal{O}_{11}(x_{1j},y)\nu_1(y,t)dy+\sum_{k\neq 1}\frac{1}{n_k}\sum_{l=1}^{n_k}\mathcal{O}_{1k}(x_{1j},x_{kl})\right)\ln C_1.
+\lim_{n_1\to\infty}n_1\left(\mathscr W_{1j}^{(\pmb n)}(X)-1\right)=\ln\mathscr{A}_1(x_{1j})+\left(\int_\mathbb{R}\mathcal{O}_{11}(x_{1j}-y)\nu_1(y,t)dy+\sum_{k\neq 1}\frac{1}{n_k}\sum_{l=1}^{n_k}\mathcal{O}_{1k}(x_{1j}-x_{kl})\right)\ln C_1.
 \end{equation}
 
 We write $\lim_{\pmb n\to\pmb\infty}$ for the iterated limit $\lim_{n_S\to\infty}\cdots\lim_{n_1\to\infty}$ and, assuming  $\nu_i(\cdot,t)\in C_1^+(\mathbb{R})$ for $i=1,\dots,S$ and $t\in[0,\infty)$, we set $\pmb\nu=(\nu_1,\dots,\nu_S)$. Then, for any $\pmb\nu$, the the diffusion limits for the remaining populations provides the Malthusian parameter for individuals in species $i$ with trait value $x_{1j}$ as
 
 \begin{equation}
-m_1(\pmb\nu,x_{1j}):=\lim_{\pmb n\to\pmb\infty}n_1\left(\mathscr W_{1j}^{(\pmb n)}(X)-1\right)=\ln\mathscr{A}_1(x)+\left(\sum_{k=1}^S\int_\mathbb{R}\mathcal{O}_{1k}(x_{1j},y)\nu_k(y,t)dy\right)\ln C_1.
+m_1(\pmb\nu,x_{1j}):=\lim_{\pmb n\to\pmb\infty}n_1\left(\mathscr W_{1j}^{(\pmb n)}(X)-1\right)=\ln\mathscr{A}_1(x)+\left(\sum_{k=1}^S\int_\mathbb{R}\mathcal{O}_{1k}(x_{1j}-y)\nu_k(y,t)dy\right)\ln C_1.
 \end{equation}
 
 We compute the average niche overlap of an individual in species $i$ with nich location $x$ across all individuals in species $j$ as
 
 \begin{equation}
-\bar{\mathcal{O}}_{ij}(x,t)=\frac{\int_\mathbb{R}\mathcal{O}_{ij}(x,y)\nu_j(y,t)dy}{\int_\mathbb{R}\nu_j(y,t)dy}.
+\bar{\mathcal{O}}_{ij}(x,t)=\frac{\int_\mathbb{R}\mathcal{O}_{ij}(x-y)\nu_j(y,t)dy}{\int_\mathbb{R}\nu_j(y,t)dy}.
 \end{equation}
 
 We now assume the resource utilization curves $u_i(\zeta)$ and phenotypic densities $\nu_i(x,t)$ are Gaussian curves for $i=1,\dots,S$. In this case $\bar{\mathcal{O}}_{ij}(x,t)$ simplifies to
 
 \begin{equation}
-\bar{\mathcal{O}}_{ij}(x,t)=\frac{\int_\mathbb{R}\mathcal O_{ij}(x,y)\nu_j(y,t)dy}{\int_\mathbb{R}\nu_j(y,t)dy}
+\bar{\mathcal{O}}_{ij}(x,t)=\frac{\int_\mathbb{R}\mathcal O_{ij}(x-y)\nu_j(y,t)dy}{\int_\mathbb{R}\nu_j(y,t)dy}
 =\frac{U_iU_j}{\sqrt{2\pi(w_i+w_j+{\sigma_j}^2(t))}}\exp\left(-\frac{(x-\bar x_j(t))^2}{2(w_i+w_j+{\sigma_j}^2(t))}\right).
 \end{equation}
 
