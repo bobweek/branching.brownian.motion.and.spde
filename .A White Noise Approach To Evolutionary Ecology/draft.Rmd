@@ -1214,7 +1214,13 @@ for all $v\in L^\infty(\mathbb{R})$ satisfies $\|S(t)v\|_1=\|v\|_1$ for all $t\g
 \begin{equation}
 (Fv)(x)=m\left(\int_\mathbb{R}\kappa(x-y)v(y)dy,x\right)v(x), \ \ \forall \ \ v\in L^1(\mathbb{R}).
 \end{equation}
-Thus $\|Fv\|_1\leq |r| \ \|v\|_1$ for all $v\in L^1(\mathbb{R})$ which implies $F$ is Lipschitz continuous. For $T>0$ set $L^{\infty,1}([0,T]\times\mathbb{R})$ as the set of functions $\nu:[0,T]\to L^1(\mathbb{R})$ that satisfy $\|\nu\|_{1,T}=\sup_{t\in[0,T]}\|\nu(t)\|_1<+\infty$ and consider the operator $G$ defined on $L^{\infty,1}([0,T]\times\mathbb{R})$ for fixed $u\in L^1(\mathbb{R})$ by
+Thus $\|Fv\|_1\leq |r| \ \|v\|_1$ for all $v\in L^1(\mathbb{R})$. Then, for any $v,w\in L^1(\mathbb{R})$,
+\begin{multline}
+Fv-Fw=F(v+w)-F(v+w)+Fv-Fw \\
+=m(v+w,x)(v+w)-m(w,x)w-m(v+w,x)(v+w)+m(v,x)v \\
+=\Big(m(v+w,x)-m(w,x)\Big)w-\Big(m(v+w,x)-m(v,x)\Big)v+m(v+w,x)(v-w).
+\end{multline}
+Hence $\|Fv-Fw\|_1\leq2|r|(\|w\|_1+\|v\|_2)+|r|\|v-w\|_1\leq\|r\|\|v-w\|_1$ which implies $F$ is Lipschitz continuous on $L^1(\mathbb{R})$. For $T>0$ set $L^{\infty,1}([0,T]\times\mathbb{R})$ as the set of functions $\nu:[0,T]\to L^1(\mathbb{R})$ that satisfy $\|\nu\|_{1,T}=\sup_{t\in[0,T]}\|\nu(t)\|_1<+\infty$ and consider the operator $G$ defined on $L^{\infty,1}([0,T]\times\mathbb{R})$ for fixed $u\in L^1(\mathbb{R})$ by
 \begin{equation}
 (Gv)(t)=S(t)u+\int_0^tS(t-s)(Fv(s))ds \ \ \forall \ \ t\in[0,T].
 \end{equation}
@@ -1225,7 +1231,7 @@ Then for any $t\in[0,T]$ and $\nu_1,\nu_2\in L^{\infty,1}([0,T]\times\mathbb{R})
 \end{multline}
 Hence, when $T<\frac{1}{|r|}$ the operator $G$ is a contraction operator. In this case we apply Banach's fixed point theorem to demonstrate $G$ has a unique fixed point. That is, there exists a unique $\nu\in L^{\infty,1}([0,T]\times\mathbb{R})$ such that $G\nu=\nu$. Then, for $\nu=\nu(x,t)$ and considering $\nu(t)$ the function $x\to\nu(x,t)$, we have by definition $\nu$ is the mild solution of PDE (\ref{PDE_supp}) with initial condition $\nu(0)=u$. To extend this to arbitrarily large $T$ we take a similar approach as Evans [-@lawrenceevans2010] and choose $T_1<\frac{1}{|r|}$ and apply the above argument to the interval $[T_1,2T_1]$. Repeating this task a finite number of times shows $\nu$ is the mild solution of PDE (\ref{PDE_supp}) with initial condition $\nu(0)=u$ for arbitrarily large $T>0$. 
 
-We shift our focus to showing mild solutions $\nu$ to PDE (\ref{PDE_supp}) are twice differentiable in $x$ and hence are classical solutions. Applying lemma 3.3.2 of Henry [-@Henry1981] we have that the mild solution $\nu$ is in fact a strong (but necessarily classical) solution to the Cauchy problem defined by PDE (\ref{PDE_supp}) with initial condition $\nu(0)=u$ for $t\in[0,T]$. In particular, this implies that $\nu(t)\in D(\Delta)$ for each $t\in(0,T)$ where $D(\Delta)=W^{2,1}(\mathbb{R})$ is the Sobolov space of integrable functions with weak derivatives at least of order $2$. Since $\frac{1}{p}\geq\frac{1}{p+1}\geq\frac{1}{p}-2$ for all $p\geq1$, the Sobolov embedding theorem [@Henry1981] implies $D(\Delta)\subset L^p(\mathbb{R})$, the Lebesgue space of $p$-integrable functions on $\mathbb{R}$, for all $p\geq1$. Hence $D(\Delta)\subset W^{2,p}(\mathbb{R})$, the Sobolov space of $p$-integrable functions with weak derivatives at least of order $2$, for all $p\geq1$. 
+We shift our focus to showing mild solutions $\nu$ to PDE (\ref{PDE_supp}) are twice differentiable in $x$ and hence are classical solutions. Applying lemma 3.3.2 of Henry [-@Henry1981] we have that the mild solution $\nu$ is in fact a strong solution (i.e., differentiable with respect to $t\in(0,T)$) to the abstract Cauchy problem defined by PDE (\ref{PDE_supp}) with initial condition $\nu(0)=u$ for $t\in[0,T]$. In particular, this implies that $\nu(t)\in D(\Delta)$ for each $t\in(0,T)$ where $D(\Delta)=W^{2,1}(\mathbb{R})$ is the Sobolov space of integrable functions with weak derivatives at least of order $2$. Since $\frac{1}{p}\geq\frac{1}{p+1}\geq\frac{1}{p}-2$ for all $p\geq1$, the Sobolov embedding theorem [@Henry1981] implies $D(\Delta)\subset L^p(\mathbb{R})$, the Lebesgue space of $p$-integrable functions on $\mathbb{R}$, for all $p\geq1$. Hence $D(\Delta)\subset W^{2,p}(\mathbb{R})$, the Sobolov space of $p$-integrable functions with weak derivatives at least of order $2$, for all $p\geq1$. 
 
 If $v\in C^{2+\delta}(\mathbb{R})$ for some $\delta>0$, then 
 \begin{equation}
