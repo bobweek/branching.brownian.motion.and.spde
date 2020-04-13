@@ -1184,6 +1184,8 @@ Although top-down approaches to community ecology, such as the Maximum Entropy T
 
 Throughout this supplement, we set use dot notation for time derivatives so that $\dot f(x,t)=\frac{\partial }{\partial t}f(x,t)$ and set $\Delta=\sum_{i=1}^d\frac{\partial^2}{\partial x_i^2}$ the Laplace operator on $\mathbb{R}^d$, except in \S\ref{caC} where $\Delta$ represents a random variable.
 
+<!--
+
 ## Existence, uniqueness and regularity of solution to deterministic PDE (\ref{eq1}) of the main text \label{regular}
 
 Here we show that solutions to the PDE described in the main text exist, are unique and are twice continuously differentiable with respect to space. Our approach is an adaptation of that taken in chapter 9 \S2.2 of Volpert [-@Volpert2014].
@@ -1231,7 +1233,7 @@ Then for any $t\in[0,T]$ and $\nu_1,\nu_2\in L^{\infty,1}([0,T]\times\mathbb{R})
 \end{multline}
 Hence, when $T<\frac{1}{|r|}$ the operator $G$ is a contraction operator. In this case we apply Banach's fixed point theorem to demonstrate $G$ has a unique fixed point. That is, there exists a unique $\nu\in L^{\infty,1}([0,T]\times\mathbb{R})$ such that $G\nu=\nu$. Then, for $\nu=\nu(x,t)$ and considering $\nu(t)$ the function $x\to\nu(x,t)$, we have by definition $\nu$ is the mild solution of PDE (\ref{PDE_supp}) with initial condition $\nu(0)=u$. To extend this to arbitrarily large $T$ we take a similar approach as Evans [-@lawrenceevans2010] and choose $T_1<\frac{1}{|r|}$ and apply the above argument to the interval $[T_1,2T_1]$. Repeating this task a finite number of times shows $\nu$ is the mild solution of PDE (\ref{PDE_supp}) with initial condition $\nu(0)=u$ for arbitrarily large $T>0$. 
 
-We shift our focus to showing mild solutions $\nu$ to PDE (\ref{PDE_supp}) are twice differentiable in $x$ and hence are classical solutions. Applying lemma 3.3.2 of Henry [-@Henry1981] we have that the mild solution $\nu$ is in fact a strong solution (i.e., differentiable with respect to $t\in(0,T)$) to the abstract Cauchy problem defined by PDE (\ref{PDE_supp}) with initial condition $\nu(0)=u$ for $t\in[0,T]$. In particular, this implies that $\nu(t)\in D(\Delta)$ for each $t\in(0,T)$ where $D(\Delta)=W^{2,1}(\mathbb{R})$ is the Sobolov space of integrable functions with weak derivatives at least of order $2$. Since $\frac{1}{p}\geq\frac{1}{p+1}\geq\frac{1}{p}-2$ for all $p\geq1$, the Sobolov embedding theorem [@Henry1981] implies $D(\Delta)\subset L^p(\mathbb{R})$, the Lebesgue space of $p$-integrable functions on $\mathbb{R}$, for all $p\geq1$. Hence $D(\Delta)\subset W^{2,p}(\mathbb{R})$, the Sobolov space of $p$-integrable functions with weak derivatives at least of order $2$, for all $p\geq1$. 
+We shift our focus to showing mild solutions $\nu$ to PDE (\ref{PDE_supp}) are twice differentiable in $x$ and hence are classical solutions. Applying lemma 3.3.2 of Henry [-@Henry1981] we have that the mild solution $\nu$ is in fact a strong solution (i.e., differentiable with respect to $t\in(0,T)$) to the abstract Cauchy problem defined by PDE (\ref{PDE_supp}) with initial condition $\nu(0)=u$ for $t\in[0,T]$. In particular, this implies that $\nu(t)\in D(\Delta)$ for each $t\in(0,T)$ where $D(\Delta)=W^{2,1}(\mathbb{R})$ is the Sobolov space of integrable functions with integrable weak derivatives at least of order $2$. Since $\frac{1}{p}\geq\frac{1}{p+1}\geq\frac{1}{p}-2$ for all $p\geq1$, the Sobolov embedding theorem [@Henry1981] implies $D(\Delta)\subset L^p(\mathbb{R})$, the Lebesgue space of $p$-integrable functions on $\mathbb{R}$, for all $p\geq1$. Hence $D(\Delta)\subset W^{2,p}(\mathbb{R})$, the Sobolov space of $p$-integrable functions with weak derivatives at least of order $2$, for all $p\geq1$. 
 
 If $v\in C^{2+\delta}(\mathbb{R})$ for some $\delta>0$, then 
 \begin{equation}
@@ -1242,24 +1244,23 @@ and, since we assume $m(h,x)$ is continuous in both arguments, $Fv=m(Kv,\cdot)v\
 
 Why is $F\nu\in C^\delta(\mathbb{R})$ for some $\delta>0$? Why does this imply $\nu(\cdot,t)\in C^{2+\delta}(\mathbb{R})$ for all $t\in(0,T)$? This argument holds for all $T>0$. Hence, solutions to the Cauchy problem (\ref{PDE_supp}) are twice continuously differentiable in their spatial parameter for all $t>0$.
 
+-->
+
 ## Sufficient conditions for finite mean, variance and total abundance in the deterministic case \label{finite}
 
-Recall that $m(\nu,x)$ is shorthand for $m\big((K\nu)(x,t),x\big)$. That is, $m:[0,+\infty)\times\mathbb{R}\to\mathbb{R}$. Following our assumptions of the main text, we have that $m(h,x)$ is differentiable with respect to both $x$ and $h$ and there exists $r\in\mathbb{R}$ such that $m(h,x)\leq r$ across all $h\geq0$ and $x\in\mathbb{R}$. As in the main text, we also assume the initial condition $\nu(x,0)$ is continuous in $x$ and satisfies
+Recall that $m(\nu,x)$ is shorthand for $m\big((K\nu)(x,t),x\big)$. That is, $m:[0,+\infty)\times\mathbb{R}\to\mathbb{R}$. Following our assumptions of the main text, we have that $m(h,x)$ is differentiable with respect to both $x$ and $h$ and there exists $r\in\mathbb{R}$ such that $m(h,x)\leq r$ across all $h\geq0$ and $x\in\mathbb{R}$. As in the main text, we also assume the initial condition $u(x)$ is continuous and integrable in $x$ and satisfies
 \begin{equation}
-N(0)=\int_{\mathbb{R}}\nu(x,0)dx<+\infty,
+0\leq\int_{\mathbb{R}}(|x|+x^2)u(x)dx<+\infty
 \end{equation}
-\begin{equation}
--\infty<\bar x(0)=\int_{\mathbb{R}}xp(x,0)dx<+\infty,
-\end{equation}
-\begin{equation}
-\sigma^2(0)=\int_{\mathbb{R}}(x-\bar x(0))^2p(x,0)dx<+\infty,
-\end{equation}
-where $p(x,0)=\nu(x,0)/N(0)$, and we consider the PDE
+and consider the Cauchy problem
 \begin{equation}\label{PDE_SM}
-\dot\nu(x,t)=m(\nu,x)\nu(x,t)+\frac{\mu}{2}\Delta\nu(x,t).
+\left\{\begin{matrix}
+\dot\nu(x,t)=m(\nu,x)\nu(x,t)+\frac{\mu}{2}\Delta\nu(x,t) & t>0\\
+\nu(x,0)=u(x) & t=0.
+\end{matrix}\right.
 \end{equation}
 
-In SM \S\ref{regular} we have shown PDE (\ref{PDE_SM}) with an integrable initial condition has a classical solution. Replacing $m$ with it's upper bound $r\in\mathbb{R}$, equation (\ref{PDE_SM}) reduces to a simple parabolic equation that can be solved using standard techniques [@stanleyfarlow1993]. In particular, when $m(\nu,x)\equiv0$ denote the solution to (\ref{PDE_SM}) by $\nu_0(x,t)$. Then, denoting
+As mentioned in the main text, theorem 2.5.6 of Zheng [-@zheng2004nonlinear] states that if $m(\nu,x)$ is locally Lipschitz in both arguments then for some maximal $T>0$ problem (\ref{PDE_SM}) admits a unique local classical solution $\nu(x,t)$ for $t\in[0,T)$. Furthermore, either $T=+\infty$ or $T<+\infty$ and $\lim_{t\uparrow T}\int_\mathbb{R}|\nu(t,x)|dx=+\infty$. In this section we show that our assumption $m(h,x)\leq r$ for all $h\geq0$ and $x\in\mathbb{R}$ implies $T=+\infty$. Replacing $m$ with it's upper bound $r\in\mathbb{R}$, equation (\ref{PDE_SM}) reduces to a simple parabolic equation that can be solved using elementary techniques [@stanleyfarlow1993]. In particular, when $m(\nu,x)\equiv0$ denote the solution to (\ref{PDE_SM}) by $\nu_0(x,t)$. Then, denoting
 \begin{equation}
 \Phi(x,t)=\frac{\exp\left(-x^2/2\mu t\right)}{\sqrt{2\pi\mu t}},
 \end{equation}
