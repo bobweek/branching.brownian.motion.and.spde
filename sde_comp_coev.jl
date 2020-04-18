@@ -69,7 +69,7 @@ while num < 1000
         adraw = exp.(rand(Normal(-10,6),1))[1]
     end
 
-    # continue to draw c until it is less than 1e-3
+    # continue to draw c until it is less than 1e-4
     # this prevents astronomical Vₓ and small N
     while maximum(cdraw)>1e-4
         cdraw = exp.(rand(Normal(-20,4),1))[1]
