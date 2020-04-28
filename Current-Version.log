@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.26)  28 APR 2020 13:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.26)  28 APR 2020 14:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -641,13 +641,13 @@ File: on_pl.png Graphic file (type png)
 Package pdftex.def Info: on_pl.png  used on input line 1830.
 (pdftex.def)             Requested size: 207.0021pt x 207.00711pt.
 [33]
-</home/bb/Gits/branching.brownian.motion.and.spde/Current Version/cov.png, id=4
-82, 469.755pt x 180.675pt>
-File: /home/bb/Gits/branching.brownian.motion.and.spde/Current Version/cov.png 
-Graphic file (type png)
-<use /home/bb/Gits/branching.brownian.motion.and.spde/Current Version/cov.png>
-Package pdftex.def Info: /home/bb/Gits/branching.brownian.motion.and.spde/Curre
-nt Version/cov.png  used on input line 1880.
+</home/bb/Gits/branching.brownian.motion.and.spde/cov.png, id=482, 469.755pt x 
+180.675pt>
+File: /home/bb/Gits/branching.brownian.motion.and.spde/cov.png Graphic file (ty
+pe png)
+<use /home/bb/Gits/branching.brownian.motion.and.spde/cov.png>
+Package pdftex.def Info: /home/bb/Gits/branching.brownian.motion.and.spde/cov.p
+ng  used on input line 1880.
 (pdftex.def)             Requested size: 345.0pt x 132.69113pt.
 [34pdfTeX warning (ext4): destination with the same identifier (name{figure.4})
  has been already used, duplicate ignored
@@ -661,16 +661,14 @@ tifier (name{figure.5}) has been already used, duplicate ignored
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.1935 
-        </home/bb/Gits/branching.brownian.motion.and.spde/Current Version/cov.p
-ng>]
-</home/bb/Gits/branching.brownian.motion.and.spde/Current Version/Cαℭp.png, 
-id=511, 289.08pt x 180.675pt>
-File: /home/bb/Gits/branching.brownian.motion.and.spde/Current Version/Cαℭp.
-png Graphic file (type png)
-<use /home/bb/Gits/branching.brownian.motion.and.spde/Current Version/Cαℭp.p
-ng>
-Package pdftex.def Info: /home/bb/Gits/branching.brownian.motion.and.spde/Curre
-nt Version/Cαℭp.png  used on input line 1973.
+        </home/bb/Gits/branching.brownian.motion.and.spde/cov.png>]
+</home/bb/Gits/branching.brownian.motion.and.spde/Cαℭp.png, id=511, 289.08pt
+ x 180.675pt>
+File: /home/bb/Gits/branching.brownian.motion.and.spde/Cαℭp.png Graphic file
+ (type png)
+<use /home/bb/Gits/branching.brownian.motion.and.spde/Cαℭp.png>
+Package pdftex.def Info: /home/bb/Gits/branching.brownian.motion.and.spde/Cα�
+�p.png  used on input line 1973.
 (pdftex.def)             Requested size: 207.0021pt x 129.37462pt.
 [36] [37pdfTeX warning (ext4): destination with the same identifier (name{figur
 e.6}) has been already used, duplicate ignored
@@ -678,8 +676,8 @@ e.6}) has been already used, duplicate ignored
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.2060 
-        </home/bb/Gits/branching.brownian.motion.and.spde/Current Version/Cα�
-�p.png>] [38] [39] [40] [41] [42] [43] [44] [45] [46] [47]
+        </home/bb/Gits/branching.brownian.motion.and.spde/Cαℭp.png>] [38] [3
+9] [40] [41] [42] [43] [44] [45] [46] [47]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2827.
 [48]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 2827.
@@ -696,7 +694,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2827.
  ) 
 Here is how much of TeX's memory you used:
  13361 strings out of 482514
- 198115 string characters out of 5950521
+ 197873 string characters out of 5950521
  488506 words of memory out of 5000000
  28220 multiletter control sequences out of 15000+600000
  616735 words of font info for 181 fonts, out of 8000000 for 9000

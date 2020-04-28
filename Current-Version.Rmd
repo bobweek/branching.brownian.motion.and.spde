@@ -200,7 +200,7 @@ wn2d = ggplot(M, aes(x, y, color = value))+scale_color_gradient2(low="black",mid
 
 wn = grid.arrange(wn1d,wn2d,nrow=1)
 
-ggsave("~/Gits/branching.brownian.motion.and.spde/Current Version/wn.png",wn,width=5,height=2.5)
+ggsave("~/Gits/branching.brownian.motion.and.spde/wn.png",wn,width=5,height=2.5)
 ```
 
 ```{r, echo=F, fig.align='center', out.width='80%', fig.cap='\\label{wn}Approximations of sample paths of temporal white noise (left) and space-time white noise (right) with brightness scaled to value.'}
@@ -353,7 +353,7 @@ n3p = ggplot(n_3,aes(x=time,y=x))+geom_point(size=0.25,stroke=0,alpha=0.1)+theme
 
 rescaled_plots = grid.arrange(n1p,n2p,n3p,nrow=3)
 
-ggsave("~/Gits/branching.brownian.motion.and.spde/Current Version/rescaled_plots.png",rescaled_plots,device="png",width=6,height=6,units="in",dpi=350)
+ggsave("~/Gits/branching.brownian.motion.and.spde/rescaled_plots.png",rescaled_plots,device="png",width=6,height=6,units="in",dpi=350)
 ```
 
 
@@ -806,7 +806,7 @@ smpl_plt_mc = grid.arrange(x_mc,G_mc,N_mc,nrow=3)
 
 community_plot = grid.arrange(smpl_plt_wc,smpl_plt_mc,nrow=1)
 
-ggsave("~/Gits/branching.brownian.motion.and.spde/Current Version/community_dynamics.png",community_plot,width=6.5,height=5,dpi=320)
+ggsave("~/Gits/branching.brownian.motion.and.spde/community_dynamics.png",community_plot,width=6.5,height=5,dpi=320)
 
 #
 # calculating strength of coevolution
@@ -910,7 +910,7 @@ on_pl = ggplot(Cadf_WC, aes(Coev,Comp)) + geom_density_2d(col="black") +
   scale_x_log10(limits=c(5e-7,1e-2)) + scale_y_log10(limits=c(2.5e-9,1.5e-8)) + 
   theme_minimal() + xlab("Pairwise Coevolution") + ylab("Competition Coefficient")
 
-ggsave("~/Gits/branching.brownian.motion.and.spde/Current Version/on_pl.png",on_pl,device="png",width=3.5,height=3.5,units="in",dpi=350)
+ggsave("~/Gits/branching.brownian.motion.and.spde/on_pl.png",on_pl,device="png",width=3.5,height=3.5,units="in",dpi=350)
 
 network <- graph_from_adjacency_matrix(ceiling(asp/max(asp)))
 
@@ -954,7 +954,7 @@ netMC <- ggnet2(MC_net, mode = "circle", edge.alpha=.1, edge.color = edge_colors
 coevs <- grid.arrange(netWC, netMC,
                       WC_co, MC_co, nrow=2)
 
-ggsave("~/Gits/branching.brownian.motion.and.spde/Current Version/interaction_networks.png",coevs,device="png",width=6,height=6,units="in",dpi=350)
+ggsave("~/Gits/branching.brownian.motion.and.spde/interaction_networks.png",coevs,device="png",width=6,height=6,units="in",dpi=350)
 
 ```
 
@@ -1142,7 +1142,7 @@ on_pl = ggplot(Cadf_SC, aes(Coev,Comp)) +
 on_pl2 = on_pl + facet_grid(rows=vars(Which), scales="free_y") + 
   ylab("Competition Coefficient") + theme(strip.background = element_blank(), strip.text.y = element_blank())
 
-ggsave("~/Gits/branching.brownian.motion.and.spde/Current Version/on_pl.png",on_pl2,device="png",width=3.5,height=3.5,units="in")
+ggsave("~/Gits/branching.brownian.motion.and.spde/on_pl.png",on_pl2,device="png",width=3.5,height=3.5,units="in")
 ```
 
 
@@ -1199,12 +1199,12 @@ dummy <- ggplot(data = data.frame(x = 0), mapping = aes(x = x))
 cov_ab_p <- dummy + stat_function(fun = Cov_ab) + ylim(-0.4,0.4) + xlim(0,2) + theme_minimal() + xlab("Approximate ratio of variance among \n species to variance within species") + ylab("Covariance of \u03B1 and |\u03B2|")
 cov_ag_p <- dummy + stat_function(fun = Cov_ag) + ylim(-0.4,0.4) + xlim(0,2) + theme_minimal() + xlab("Approximate ratio of variance among \n species to variance within species") + ylab("Covariance of \u03B1 and \u03B3")
 cov_plot <- grid.arrange(cov_ab_p,cov_ag_p,nrow=1) 
-ggsave("~/Gits/branching.brownian.motion.and.spde/Current Version/cov.png",cov_plot,width=6.5,height=2.5)
+ggsave("~/Gits/branching.brownian.motion.and.spde/cov.png",cov_plot,width=6.5,height=2.5)
 ```
 
 
 ```{r, echo=F, fig.align='center', out.width='100%', fig.cap='\\label{cov_fig}Curves representing the covariance between the magnitude of linear selection gradients and competition coefficients (left) and between stabilizing selection gradients and competition coefficients (right) as a function of $2bV_{\\bar X}$ which is approximately equal to the ratio of variance in mean traits among species to the intraspecific trait variance. In both plots we set $c=1.0\\times10^{-4}$, $b=0.1$, $\\bar r=0.1$ and $N=1.0\\times10^{10}$ and let $V_{\\bar X}$ vary.'}
-knitr::include_graphics('/home/bb/Gits/branching.brownian.motion.and.spde/Current Version/cov.png')
+knitr::include_graphics('/home/bb/Gits/branching.brownian.motion.and.spde/cov.png')
 ```
 We visualize these relationships in Figure \ref{cov_fig} for fixed $c,b,\bar r,U$ and $N$. In SM \S\ref{coef_grad_moms} we verify the qualitative nature of these relationships by repeating numerical integrations of system (\ref{comm_dynamics}) across a set of randomly drawn model parameters. We designed our numerical approach to inherit the assumptions of symmetric model parameters such as mutation rates $\mu_1=\dots=\mu_S$ and abiotic optima $\theta_1=\dots=\theta_S$ and to relax the key assumptions of normally distributed mean traits along with constant additive genetic variances and abundances across species.
 
@@ -1225,12 +1225,12 @@ Cαabsβp = ggplot(df,aes(x=df$V/df$σ,y=df$Cαabsβ))+geom_point(size=0.1)+stat
 Cαγp = ggplot(df,aes(x=df$V/df$σ,y=df$Cαγ))+geom_point(size=0.1)+stat_smooth(color="black", method = "lm", formula = y ~ x + I(x^2) + I(x^3))+theme_minimal()+ylab("Correlation of \u03B1 and \u03B3")+xlab("Ratio of variance among \n species to variance within species")
 Cαℭp = ggplot(df,aes(x=df$V/df$σ,y=df$Cαℭ))+geom_point(size=0.1)+stat_smooth(color="black", method = "lm", formula = y ~ x + I(x^2) + I(x^3))+theme_minimal()+ylab("Correlation of \u03B1 and ℭ")+xlab("Ratio of variance among \n species to variance within species")
 corrsp = grid.arrange(Cαabsβp,Cαγp,nrow=1)
-ggsave("/home/bb/Gits/branching.brownian.motion.and.spde/Current Version/corrs.png",  corrsp,  width=6.5,height=2.5)
-ggsave("/home/bb/Gits/branching.brownian.motion.and.spde/Current Version/Cαℭp.png",   Cαℭp,  width=4,height=2.5)
+ggsave("/home/bb/Gits/branching.brownian.motion.and.spde/corrs.png",  corrsp,  width=6.5,height=2.5)
+ggsave("/home/bb/Gits/branching.brownian.motion.and.spde/Cαℭp.png",   Cαℭp,  width=4,height=2.5)
 ```
 
 ```{r, echo=F, fig.align='center', out.width='60%', fig.cap='\\label{cor_coev_fig}Numerical estimates for the correlation of the strength of coevolution measured by $\\mathfrak{C}$ and competition coefficeints $\\alpha$ plotted against the variance of mean traits among species divided by the mean variance of traits within species. Each dot represents the result from a single simulation. The red line is a cubic regression.'}
-knitr::include_graphics('/home/bb/Gits/branching.brownian.motion.and.spde/Current Version/Cαℭp.png')
+knitr::include_graphics('/home/bb/Gits/branching.brownian.motion.and.spde/Cαℭp.png')
 ```
 
 
