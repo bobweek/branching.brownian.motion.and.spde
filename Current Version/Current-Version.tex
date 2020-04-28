@@ -400,14 +400,12 @@ N(0)=\int_{-\infty}^{+\infty}\nu(x,0)dx<+\infty,
 -\infty<\bar x(0)=\int_{-\infty}^{+\infty}xp(x,0)dx<+\infty,
 \end{equation} \begin{equation}
 \sigma^2(0)=\int_{-\infty}^{+\infty}(x-\bar x(0))^2p(x,0)dx<+\infty,
-\end{equation}
-
-where \(\bar x(t)\) and \(\sigma^2(t)\) are respectively the mean trait
-and phenotypic variance at time \(t\geq0\). Second, we assume selection
-is determined by the growth rate \(m(h,x)\) that is differentiable with
-respect to both arguments and is bounded above by some
-\(r\in\mathbb{R}\) for all \(x\in\mathbb{R}\) and \(h\geq0\). We also
-assume \((1+h)C\leq m(h,x)\) for some constant \(C>0\) so that
+\end{equation} where \(\bar x(t)\) and \(\sigma^2(t)\) are respectively
+the mean trait and phenotypic variance at time \(t\geq0\). Second, we
+assume selection is determined by the growth rate \(m(h,x)\) that is
+differentiable with respect to both arguments and is bounded above by
+some \(r\in\mathbb{R}\) for all \(x\in\mathbb{R}\) and \(h\geq0\). We
+also assume \((1+h)C\leq m(h,x)\) for some constant \(C>0\) so that
 \(m(h,x)\) is linear or more than linear in \(h\). We denote by \(K\) an
 operator that takes functions such as \(\nu(x,t)\) as its argument and
 returns other functions that may still depend on the spatial variable
@@ -431,14 +429,12 @@ quantitative character simultaneously by the PDE
 
 \begin{equation}\label{eq1}
 \frac{\partial}{\partial t}\nu(x,t)=m(\nu,x)\nu(x,t)+\frac{\mu}{2}\frac{\partial^2}{\partial x^2}\nu(x,t)
-\end{equation}
-
-with the initial condition \(\nu(x,0)\) described above. Equation
-(\ref{eq1}) is a semilinear parabolic PDE and is referred to as a scalar
-reaction-diffusion equation (Evans, 2010; Zheng, 2004). To ensure
-existence and uniqueness of solutions to (\ref{eq1}), we further assume
-that for each \(M>0\) there exists a constant \(L_M>0\) depending on
-\(M\) such that
+\end{equation} with the initial condition \(\nu(x,0)\) described above.
+Equation (\ref{eq1}) is a semilinear parabolic PDE and is referred to as
+a scalar reaction-diffusion equation (Evans, 2010; Zheng, 2004). To
+ensure existence and uniqueness of solutions to (\ref{eq1}), we further
+assume that for each \(M>0\) there exists a constant \(L_M>0\) depending
+on \(M\) such that
 \(\int_\mathbb{R}\nu_1(x)dx,\int_\mathbb{R}\nu_2(x)dx\leq M\) implies
 
 \begin{equation}\label{local_lipschitz}
@@ -468,11 +464,9 @@ selection can be captured using the growth rate
 
 \begin{equation}\label{special_m}
 m(\nu,x)=r-\frac{a}{2}(\theta-x)^2-c\int_{-\infty}^{+\infty}\nu(y,t)dy
-\end{equation}
-
-where \(r\in\mathbb{R}\) is the intrinsic rate of growth in the absence
-of abiotic stabilizing selection, \(a>0\) is the strength of abiotic
-stabilizing selection around the phenotypic optimum
+\end{equation} where \(r\in\mathbb{R}\) is the intrinsic rate of growth
+in the absence of abiotic stabilizing selection, \(a>0\) is the strength
+of abiotic stabilizing selection around the phenotypic optimum
 \(\theta\in\mathbb{R}\), \(c>0\) captures the sensitivity of fitness to
 intraspecific competition and \(\kappa(x-y)=1\) so that competitive
 interactions cause the same reduction in fitness regardless of trait
@@ -564,7 +558,7 @@ Hence, the dynamics of the mean trait \(\bar x(t)\) can be derived as
 
 \begin{multline}\label{detmean}
 \frac{d}{dt}\bar x(t)=\frac{d}{dt}\int_{-\infty}^{+\infty} x p(x,t)dx=\int_{-\infty}^{+\infty} x\frac{\partial}{\partial t} p(x,t)dx \\
-=\int_{-\infty}^{+\infty} x\big(m(\nu,x)-\bar m(t)\big) p(x,t)+x\frac{\mu}{2}\frac{\partial^2}{\partial x^2} p(x,t)dx
+=\int_{-\infty}^{+\infty} x\big(m(\nu,x)-\bar m(t)\big) p(x,t)+x\frac{\mu}{2}\frac{\partial^2}{\partial x^2} p(x,t)dx \\
 =\mathrm{Cov}_t\Big(m(\nu,x),x\Big).
 \end{multline}
 
@@ -745,11 +739,9 @@ set
 
 \begin{equation}
 \|f\|_t=\sqrt{\mathbb{E}\left(\int_0^t\int_\mathbb{R}f^2(x,s)dxds\right)},
-\end{equation}
-
-and make use of the convention \(f=g\) if \(\|f-g\|_t=0\) for all
-\(t\geq0\). Later, when we investigate stochastic dynamics of the
-abundance density \(\nu(x,t)\), we will find
+\end{equation} and make use of the convention \(f=g\) if \(\|f-g\|_t=0\)
+for all \(t\geq0\). Later, when we investigate stochastic dynamics of
+the abundance density \(\nu(x,t)\), we will find
 \(\sqrt\nu\in\mathscr{N}_2\). This enables us to utilize the heuristics
 developed in this section for the derivation of SDE describing the
 stochastic dynamics of \(N(t)\), \(\bar x(t)\) and \(\sigma^2(t)\).
@@ -766,10 +758,8 @@ satisfying, for any \(t,t_1,t_2\geq0\),
 \mathbb{E}\big(\mathbf W_t(f)\big)=\mathbb{E}\big(\mathbf W_t(g)\big)=0,
 \end{equation} \begin{equation}\label{cov_WN}
 \mathbb{C}\big(\mathbf W_{t_1}(f),\mathbf W_{t_2}(g)\big)=\mathbb{E}\left(\int_0^{t_1\wedge t_2}\int_\mathbb{R} f(x,s)g(x,s)dxds\right),
-\end{equation}
-
-where \(t_1\wedge t_2=\min(t_1,t_2)\) and \(\mathbb{C}\) denotes
-covariance with respect to the underlying probability space. In
+\end{equation} where \(t_1\wedge t_2=\min(t_1,t_2)\) and \(\mathbb{C}\)
+denotes covariance with respect to the underlying probability space. In
 particular, denoting \(\mathbb{V}\) the variance operator with respect
 to the underlying probability space, we have
 \(\mathbb{V}\big(\mathbf W_t(f)\big)=\|f\|_t^2\) for all \(t\geq0\) and
@@ -811,9 +801,7 @@ Since
 
 \begin{equation}
 \|I_D\|_t^2=\mathbb{E}\left(\int_0^t\int_\mathbb{R}I_D^2(x,s)dxds\right)=t\int_Ddx=t|D|<+\infty, 
-\end{equation}
-
-where \(|D|\) denotes the length of \(D\), we have
+\end{equation} where \(|D|\) denotes the length of \(D\), we have
 \(I_D\in\mathscr{N}_2\). Thus, using equations (\ref{exp_WN}) and
 (\ref{cov_WN}) and adopting the informal notation introduced in equation
 (\ref{informal}), we can write the following
@@ -839,9 +827,7 @@ To relate these formula to the common notation used for SDE, we write
 \begin{equation}
 \hat f(x,t)=\frac{f(x,t)}{\sqrt{\int_\mathbb{R}f^2(y,t)dy}} \ \text{ and } \ 
 d\hat{\mathbf W}_t(f)=\left(\int_\mathbb{R}\hat f(x,t)\dot W(x,t)dx\right)dt
-\end{equation}
-
-so that
+\end{equation} so that
 
 \begin{equation}
 \int_0^td\hat{\mathbf W}_s(f)=\int_0^t\int_\mathbb{R}\frac{f(x,s)}{\sqrt{\int_\mathbb{R}f^2(s,y)dy}}\dot W(x,s)dxds.
@@ -851,9 +837,7 @@ This implies
 
 \begin{equation}
 \mathbb{E}\left(\int_0^td\hat{\mathbf W}_s(f)\right)=0, \ \mathbb{C}\left(\int_0^{t_1}d\hat{\mathbf W}_s(f),\int_0^{t_2}d\hat{\mathbf W}_s(f)\right)=t_1\wedge t_2
-\end{equation}
-
-and in particular, as a function of \(t\),
+\end{equation} and in particular, as a function of \(t\),
 \(\int_0^td\hat{\mathbf W}_s(f)\) is a standard Brownian motion for any
 \(f\in\mathscr{N}_2\). Hence, \(d\hat{\mathbf W}_t(f)\) is analogous to
 the traditional shorthand used to denote stochastic differentials. Thus,
@@ -914,19 +898,20 @@ modelling of ecological interactions. We therefore follow our discussion
 of BBM with a review of a few important results on spatially structured
 branching processes that account for interactions.
 
-\emph{Branching Brownian motion (BBM):} A BBM tracks individuals
-navigating \(d\)-dimensional Euclidean space that reproduce and senesce
-between exponentially distributed intervals. Unlike other stochastic
-processes that take values in \(\mathbb{R}^d\), BBM takes values in the
-set of \emph{non-negative finite measures} over \(\mathbb{R}^d\).
-Intuitively, one can think of a finite measure as a function that maps
-subsets of \(\mathbb{R}^d\) to real numbers. To be formal, we only
-consider the Borel subsets of \(\mathbb{R}^d\) corresponding to the
-Euclidean metric, but understanding this technicality is not crucial to
-our discussion. In particular, denoting \(X_t\) a BBM, for a subset
-\(D\subset\mathbb{R}^d\), \(X_t(D)\) returns the (random) number of
-individuals alive within the region \(D\) at time \(t\geq0\). The BBM
-has three main components:
+\paragraph{Branching Brownian motion (BBM)}
+
+A BBM tracks individuals navigating \(d\)-dimensional Euclidean space
+that reproduce and senesce between exponentially distributed intervals.
+Unlike other stochastic processes that take values in \(\mathbb{R}^d\),
+BBM takes values in the set of \emph{non-negative finite measures} over
+\(\mathbb{R}^d\). Intuitively, one can think of a finite measure as a
+function that maps subsets of \(\mathbb{R}^d\) to real numbers. To be
+formal, we only consider the Borel subsets of \(\mathbb{R}^d\)
+corresponding to the Euclidean metric, but understanding this
+technicality is not crucial to our discussion. In particular, denoting
+\(X_t\) a BBM, for a subset \(D\subset\mathbb{R}^d\), \(X_t(D)\) returns
+the (random) number of individuals alive within the region \(D\) at time
+\(t\geq0\). The BBM has three main components:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi})}
@@ -1010,7 +995,7 @@ differentiable functions on \(\mathbb{R}\). Hence, equation
 (\ref{neutral_SPDE}) is just an abbreviation for
 
 \begin{multline}\label{neutral_int}
-\int_\mathbb{R}\nu(x,t)f(x)dx-\int_\mathbb{R}\nu(x,0)f(x)dx=\int_0^t\int_\mathbb{R}\nu(x,s)\left(mf(x)+\frac{\mu}{2}\frac{\partial^2}{\partial x^2}f(x)\right)dsdx \\
+\int_\mathbb{R}\nu(x,t)f(x)dx-\int_\mathbb{R}\nu(x,0)f(x)dx\\=\int_0^t\int_\mathbb{R}\nu(x,s)\left(mf(x)+\frac{\mu}{2}\frac{\partial^2}{\partial x^2}f(x)\right)dsdx \\
 +\int_0^t\int_\mathbb{R}f(x)\sqrt{V\nu(x,s)}\dot W(x,s)dxds, \ \forall \ f\in C_b^2(\mathbb{R}).
 \end{multline}
 
@@ -1053,30 +1038,31 @@ next subsection we summarize the main results in this area and introduce
 the SPDE that provides the basis for our approach to theoretical
 evolutionary ecology.
 
-\emph{Interacting superprocesses:} In the above subsection we reviewed
-the diffusion limit of an especially tractable measure-valued branching
-process. However, we found the simplicity of this process restricts us
-from modelling nonlocal effects on the fitness of individuals. Here, we
-discuss superprocesses that account for such effects. The existence of
-diffusion limits for a class of measure-valued branching processes
-involving nonlocal effects has been treated by Méléard and Roelly (1993,
-1992). The interactions can manifest as dependencies of the spatial
-movement or reproductive law of individuals on their position \(x\) and
-the state of the whole population described by \(X_t\). An important
-result of Méléard and Roelly (1993, 1992) is a theorem that provides
-sufficient conditions to construct a sequence of rescaled measure-valued
-branching processes that converge to a generalization of the
-Dawson-Watanabe superprocess that includes interactions. The rescaling
-is analogous to that described above for non-interacting Dawson-Watanabe
-superprocesses, but now the reproductive law described by
-\(\mathscr{W}(X_t,x)\) and \(V(X_t,x)\), branching rate
-\(\lambda(X_t,x)\) and diffusion parameter \(\sqrt{\mu(X_t,x)}\) are
-allowed to depend on the whole population \(X_t\) and individual
-location \(x\). In Figure \ref{rescaled} we demonstrate this rescaling
-in discrete time for a population experiencing stabilizing selection and
-logistic growth. Since time is discretized, the process we simulate is
-formally a branching random walk. For further details on our simulation
-see SM \S\ref{numerical}.
+\paragraph{Interacting superprocesses}
+
+In the above subsection we reviewed the diffusion limit of an especially
+tractable measure-valued branching process. However, we found the
+simplicity of this process restricts us from modelling nonlocal effects
+on the fitness of individuals. Here, we discuss superprocesses that
+account for such effects. The existence of diffusion limits for a class
+of measure-valued branching processes involving nonlocal effects has
+been treated by Méléard and Roelly (1993, 1992). The interactions can
+manifest as dependencies of the spatial movement or reproductive law of
+individuals on their position \(x\) and the state of the whole
+population described by \(X_t\). An important result of Méléard and
+Roelly (1993, 1992) is a theorem that provides sufficient conditions to
+construct a sequence of rescaled measure-valued branching processes that
+converge to a generalization of the Dawson-Watanabe superprocess that
+includes interactions. The rescaling is analogous to that described
+above for non-interacting Dawson-Watanabe superprocesses, but now the
+reproductive law described by \(\mathscr{W}(X_t,x)\) and \(V(X_t,x)\),
+branching rate \(\lambda(X_t,x)\) and diffusion parameter
+\(\sqrt{\mu(X_t,x)}\) are allowed to depend on the whole population
+\(X_t\) and individual location \(x\). In Figure \ref{rescaled} we
+demonstrate this rescaling in discrete time for a population
+experiencing stabilizing selection and logistic growth. Since time is
+discretized, the process we simulate is formally a branching random
+walk. For further details on our simulation see SM \S\ref{numerical}.
 
 \begin{figure}
 
@@ -1130,17 +1116,14 @@ process \(N(t)\) using the mild solution of (\ref{SPDE}) with
 equal to for every \(x\)). That is,
 
 \begin{multline}
-N(t)=N(0)+\int_0^t\int_\mathbb{R}\nu(x,s)\left(m(\nu,x)\cdot1+\frac{\mu}{2}\frac{\partial^2}{\partial x^2}1\right)+1\sqrt{V\nu(x,s)}\dot W(x,s)dsdx \\
-=N(0)+\int_0^t\bar m(s)N(s)dt+\int_0^t\sqrt{VN(s)}d\hat{\mathbf{W}}_s(\sqrt{\nu(x,s)}),
-\end{multline}
-
-where
+N(t)-N(0)=\\
+\int_0^t\int_\mathbb{R}\nu(x,s)\left(m(\nu,x)\cdot1+\frac{\mu}{2}\frac{\partial^2}{\partial x^2}1\right)+1\sqrt{V\nu(x,s)}\dot W(x,s)dsdx \\
+=\int_0^t\bar m(s)N(s)dt+\int_0^t\sqrt{VN(s)}d\hat{\mathbf{W}}_s(\sqrt{\nu(x,s)}),
+\end{multline} where
 
 \begin{equation}
 \bar m(t)=\frac{1}{N(t)}\int_\mathbb{R}m(\nu,x)\nu(x,t)dx,
-\end{equation}
-
-and
+\end{equation} and
 
 \begin{equation}
 \int_0^td\hat{\mathbf{W}}_s(\sqrt{\nu(x,s)})=\int_0^t\int_\mathbb{R}\frac{\sqrt{\nu(x,s)}}{\sqrt{\int_\mathbb{R}\nu(x,s)dx}}\dot W(x,s)dxds.
@@ -1201,9 +1184,9 @@ dN(t)=\bar m(t)N(t)dt+\sqrt{V N(t)}dW_1(t),
 \begin{equation}\label{xbar_gen}
 d\bar x(t)=\mathrm{Cov}_t\Big(x,m(\nu,x)\Big)dt+\sqrt{V\frac{\sigma^2(t)}{N(t)}}dW_2(t),
 \end{equation}
-\begin{equation}\label{sig2_gen}
-d\sigma^2(t)=\mathrm{Cov}_t\Big((x-\bar x(t))^2,m(\nu,x)\Big)dt+\left(\mu-V\frac{\sigma^2(t)}{N(t)}\right)dt+\sqrt{V\frac{\overline{(x-\bar x(t))^4}-\sigma^4(t)}{N(t)}}dW_3(t),
-\end{equation}
+\begin{multline}\label{sig2_gen}
+d\sigma^2(t)=\mathrm{Cov}_t\Big((x-\bar x(t))^2,m(\nu,x)\Big)dt+\left(\mu-V\frac{\sigma^2(t)}{N(t)}\right)dt\\+\sqrt{V\frac{\overline{(x-\bar x(t))^4}-\sigma^4(t)}{N(t)}}dW_3(t),
+\end{multline}
 \end{subequations}
 
 where \(W_1\), \(W_2\) and \(W_3\) are standard Brownian motions. We
@@ -1292,10 +1275,8 @@ Under this assumption we find in SM \S\ref{cov2deriv} the results
 \mathrm{Cov}(x,m)=\sigma^2\left(\frac{\partial\bar m}{\partial\bar x}-\overline{\frac{\partial m}{\partial\bar x}}\right),
 \end{equation} \begin{equation}
 \mathrm{Cov}\Big((x-\bar x)^2,m\Big)=2\sigma^4\left(\frac{\partial\bar m}{\partial\sigma^2}-\overline{\frac{\partial m}{\partial\sigma^2}}\right)
-\end{equation}
-
-and \(\overline{(x-\bar x)^4}=3\sigma^4\). In particular, these results
-imply
+\end{equation} and \(\overline{(x-\bar x)^4}=3\sigma^4\). In particular,
+these results imply
 
 \begin{subequations}\label{no_inher}
 \begin{equation}\label{xbar}
@@ -1474,6 +1455,8 @@ occur, is the treatment of resource quality, which we replace with a
 model of abiotic stabilizing selection. A derivation is provided in SM
 \S\ref{diffuse}.
 
+\paragraph{Description of abiotic selection and competition}
+
 For species \(i\) we inherit the above notation for trait value,
 distribution, average, variance, abundance, et cetera, except with an
 \(i\) in the subscript. Real world examples of niche axes include the
@@ -1515,9 +1498,11 @@ To determine the potential for competition between individuals with
 niche locations \(x_i\) and \(x_j\), belonging to species \(i\) and
 \(j\) respectively, we compute the niche overlap
 
-\begin{equation}
-\mathcal O_{ij}(x_i-x_j)=\int_{-\infty}^{+\infty}u_i(\zeta,x_i)u_j(\zeta,x_j)d\zeta=\frac{U_iU_j}{\sqrt{2\pi(w_i+w_j)}}\exp\left(-\frac{(x_i-x_j)^2}{2(w_i+w_j)}\right).
-\end{equation}
+\begin{multline}
+\mathcal O_{ij}(x_i-x_j)=\int_{-\infty}^{+\infty}u_i(\zeta,x_i)u_j(\zeta,x_j)d\zeta\\=\frac{U_iU_j}{\sqrt{2\pi(w_i+w_j)}}\exp\left(-\frac{(x_i-x_j)^2}{2(w_i+w_j)}\right).
+\end{multline}
+
+\paragraph{Avoiding caveats of niche theory}
 
 A notable criticism of using niche overlap to measure the intensity of
 competition points to cases where populations competiting on multiple
@@ -1541,6 +1526,8 @@ are competing on and how these axes interact to determine fitness
 consequences. Our model avoids these caveats by assuming competition
 only occurs along a single dimensional resource gradient.
 
+\paragraph{The fitness function}
+
 To map the degree of niche overlap to fitness, we assume competition
 between individuals with niche locations \(x_i\) and \(x_j\) decreases
 the expected reproductive output for the individual in species \(i\) at
@@ -1552,9 +1539,12 @@ SPDE model developed to study the combined effects of demographic
 stochasticity, spatial dispersion and locally finite carrying capacity
 (Dawson, 1978). In relation to the example fitness function discussed in
 \S\ref{deterministic}, consider
-\(\kappa(x_i-x_j)=\mathcal{O}_{ij}(x_i-x_j)\). In SM \S\ref{diffuse} we
-combine our treatment of resource competition with equations (\ref{N}),
-(\ref{xbarfinal}) and (\ref{Gfinal}) to find
+\(\kappa(x_i-x_j)=\mathcal{O}_{ij}(x_i-x_j)\).
+
+\paragraph{The model}
+
+In SM \S\ref{diffuse} we combine our treatment of resource competition
+with equations (\ref{N}), (\ref{xbarfinal}) and (\ref{Gfinal}) to find
 
 \begin{subequations}\label{comm_dynamics}
 \begin{multline}\label{N_comm}
@@ -1579,6 +1569,8 @@ b_{ij}(t) = b_{ji}(t) = & \ \big(w_i+w_j+\eta_i+\eta_j+G_i(t)+G_j(t)\big)^{-1}, 
 c_i \geq & \ 0.
 \end{align}
 \end{subequations}
+
+\paragraph{Description of model behavior}
 
 Despite the convoluted appearance of system (\ref{comm_dynamics}), there
 are some nice features that reflect biological reasoning. For example,
@@ -1649,6 +1641,8 @@ state variables and model parameters, but found an enourmous amount of
 asymmetry and even some potential phase changes. In the following two
 paragraphs we describe the natural history of the community as
 illustrated in Figure \ref{temporal}.
+
+\paragraph{Natural history of an in-silico community}
 
 We begin by describing the weak competition scenario. After about
 \(125.0\) units of time, the community appears to have shaken off the
@@ -1752,9 +1746,7 @@ theory (Chesson, 2000), the absolute competition coefficient
 
 \begin{multline}
 \alpha_{ij}(t)=\frac{c_i}{r_i(t)}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}p_i(x,t)p_j(y,t)\mathcal O_{ij}(x,y) dxdy \\ =\frac{c_iU_iU_j}{r_i(t)}\sqrt\frac{b_{ij}(t)}{2\pi}\exp\left(-\frac{b_{ij}(t)}{2}\big(\bar x_i(t)-\bar x_j(t)\big)^2\right),
-\end{multline}
-
-where
+\end{multline} where
 
 \begin{equation}
 r_i(t)=R_i-\frac{a_i}{2}\Big((\bar x_i(t)-\theta_i)^2+G_i(t)+\eta_i\Big).
@@ -1798,16 +1790,17 @@ here denote species instead of components of multivariate traits and we
 drop the prime that distinguishes between selection gradients and
 standardized selection gradients.
 
-\emph{Metric of pairwise coevolution:} Below we investigate the
-correspondence of interaction intensity and coevolutionary change.
-However, we can already identify one major discrepancy; \(\alpha_{ij}\)
-is maximized when \(\bar x_i=\bar x_j\), but \(\beta_{ij}=0\) under the
-same condition. We therefore include in our metric of selection the
-standardized stabilizing selection gradient \(\gamma\) which measures
-the effect of stabilizing or disruptive selection on phenotypic variance
-(Lande and Arnold, 1983). In SM \S\ref{diffuse} we show that the
-standardized stabilizing selection gradient induced by species \(j\) on
-species \(i\) can be computed as
+\paragraph{Metric of pairwise coevolution}
+
+Below we investigate the correspondence of interaction intensity and
+coevolutionary change. However, we can already identify one major
+discrepancy; \(\alpha_{ij}\) is maximized when \(\bar x_i=\bar x_j\),
+but \(\beta_{ij}=0\) under the same condition. We therefore include in
+our metric of selection the standardized stabilizing selection gradient
+\(\gamma\) which measures the effect of stabilizing or disruptive
+selection on phenotypic variance (Lande and Arnold, 1983). In SM
+\S\ref{diffuse} we show that the standardized stabilizing selection
+gradient induced by species \(j\) on species \(i\) can be computed as
 
 \begin{multline}
 \gamma_{ij}(t)=c_iU_iU_jN_j(t)b_{ij}(t)\left(1-b_{ij}(t)\big(\bar x_i(t)-\bar x_j(t)\big)^2\right) \\
@@ -1841,15 +1834,16 @@ for a range of parameters.
 \caption{\label{net}Bivariate distributions of competition coffecients (y-axis) and pairwise coevolution (x-axis) under the scenarios of weak competition (dashed line) and strong competition (solid line) after simulating for $t=1000.0$ units of time. Simulations were ran for $S=1000$ species. Parameters are the same as in Table 2, except we used $c=1\times 10^{-8}$ for weak competition and $c=5\times 10^{-7}$ for strong competition in order to account for increased species richness.}\label{fig:unnamed-chunk-8}
 \end{figure}
 
-\emph{Covariance of selection and competition as a function of
-diversity:} We now make use of the expressions derived for competition
-coeffecients and selection gradients to investigate their relationship.
-As a first pass, let us assume all model parameters are equivalent
-across species and that each species has the same abundance and trait
-variance. Let us further assume that richness \(S\) is large and the
-distribution of mean trait values is normal with mean \(\bar{\bar x}\),
-variance \(V_{\bar X}\) and density \(f_{\bar X}\). Such assumptions are
-typical when deriving analytical results in the field of theoretical
+\paragraph{Covariance of selection and competition as a function of diversity}
+
+We now make use of the expressions derived for competition coeffecients
+and selection gradients to investigate their relationship. As a first
+pass, let us assume all model parameters are equivalent across species
+and that each species has the same abundance and trait variance. Let us
+further assume that richness \(S\) is large and the distribution of mean
+trait values is normal with mean \(\bar{\bar x}\), variance
+\(V_{\bar X}\) and density \(f_{\bar X}\). Such assumptions are typical
+when deriving analytical results in the field of theoretical
 coevolutionary community ecology (Nuismer et al., 2012, 2018). If
 \(\bar{\bar x}\) is near \(\theta\) and \(V_{\bar X}\) is much smaller
 than \(|2\frac{R}{a}-G-\eta|\), then we may approximate \(r_i\) with
@@ -1883,7 +1877,7 @@ be written as
 
 \begin{figure}
 
-{\centering \includegraphics[width=1\linewidth]{/home/bb/Gits/branching.brownian.motion.and.spde/.A White Noise Approach To Evolutionary Ecology/cov} 
+{\centering \includegraphics[width=1\linewidth]{/home/bb/Gits/branching.brownian.motion.and.spde/Current Version/cov} 
 
 }
 
@@ -1976,7 +1970,7 @@ ratios below \(0.5\), zero at variance ratios between \(0.5\) and
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.6\linewidth]{/home/bb/Gits/branching.brownian.motion.and.spde/.A White Noise Approach To Evolutionary Ecology/Cαℭp} 
+{\centering \includegraphics[width=0.6\linewidth]{/home/bb/Gits/branching.brownian.motion.and.spde/Current Version/Cαℭp} 
 
 }
 
@@ -2167,30 +2161,37 @@ contemporary phenological coevolution is rampant, why should this
 pattern be so well preserved across a thousand miles of rugged and
 diverse terrain? Although it would be exciting to find that these
 species repeatedly coevolved this pattern in each location, a more
-parsimoniuous hypothesis suggests the phenology and physiology of these
+parsimonious hypothesis suggests the phenology and physiology of these
 species slowly evolved independently over macroevolutionary time scales
 to take advantage of the specific conditions available within each of
-these windows of the flowering season. However, this could not have
-carried out in the Rocky mountains since this terrain only became
-habitable just over ten thousand years ago as the glaciers of the
-Pleistocene began to retreat (Paul CaraDonna, personal communications).
-Hence, given these considerations, it appears that an understanding of
-early season phenology patterns should focus on how these communities
-are assembled as opposed to contemporary evolutionary dynamics. Indeed,
-recent work testing models of phylogeography ignores the potential for
-contemporary evolution and instead suggests alpine flower communities
-tend to follow neutral assembly where flowers merely compete for who can
-disperse to new habitat first, as opposed to a selective process where a
-regional species pool is filtered for those species adapted to the newly
-available habitat (Marx et al., 2017).
+these windows of the flowering season. However, considering genera of
+these species have many early-season representatives occurring further
+east, such as in the Appalachian Mountains, these adaptations
+potentially arose before the glaciers of the Pleistocene began to
+retreat (Paul CaraDonna \& Dave Tank, personal communications). Hence,
+given these considerations, it appears that an understanding of early
+season phenology patterns of sub-alpine flower communities should focus
+on how these communities are assembled as opposed to contemporary
+evolutionary dynamics. Indeed, recent work testing phylogeographic
+models suggests alpine flower communities tend to follow neutral
+assembly where flowers merely compete for who can disperse to new
+habitat first (Marx et al., 2017). Due to spatial and altitudinal
+proximity, a similar result is likely to hold for sub-alpine flower
+communities.
 
 Of course microevolutionary and ecological dynamics are not completely
 irrelevant for understanding patterns in communities that are primarily
 structured by deep evolutionary processes. In particular,
 macroevolutionary trait evolution is simply the aggregation of
-microevolutionary change occuring over large spans of time. This
-suggests a road forward to connect the theory we have introduced to
-models of macroevolutionary trait evolution.
+microevolutionary change occuring over large spans of time. Hence, it
+would be ideal to formally derive macroevolutionary models from
+microevolutionary models. Furthermore, since tests based on
+phylogeographic models do not take into account rapid coevolutionary
+dynamics, it has not been rigorously shown that rapid coevolution is not
+a driver of alpine flower community phenology patterns. Hence, there is
+a need for models that simultaneously account for both deep
+macroevolutionary history of taxa and recent microevolutionary change.
+Here we suggest a road forward to accomplish both of these tasks.
 
 Some approaches to modelling macroevolutionary trait change simply
 repurpose microevolutionary models by blindly rescaling time from the
@@ -2205,31 +2206,29 @@ modification of the Ornstein-Uhlenbeck process defined by the SDE
 
 \begin{equation}
 dX_t=a(\theta_t-X_t)dt+bdW_t
-\end{equation}
-
-where \(a,b>0\), \(W_t\) is a standard Brownian motion and \(\theta_t\)
-is itself a Markov process that takes normally distributed jumps
-centered on its current location at exponentially distributed time
-intervals. If we assume the rate \(\lambda\) at which jumps occur is
-much smaller than \(a\) and the variance in jumping is much larger than
-\(b^2\), then, even though the sample paths of \(X_t\) are actually
-continuous (if we zoom in close enough, they look like Brownian motion),
-over long intervals of time sample paths of \(X_t\) will begin to appear
-to have periods of continuity interrupted by an occasional discontinuous
-jump and thus approach a qualitatively distinct process. These emergent
-properties can be formally characterized by Lévy processes and have been
-successfully employed in comparative phylogenetics to fit phenotypic
-data from extant populations and the fossil record (Landis and
-Schraiber, 2017). It would therefore be interesting to investigate
-whether an application of a separation of time scales argument for the
-rate of environmental change (\(\lambda\)) versus the rate of
-evolutionary and ecological change (\(a\)) to microevolutionary models
-derived via our framework can be used to obtain macroevolutionary models
-that include not only mean trait evolution, but also the evolution of
-trait variance and abundance. The resulting macroevolutionary models can
-give rise to novel comparative phylogenetic methods and provide initial
-conditions for microevolutionary models that capture contemporary
-dynamics.
+\end{equation} where \(a,b>0\), \(W_t\) is a standard Brownian motion
+and \(\theta_t\) is itself a Markov process that takes normally
+distributed jumps centered on its current location at exponentially
+distributed time intervals. If we assume the rate \(\lambda\) at which
+jumps occur is much smaller than \(a\) and the variance in jumping is
+much larger than \(b^2\), then, even though the sample paths of \(X_t\)
+are actually continuous (if we zoom in close enough, they look like
+Brownian motion), over long intervals of time sample paths of \(X_t\)
+will begin to appear to have periods of continuity interrupted by an
+occasional discontinuous jump and thus approach a qualitatively distinct
+process. These emergent properties can be formally characterized by Lévy
+processes and have been successfully employed in comparative
+phylogenetics to fit phenotypic data from extant populations and the
+fossil record (Landis and Schraiber, 2017). It would therefore be
+interesting to investigate whether an application of a separation of
+time scales argument for the rate of environmental change (\(\lambda\))
+versus the rate of evolutionary and ecological change (\(a\)) to
+microevolutionary models derived via our framework can be used to obtain
+macroevolutionary models that include not only mean trait evolution, but
+also the evolution of trait variance and abundance. The resulting
+macroevolutionary models can give rise to novel comparative phylogenetic
+methods and provide initial conditions for microevolutionary models that
+capture contemporary dynamics.
 
 \hypertarget{final-remarks}{%
 \section{Final remarks}\label{final-remarks}}
@@ -2252,6 +2251,8 @@ step towards capturing these many details. However, we hope the
 theoretical framework outlined here along with the demonstration of its
 use in modelling competitive communities provides some helpful tools to
 aid quantitative evolutionary ecologists in reaching such lofty goals.
+
+\newpage
 
 \hypertarget{references}{%
 \section*{References}\label{references}}
