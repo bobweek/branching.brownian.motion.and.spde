@@ -65,7 +65,6 @@ time = sol.t
 
 abun = zeros(N,length(time))
 for i in 1:length(time)
-    MAX = maximum(sol.u[i])
     for j in 1:N
         abun[j,i] = sol.u[i][j]
     end
@@ -83,7 +82,6 @@ time = sol.t
 
 abun = zeros(N,length(time))
 for i in 1:length(time)
-    MAX = maximum(sol.u[i])
     for j in 1:N
         abun[j,i] = sol.u[i][j]
     end
