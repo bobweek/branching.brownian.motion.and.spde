@@ -16,8 +16,8 @@ const Mx = Tridiagonal([1.0 for i in 1:N-1],[-2.0 for i in 1:N],[1.0 for i in 1:
     R::Float64	# intrinsic rates of growth
     a::Float64	# strength of abiotic selection
     θ::Float64	# phenotypic optima
-	c::Float64	# strength of competition
-	V::Float64	# variance of reproductive output
+    c::Float64	# strength of competition
+    V::Float64	# variance of reproductive output
     X::Vector{Float64}	# variance of reproductive output
 end
 
