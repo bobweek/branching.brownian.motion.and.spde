@@ -1,5 +1,5 @@
 #
-# Generates sample paths for large community (S=100)
+# Generates sample paths to compare with ind-based simulation
 #
 
 using Parameters, Statistics, Random, LinearAlgebra, Distributions,
@@ -7,6 +7,7 @@ using Parameters, Statistics, Random, LinearAlgebra, Distributions,
 
 include("/home/bb/Gits/branching.brownian.motion.and.spde/sde_functions.jl")
 
+j=1
 k=1
 # strengths of competition
 cc = [1e-7,5e-6]
@@ -15,10 +16,10 @@ cc = [1e-7,5e-6]
 cc = [1e-8,5e-7]
 
 
-# duration of simulation
-TIME = 5e3
+# durations
+TT = [1e3,5e3]
 
-tspan = (0.0,TIME)
+tspan = (0.0,TT[j])
 
 # background parameters
 S = 1000

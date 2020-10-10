@@ -5,7 +5,9 @@ include("/home/bob/Research/Branching Brownian Motion/bbm_functions_structs.jl")
 
 ########################################################
 #                                                      #
-# a branching Brownian motion for the entire community #
+#  An individual-based model for the entire community  #
+#                                                      #
+#  Used to compare with diffusion approximation        #
 #                                                      #
 ########################################################
 
@@ -15,7 +17,7 @@ w = fill(0.1, S)  # niche breadths
 U = fill(1.0, S)  # total niche use
 c = fill(0.002,S) # strengths of competition
 Ω = sum(U)        # niche use scaling
-η = fill(1e-3, S)  # segregation variances
+η = fill(1e-3, S) # environmental variances
 μ = fill(1e-5, S) # mutation rates
 V = fill(2.0, S)  # magnitudes of drift
 R = fill(0.1, S)  # innate rate of growth

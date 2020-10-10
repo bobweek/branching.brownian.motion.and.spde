@@ -14,7 +14,7 @@ include("/home/bob/Research/Branching Brownian Motion/bbm_functions_structs.jl")
 w = 0.1  # niche breadths
 U = 1.0  # total niche use
 c = 2e-3 # strengths of competition
-η = 1e-5 # segregation variances
+η = 1e-5 # environmental variances
 μ = 1e-2 # mutation rates
 V = 2.0  # magnitudes of drift
 r = 1.0  # innate rate of growth

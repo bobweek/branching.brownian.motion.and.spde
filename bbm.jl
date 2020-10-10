@@ -14,13 +14,13 @@ include("/home/bb/Gits/branching.brownian.motion.and.spde/bbm_functions_structs.
 w = 0.1  # niche breadths
 U = 1.0  # total niche use
 c = 2e-3 # strengths of competition
-η = 1e-5 # segregation variances
+η = 1e-5 # environmental variances
 μ = 1e-3 # mutation rates
 V = 2.0  # magnitudes of drift
 r = 1.0  # innate rate of growth
 a = 1e-2 # strengths of abiotic selection
 θ = 0.0  # phenotypic optima
-n = 1.0 # scaling parameter
+n = 1.0  # scaling parameter
 
 ##
 ## VERY IMPORTANT REQUIREMENT   -->  V >= exp(r)
@@ -28,10 +28,9 @@ n = 1.0 # scaling parameter
 ## this inequality must be satisfied to use negative binomial sampling
 ##
 
-# equilibrium abundance an the absence of interspecific interactions
-# we use this as the initial abundance
-
+# initial abundance
 N₀ = Int64(floor( n*( r -0.5*( η*a + √(μ*a) ) )/c ) )
+# here we set this to the equilibrium abundance
 
 # initial breeding values
 g₀ = rand(Normal(0.0,1.0),N₀)
